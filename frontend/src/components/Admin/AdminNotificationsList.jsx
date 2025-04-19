@@ -284,8 +284,7 @@ const AdminNotificationsList = () => {
           )}
         </div>
       )}
-      
-      {/* Модальное окно для создания нового уведомления */}
+
       {showCreateModal && (
         <div className="admin-modal">
           <div className="admin-modal-content">

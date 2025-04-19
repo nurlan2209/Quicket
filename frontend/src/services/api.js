@@ -111,34 +111,31 @@ createEvent: async (eventData) => {
   // Добавьте эти методы в ваш существующий apiService.js
 
 // Получение уведомлений пользователя
-  getUserNotifications: async (userId, options = {}) => {
-    try {
-      const params = new URLSearchParams();
-      
-      if (options.limit) {
-        params.append('limit', options.limit);
+getUserNotifications: async () => {
+  try {
+    // Получаем текущего пользователя из хранилища
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || !user.id) {
+      throw new Error('Пользователь не авторизован');
+    }
+
+    // Получаем токен
+    const token = localStorage.getItem('authToken') || user.token;
+    
+    // Делаем запрос к API
+    const response = await axios.get(`${API_URL}/users/${user.id}/notifications`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
       }
+    });
     
-    if (options.page) {
-      params.append('page', options.page);
-    }
-    
-    const queryString = params.toString() ? `?${params.toString()}` : '';
-    const response = await axios.get(`/api/users/${userId}/notifications${queryString}`);
-    
-    return {
-      success: true,
-      data: response.data
-    };
-    } catch (error) {
-      console.error('Error fetching notifications:', error);
-      
-      return {
-        success: false,
-        message: error.response?.data?.message || 'Ошибка при загрузке уведомлений'
-      };
-    }
-  },
+    // Возвращаем данные
+    return response.data;
+  } catch (error) {
+    console.error('Ошибка при получении уведомлений:', error);
+    throw error;
+  }
+},
 
   // Получение количества непрочитанных уведомлений
   getUnreadNotificationsCount: async (userId) => {
@@ -169,57 +166,68 @@ createEvent: async (eventData) => {
   // Отметить уведомление как прочитанное
   markNotificationAsRead: async (notificationId) => {
     try {
-      const response = await axios.patch(`/api/notifications/${notificationId}/read`);
+      // Получаем токен
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = localStorage.getItem('authToken') || (user || {}).token;
       
-      return {
-        success: true,
-        data: response.data
-      };
+      // Отправляем запрос на обновление статуса
+      const response = await axios.patch(`${API_URL}/notifications/${notificationId}/read`, {}, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      return response.data;
     } catch (error) {
-      console.error('Error marking notification as read:', error);
-      
-      return {
-        success: false,
-        message: error.response?.data?.message || 'Ошибка при обновлении статуса уведомления'
-      };
+      console.error('Ошибка при отметке уведомления как прочитанного:', error);
+      throw error;
     }
   },
 
   // Отметить все уведомления пользователя как прочитанные
-  markAllNotificationsAsRead: async (userId) => {
+  markAllNotificationsAsRead: async () => {
     try {
-      const response = await axios.patch(`/api/users/${userId}/notifications/mark-all-read`);
+      // Получаем текущего пользователя
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user || !user.id) {
+        throw new Error('Пользователь не авторизован');
+      }
       
-      return {
-        success: true,
-        data: response.data
-      };
+      // Получаем токен
+      const token = localStorage.getItem('authToken') || user.token;
+      
+      // Отправляем запрос на обновление статуса всех уведомлений
+      const response = await axios.patch(`${API_URL}/users/${user.id}/notifications/mark-all-read`, {}, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      return response.data;
     } catch (error) {
-      console.error('Error marking all notifications as read:', error);
-      
-      return {
-        success: false,
-        message: error.response?.data?.message || 'Ошибка при обновлении статуса уведомлений'
-      };
+      console.error('Ошибка при отметке всех уведомлений как прочитанных:', error);
+      throw error;
     }
-  },
+  }   ,
 
   // Удаление уведомления
   deleteNotification: async (notificationId) => {
     try {
-      const response = await axios.delete(`/api/notifications/${notificationId}`);
+      // Получаем токен
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = localStorage.getItem('authToken') || (user || {}).token;
       
-      return {
-        success: true,
-        data: response.data
-      };
+      // Отправляем запрос на удаление
+      const response = await axios.delete(`${API_URL}/notifications/${notificationId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      return response.data;
     } catch (error) {
-      console.error('Error deleting notification:', error);
-      
-      return {
-        success: false,
-        message: error.response?.data?.message || 'Ошибка при удалении уведомления'
-      };
+      console.error('Ошибка при удалении уведомления:', error);
+      throw error;
     }
   },
 

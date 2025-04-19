@@ -1,50 +1,40 @@
 import { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../contexts/AuthContext';
+import apiService from '../services/api';
 import '../styles/NotificationsPage.css';
 
 const NotificationsPage = () => {
   const { t } = useTranslation();
   const { user } = useContext(AuthContext);
 
-  // Temporary mock data for demonstration
-  // In the future, this data will come from the server
-  const [notifications, setNotifications] = useState([
-    {
-      id: "n1",
-      type: "booking_created",
-      title: "Билет забронирован",
-      message: "Вы успешно забронировали билет на мероприятие «Баскетбол секциясы»",
-      read: false,
-      created_at: new Date(Date.now() - 10 * 60000).toISOString() // 10 minutes ago
-    },
-    {
-      id: "n2",
-      type: "booking_reminder",
-      title: "Напоминание о мероприятии",
-      message: "Мероприятие «Жаңадан бастаушыларға арналған жүзу» состоится завтра в 15:00",
-      read: false,
-      created_at: new Date(Date.now() - 3 * 3600000).toISOString() // 3 hours ago
-    },
-    {
-      id: "n3",
-      type: "booking_cancelled",
-      title: "Бронирование отменено",
-      message: "Ваше бронирование на мероприятие «Футбол» было отменено",
-      read: true,
-      created_at: new Date(Date.now() - 2 * 86400000).toISOString() // 2 days ago
-    },
-    {
-      id: "n4",
-      type: "system_message",
-      title: "Добро пожаловать в Quicket!",
-      message: "Спасибо за регистрацию в нашем сервисе. Теперь вы можете бронировать билеты на различные мероприятия.",
-      read: true,
-      created_at: new Date(Date.now() - 7 * 86400000).toISOString()
-    }
-  ]);
-  const [loading, setLoading] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Загрузка уведомлений при монтировании компонента
+  useEffect(() => {
+    if (user) {
+      fetchNotifications();
+    }
+  }, [user]);
+
+  // Функция для загрузки уведомлений
+  const fetchNotifications = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const data = await apiService.getUserNotifications();
+      console.log('Получены уведомления:', data);
+      setNotifications(Array.isArray(data) ? data : []);
+    } catch (err) {
+      console.error('Ошибка при загрузке уведомлений:', err);
+      setError('Не удалось загрузить уведомления. Попробуйте позже.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getNotificationIcon = (type) => {
     switch (type) {
@@ -61,7 +51,6 @@ const NotificationsPage = () => {
     }
   };
 
-  // Function to format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat(t('locale') || 'ru-RU', {
@@ -73,39 +62,62 @@ const NotificationsPage = () => {
     }).format(date);
   };
 
-  // In the future, these will be handlers for marking notifications as read and deleting
-  const handleMarkAsRead = (notificationId) => {
-    console.log('Mark as read:', notificationId);
-    // Update local state to mark notification as read
-    setNotifications(prevNotifications => 
-      prevNotifications.map(notification => 
-        notification.id === notificationId 
-          ? { ...notification, read: true }
-          : notification
-      )
-    );
-    // Here would be an API call
+  const handleMarkAsRead = async (notificationId) => {
+    try {
+      // Оптимистично обновляем UI
+      setNotifications(prevNotifications => 
+        prevNotifications.map(notification => 
+          notification.id === notificationId 
+            ? { ...notification, read: true }
+            : notification
+        )
+      );
+      
+      // Вызываем API
+      await apiService.markNotificationAsRead(notificationId);
+      console.log('Уведомление отмечено как прочитанное:', notificationId);
+    } catch (err) {
+      console.error('Ошибка при отметке уведомления:', err);
+      // В случае ошибки обновляем данные заново
+      fetchNotifications();
+    }
   };
 
-  const handleDeleteNotification = (notificationId) => {
-    console.log('Delete notification:', notificationId);
-    // Update local state to remove notification
-    setNotifications(prevNotifications => 
-      prevNotifications.filter(notification => notification.id !== notificationId)
-    );
-    // Here would be an API call
+  const handleDeleteNotification = async (notificationId) => {
+    try {
+      // Оптимистично обновляем UI
+      setNotifications(prevNotifications => 
+        prevNotifications.filter(notification => notification.id !== notificationId)
+      );
+      
+      // Вызываем API
+      await apiService.deleteNotification(notificationId);
+      console.log('Уведомление удалено:', notificationId);
+    } catch (err) {
+      console.error('Ошибка при удалении уведомления:', err);
+      // В случае ошибки обновляем данные заново
+      fetchNotifications();
+    }
   };
 
-  const handleMarkAllAsRead = () => {
-    console.log('Mark all as read');
-    // Update all notifications to read status
-    setNotifications(prevNotifications => 
-      prevNotifications.map(notification => ({ ...notification, read: true }))
-    );
-    // Here would be an API call
+  const handleMarkAllAsRead = async () => {
+    try {
+      // Оптимистично обновляем UI
+      setNotifications(prevNotifications => 
+        prevNotifications.map(notification => ({ ...notification, read: true }))
+      );
+      
+      // Вызываем API
+      await apiService.markAllNotificationsAsRead();
+      console.log('Все уведомления отмечены как прочитанные');
+    } catch (err) {
+      console.error('Ошибка при отметке всех уведомлений:', err);
+      // В случае ошибки обновляем данные заново
+      fetchNotifications();
+    }
   };
 
-  // If user is not authenticated, show a message
+  // Если пользователь не авторизован
   if (!user) {
     return (
       <div className="notifications-page">
@@ -141,7 +153,7 @@ const NotificationsPage = () => {
       ) : error ? (
         <div className="notifications-error">
           <p>{error}</p>
-          <button className="retry-btn" onClick={() => window.location.reload()}>
+          <button className="retry-btn" onClick={fetchNotifications}>
             {t('common.retry', 'Повторить')}
           </button>
         </div>
