@@ -1117,47 +1117,56 @@ def get_event_stats():
 @app.route('/api/admin/stats/users', methods=['GET'])
 @admin_required
 def get_user_stats():
-    # Общее количество пользователей
-    total_users = User.query.count()
-    
-    # Количество администраторов
-    admin_count = User.query.filter_by(role=UserRole.admin).count()
-    
-    # Топ-5 пользователей по количеству бронирований
-    top_users = db.session.query(
-        User.id,
-        User.username,
-        db.func.count(Booking.id).label('bookings_count')
-    ).join(
-        Booking, User.id == Booking.user_id
-    ).group_by(
-        User.id, User.username
-    ).order_by(
-        db.desc('bookings_count')
-    ).limit(5).all()
-    
-    top_users_data = [
-        {'id': id, 'username': username, 'bookings_count': count}
-        for id, username, count in top_users
-    ]
-    
-    # Статистика по времени регистрации (по месяцам)
-    monthly_stats = db.session.query(
-        db.func.strftime('%Y-%m', User.created_at),
-        db.func.count(User.id)
-    ).group_by(
-        db.func.strftime('%Y-%m', User.created_at)
-    ).all()
-    
-    monthly_data = {month: count for month, count in monthly_stats}
-    
-    return jsonify({
-        'success': True,
-        'total_users': total_users,
-        'admin_count': admin_count,
-        'top_users': top_users_data,
-        'monthly_stats': monthly_data
-    })
+    try:
+        # Общее количество пользователей
+        total_users = User.query.count()
+        
+        # Количество администраторов
+        admin_count = User.query.filter_by(role=UserRole.admin).count()
+        
+        # Топ-5 пользователей по количеству бронирований
+        top_users = db.session.query(
+            User.id,
+            User.username,
+            db.func.count(Booking.id).label('bookings_count')
+        ).join(
+            Booking, User.id == Booking.user_id
+        ).group_by(
+            User.id, User.username
+        ).order_by(
+            db.desc('bookings_count')
+        ).limit(5).all()
+        
+        top_users_data = [
+            {'id': id, 'username': username, 'bookings_count': count}
+            for id, username, count in top_users
+        ]
+        
+        # Статистика по времени регистрации (по месяцам)
+        # Обратите внимание на изменение здесь - используем EXTRACT вместо strftime для PostgreSQL
+        monthly_stats = db.session.query(
+            db.func.to_char(User.created_at, 'YYYY-MM').label('month'),
+            db.func.count(User.id)
+        ).group_by(
+            'month'
+        ).all()
+        
+        monthly_data = {month: count for month, count in monthly_stats}
+        
+        return jsonify({
+            'success': True,
+            'total_users': total_users,
+            'admin_count': admin_count,
+            'top_users': top_users_data,
+            'monthly_stats': monthly_data
+        })
+    except Exception as e:
+        # Добавьте логирование ошибки
+        print(f"Error in get_user_stats: {str(e)}")
+        return jsonify({
+            'success': False, 
+            'message': f'Ошибка при получении статистики пользователей: {str(e)}'
+        }), 500
 
 # Административный API для управления пользователями
 @app.route('/api/admin/users', methods=['GET'])
@@ -1208,6 +1217,30 @@ def update_user_role(user_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({'success': False, 'message': f'Ошибка: {str(e)}'}), 500
+    
+# API для удаления пользователя (только для админов)
+@app.route('/api/admin/users/<int:user_id>', methods=['DELETE'])
+@admin_required
+def delete_user(user_id):
+    if user_id == g.user_id:
+        return jsonify({'success': False, 'message': 'Нельзя удалить себя'}), 400
+    
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({'success': False, 'message': 'Пользователь не найден'}), 404
+    
+    try:
+        # Удаляем связанные записи
+        db.session.delete(user)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Пользователь успешно удален'
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'message': f'Ошибка при удалении пользователя: {str(e)}'}), 500
     
     
 with app.app_context():

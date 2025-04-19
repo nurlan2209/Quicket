@@ -64,7 +64,7 @@ const AdminVenuesList = () => {
   
   // Обработчик удаления места проведения
   const handleDeleteVenue = async (venueId) => {
-    if (window.confirm(t('admin.venues.confirmDelete'))) {
+    if (window.confirm('Вы уверены, что хотите удалить этот объект?')) {
       setLoading(true);
       
       try {
@@ -94,7 +94,7 @@ const AdminVenuesList = () => {
   return (
     <div className="admin-venues-container">
       <div className="admin-venues-header">
-        <h2>{t('admin.venues.title')}</h2>
+        <h2>Спортивные объекты</h2>
         <button 
           className="admin-add-button"
           onClick={() => {
@@ -102,7 +102,7 @@ const AdminVenuesList = () => {
             setShowForm(true);
           }}
         >
-          {t('admin.venues.addNew')}
+          Добавить объект
         </button>
       </div>
       
@@ -120,11 +120,11 @@ const AdminVenuesList = () => {
       
       <div className="admin-filters">
         <div className="admin-filter-group full-width">
-          <label htmlFor="search">{t('admin.venues.search')}</label>
+          <label htmlFor="search">Поиск</label>
           <input
             type="text"
             id="search"
-            placeholder={t('admin.venues.searchPlaceholder')}
+            placeholder="Поиск по названию или адресу..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -134,22 +134,22 @@ const AdminVenuesList = () => {
       {loading ? (
         <div className="admin-loading">
           <div className="spinner"></div>
-          <p>{t('common.loading')}</p>
+          <p>Загрузка...</p>
         </div>
       ) : (
         <div className="admin-table-responsive">
           {filteredVenues.length === 0 ? (
-            <p className="admin-no-data">{t('admin.venues.noVenues')}</p>
+            <p className="admin-no-data">Объекты не найдены</p>
           ) : (
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>{t('admin.venues.id')}</th>
-                  <th>{t('admin.venues.name')}</th>
-                  <th>{t('admin.venues.address')}</th>
-                  <th>{t('admin.venues.capacity')}</th>
-                  <th>{t('admin.venues.eventsCount')}</th>
-                  <th className="actions-column">{t('admin.venues.actions')}</th>
+                  <th>ID</th>
+                  <th>Название</th>
+                  <th>Адрес</th>
+                  <th>Вместимость</th>
+                  <th>Кол-во мероприятий</th>
+                  <th className="actions-column">Действия</th>
                 </tr>
               </thead>
               <tbody>
@@ -167,21 +167,21 @@ const AdminVenuesList = () => {
                           setSelectedVenue(venue);
                           setShowForm(true);
                         }}
-                        title={t('admin.venues.edit')}
+                        title="Редактировать"
                       >
                         ✏️
                       </button>
                       <button 
                         className="admin-action-button delete"
                         onClick={() => handleDeleteVenue(venue.id)}
-                        title={t('admin.venues.delete')}
+                        title="Удалить"
                       >
                         🗑️
                       </button>
                       <button 
                         className="admin-action-button view"
                         onClick={() => window.open(`/venues/${venue.id}`, '_blank')}
-                        title={t('admin.venues.view')}
+                        title="Просмотр"
                       >
                         👁️
                       </button>

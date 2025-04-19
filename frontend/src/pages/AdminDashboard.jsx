@@ -13,6 +13,8 @@ import AdminEventsList from '../components/Admin/AdminEventsList';
 import AdminVenuesList from '../components/Admin/AdminVenuesList';
 import AdminVenueForm from '../components/Admin/AdminVenueForm';
 import AdminStats from '../components/Admin/AdminStats';
+import AdminUsersList from '../components/Admin/AdminUsersList';  // Добавлен импорт
+import AdminNotificationsList from '../components/Admin/AdminNotificationsList';  // Добавлен импорт
 const AdminDashboard = () => {
   const { t } = useTranslation();
   const { user } = useContext(AuthContext);
@@ -259,11 +261,11 @@ const AdminDashboard = () => {
       return (
         <div className="admin-loading">
           <div className="spinner"></div>
-          <p>{t('common.loading', 'Загрузка...')}</p>
+          <p>Загрузка...</p>
         </div>
       );
     }
-
+  
     if (error && activeTab === 'dashboard') {
       return (
         <div className="admin-error">
@@ -273,12 +275,12 @@ const AdminDashboard = () => {
             className="retry-button"
             onClick={() => setActiveTab('dashboard')}
           >
-            {t('admin.dashboard.retry', 'Повторить')}
+            Повторить
           </button>
         </div>
       );
     }
-
+  
     switch (activeTab) {
       case 'dashboard':
         return (
@@ -317,46 +319,46 @@ const AdminDashboard = () => {
           </div>
           
           <nav className="admin-sidebar-nav">
-            <button 
-              className={`admin-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-              onClick={() => setActiveTab('dashboard')}
-            >
-              <span className="admin-nav-icon">📊</span>
-              {t('admin.nav.dashboard', 'Статистика')}
-            </button>
-            
-            <button 
-              className={`admin-nav-item ${activeTab === 'events' ? 'active' : ''}`}
-              onClick={() => setActiveTab('events')}
-            >
-              <span className="admin-nav-icon">🎭</span>
-              {t('admin.nav.events', 'Мероприятия')}
-            </button>
-            
-            <button 
-              className={`admin-nav-item ${activeTab === 'venues' ? 'active' : ''}`}
-              onClick={() => setActiveTab('venues')}
-            >
-              <span className="admin-nav-icon">🏟️</span>
-              {t('admin.nav.venues', 'Спортивные объекты')}
-            </button>
+  <button 
+    className={`admin-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+    onClick={() => setActiveTab('dashboard')}
+  >
+    <span className="admin-nav-icon">📊</span>
+    Статистика
+  </button>
+  
+  <button 
+    className={`admin-nav-item ${activeTab === 'events' ? 'active' : ''}`}
+    onClick={() => setActiveTab('events')}
+  >
+    <span className="admin-nav-icon">🎭</span>
+    Мероприятия
+  </button>
+  
+  <button 
+    className={`admin-nav-item ${activeTab === 'venues' ? 'active' : ''}`}
+    onClick={() => setActiveTab('venues')}
+  >
+    <span className="admin-nav-icon">🏟️</span>
+    Спортивные объекты
+  </button>
 
-            <button 
-              className={`admin-nav-item ${activeTab === 'notifications' ? 'active' : ''}`}
-              onClick={() => setActiveTab('notifications')}
-            >
-              <span className="admin-nav-icon">🔔</span>
-              {t('admin.nav.notifications', 'Уведомления')}
-            </button>
-            
-            <button 
-              className={`admin-nav-item ${activeTab === 'users' ? 'active' : ''}`}
-              onClick={() => setActiveTab('users')}
-            >
-              <span className="admin-nav-icon">👥</span>
-              {t('admin.nav.users', 'Пользователи')}
-            </button>
-          </nav>
+  <button 
+    className={`admin-nav-item ${activeTab === 'notifications' ? 'active' : ''}`}
+    onClick={() => setActiveTab('notifications')}
+  >
+    <span className="admin-nav-icon">🔔</span>
+    Уведомления
+  </button>
+  
+  <button 
+    className={`admin-nav-item ${activeTab === 'users' ? 'active' : ''}`}
+    onClick={() => setActiveTab('users')}
+  >
+    <span className="admin-nav-icon">👥</span>
+    Пользователи
+  </button>
+</nav>
           
           <div className="admin-sidebar-footer">
             <div className="admin-user-info">
@@ -370,49 +372,49 @@ const AdminDashboard = () => {
             </div>
             
             <div className="admin-actions">
-              <button 
-                className="admin-action-button"
-                onClick={() => navigate('/')}
-              >
-                <span className="admin-action-icon">🏠</span>
-                {t('admin.nav.backToSite', 'Вернуться на сайт')}
-              </button>
+            <button 
+              className="admin-action-button"
+              onClick={() => navigate('/')}
+            >
+            <span className="admin-action-icon">🏠</span>
+              Вернуться на сайт
+            </button>
             </div>
           </div>
         </div>
         
         <div className="admin-content">
-          <div className="admin-content-header">
-            <h1 className="admin-page-title">
-              {activeTab === 'dashboard' && t('admin.dashboard.title', 'Статистика')}
-              {activeTab === 'events' && t('admin.events.title', 'Управление мероприятиями')}
-              {activeTab === 'venues' && t('admin.venues.title', 'Управление спортивными объектами')}
-              {activeTab === 'notifications' && t('admin.notifications.title', 'Управление уведомлениями')}
-              {activeTab === 'users' && t('admin.users.title', 'Управление пользователями')}
-            </h1>
-            
-            <div className="admin-header-actions">
-              {activeTab === 'events' && (
-                <button 
-                  className="admin-add-button"
-                  onClick={handleCreateEvent}
-                >
-                  <span className="admin-add-icon">+</span>
-                  {t('admin.events.addNew', 'Создать мероприятие')}
-                </button>
-              )}
-              
-              {activeTab === 'venues' && (
-                <button 
-                  className="admin-add-button"
-                  onClick={handleCreateVenue}
-                >
-                  <span className="admin-add-icon">+</span>
-                  {t('admin.venues.addNew', 'Добавить спортивный объект')}
-                </button>
-              )}
-            </div>
-          </div>
+        <div className="admin-content-header">
+  <h1 className="admin-page-title">
+    {activeTab === 'dashboard' && "Статистика"}
+    {activeTab === 'events' && "Управление мероприятиями"}
+    {activeTab === 'venues' && "Управление спортивными объектами"}
+    {activeTab === 'notifications' && "Управление уведомлениями"}
+    {activeTab === 'users' && "Управление пользователями"}
+  </h1>
+  
+  <div className="admin-header-actions">
+    {activeTab === 'events' && (
+      <button 
+        className="admin-add-button"
+        onClick={handleCreateEvent}
+      >
+        <span className="admin-add-icon">+</span>
+        Создать мероприятие
+      </button>
+    )}
+    
+    {activeTab === 'venues' && (
+      <button 
+        className="admin-add-button"
+        onClick={handleCreateVenue}
+      >
+        <span className="admin-add-icon">+</span>
+        Добавить спортивный объект
+      </button>
+    )}
+  </div>
+</div>
           
           <div className="admin-content-body">
             {renderContent()}

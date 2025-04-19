@@ -14,10 +14,11 @@ const AdminEventsList = () => {
   const [filterType, setFilterType] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-
+        // Загрузка данных о мероприятиях и площадках одновременно
         const [eventsResponse, venuesResponse] = await Promise.all([
           apiService.getEvents(),
           apiService.getVenues()
@@ -119,7 +120,7 @@ const AdminEventsList = () => {
   return (
     <div className="admin-events-container">
       <div className="admin-events-header">
-        <h2>{t('admin.events.title')}</h2>
+        <h2>Управление мероприятиями</h2>
         <button 
           className="admin-add-button"
           onClick={() => {
@@ -127,7 +128,7 @@ const AdminEventsList = () => {
             setShowForm(true);
           }}
         >
-          {t('admin.events.addNew')}
+          Создать мероприятие
         </button>
       </div>
       
@@ -145,13 +146,13 @@ const AdminEventsList = () => {
       
       <div className="admin-filters">
         <div className="admin-filter-group">
-          <label htmlFor="type-filter">{t('admin.events.filterType')}</label>
+          <label htmlFor="type-filter">Тип мероприятия</label>
           <select
             id="type-filter"
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
           >
-            <option value="all">{t('admin.events.allTypes')}</option>
+            <option value="all">Все типы</option>
             {eventTypes.map(type => (
               <option key={type} value={type}>
                 {type}
@@ -161,11 +162,11 @@ const AdminEventsList = () => {
         </div>
         
         <div className="admin-filter-group">
-          <label htmlFor="search">{t('admin.events.search')}</label>
+          <label htmlFor="search">Поиск</label>
           <input
             type="text"
             id="search"
-            placeholder={t('admin.events.searchPlaceholder')}
+            placeholder="Поиск по названию или месту проведения..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -175,26 +176,26 @@ const AdminEventsList = () => {
       {loading ? (
         <div className="admin-loading">
           <div className="spinner"></div>
-          <p>{t('common.loading')}</p>
+          <p>Загрузка...</p>
         </div>
       ) : (
         <div className="admin-table-responsive">
           {filteredEvents.length === 0 ? (
-            <p className="admin-no-data">{t('admin.events.noEvents')}</p>
+            <p className="admin-no-data">Мероприятия не найдены</p>
           ) : (
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>{t('admin.events.id')}</th>
-                  <th>{t('admin.events.title')}</th>
-                  <th>{t('admin.events.type')}</th>
-                  <th>{t('admin.events.venue')}</th>
-                  <th>{t('admin.events.date')}</th>
-                  <th>{t('admin.events.time')}</th>
-                  <th>{t('admin.events.seats')}</th>
-                  <th>{t('admin.events.price')}</th>
-                  <th>{t('admin.events.status')}</th>
-                  <th className="actions-column">{t('admin.events.actions')}</th>
+                  <th>ID</th>
+                  <th>Название</th>
+                  <th>Тип</th>
+                  <th>Место проведения</th>
+                  <th>Дата</th>
+                  <th>Время</th>
+                  <th>Места</th>
+                  <th>Цена</th>
+                  <th>Статус</th>
+                  <th className="actions-column">Действия</th>
                 </tr>
               </thead>
               <tbody>
@@ -270,4 +271,4 @@ const AdminEventsList = () => {
   );
 };
 
-export default AdminEventsList
+export default AdminEventsList;

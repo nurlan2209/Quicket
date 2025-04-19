@@ -1,14 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-
 const AdminStats = ({ stats }) => {
   const { t } = useTranslation();
   
   if (!stats) {
     return (
       <div className="admin-no-stats">
-        <p>{t('admin.stats.noData')}</p>
+        <p>Нет доступных данных</p>
       </div>
     );
   }
@@ -23,46 +22,46 @@ const AdminStats = ({ stats }) => {
   return (
     <div className="admin-stats-container">
       <div className="admin-stats-header">
-        <h2>{t('admin.stats.title')}</h2>
-        <p>{t('admin.stats.description')}</p>
+        <h2>Статистика</h2>
+        <p>Обзор системных данных и активности пользователей</p>
       </div>
       
       <div className="admin-stats-overview">
         <div className="admin-stat-card">
           <div className="admin-stat-icon users">👥</div>
           <div className="admin-stat-details">
-            <h3>{t('admin.stats.users.title')}</h3>
+            <h3>Пользователи</h3>
             <div className="admin-stat-value">{users.total_users}</div>
-            <div className="admin-stat-label">{t('admin.stats.users.total')}</div>
+            <div className="admin-stat-label">Всего пользователей</div>
           </div>
         </div>
         
         <div className="admin-stat-card">
           <div className="admin-stat-icon events">🎭</div>
           <div className="admin-stat-details">
-            <h3>{t('admin.stats.events.title')}</h3>
+            <h3>Мероприятия</h3>
             <div className="admin-stat-value">{events.total_events}</div>
-            <div className="admin-stat-label">{t('admin.stats.events.total')}</div>
+            <div className="admin-stat-label">Всего мероприятий</div>
           </div>
         </div>
         
         <div className="admin-stat-card">
           <div className="admin-stat-icon bookings">🎟️</div>
           <div className="admin-stat-details">
-            <h3>{t('admin.stats.bookings.title')}</h3>
+            <h3>Бронирования</h3>
             <div className="admin-stat-value">{bookings.total_bookings}</div>
-            <div className="admin-stat-label">{t('admin.stats.bookings.total')}</div>
+            <div className="admin-stat-label">Всего бронирований</div>
           </div>
         </div>
       </div>
       
       <div className="admin-stats-details">
         <div className="admin-stats-section">
-          <h3>{t('admin.stats.eventTypes')}</h3>
+          <h3>Типы мероприятий</h3>
           <div className="admin-stats-chart">
             {Object.entries(events.type_stats).map(([type, count]) => (
               <div className="admin-stats-bar-item" key={type}>
-                <div className="admin-stats-bar-label">{type}</div>
+                <div className="admin-stats-bar-label">{getTypeLabel(type)}</div>
                 <div className="admin-stats-bar-container">
                   <div 
                     className="admin-stats-bar" 
@@ -79,11 +78,11 @@ const AdminStats = ({ stats }) => {
         </div>
         
         <div className="admin-stats-section">
-          <h3>{t('admin.stats.bookingStatus')}</h3>
+          <h3>Статусы бронирований</h3>
           <div className="admin-stats-chart">
             {Object.entries(bookings.status_stats).map(([status, count]) => (
               <div className="admin-stats-bar-item" key={status}>
-                <div className="admin-stats-bar-label">{status}</div>
+                <div className="admin-stats-bar-label">{getStatusLabel(status)}</div>
                 <div className="admin-stats-bar-container">
                   <div 
                     className="admin-stats-bar" 
@@ -102,13 +101,13 @@ const AdminStats = ({ stats }) => {
       
       <div className="admin-stats-tables">
         <div className="admin-stats-table-section">
-          <h3>{t('admin.stats.topEvents')}</h3>
+          <h3>Популярные мероприятия</h3>
           <div className="admin-table-wrapper">
             <table className="admin-stats-table">
               <thead>
                 <tr>
-                  <th>{t('admin.stats.eventName')}</th>
-                  <th>{t('admin.stats.bookings.count')}</th>
+                  <th>Название мероприятия</th>
+                  <th>Количество бронирований</th>
                 </tr>
               </thead>
               <tbody>
@@ -120,7 +119,7 @@ const AdminStats = ({ stats }) => {
                 ))}
                 {bookings.top_events.length === 0 && (
                   <tr>
-                    <td colSpan="2" className="no-data">{t('admin.stats.noData')}</td>
+                    <td colSpan="2" className="no-data">Нет данных</td>
                   </tr>
                 )}
               </tbody>
@@ -129,13 +128,13 @@ const AdminStats = ({ stats }) => {
         </div>
         
         <div className="admin-stats-table-section">
-          <h3>{t('admin.stats.topUsers')}</h3>
+          <h3>Активные пользователи</h3>
           <div className="admin-table-wrapper">
             <table className="admin-stats-table">
               <thead>
                 <tr>
-                  <th>{t('admin.stats.username')}</th>
-                  <th>{t('admin.stats.bookings.count')}</th>
+                  <th>Имя пользователя</th>
+                  <th>Количество бронирований</th>
                 </tr>
               </thead>
               <tbody>
@@ -147,7 +146,7 @@ const AdminStats = ({ stats }) => {
                 ))}
                 {users.top_users.length === 0 && (
                   <tr>
-                    <td colSpan="2" className="no-data">{t('admin.stats.noData')}</td>
+                    <td colSpan="2" className="no-data">Нет данных</td>
                   </tr>
                 )}
               </tbody>
@@ -156,13 +155,13 @@ const AdminStats = ({ stats }) => {
         </div>
         
         <div className="admin-stats-table-section">
-          <h3>{t('admin.stats.topVenues')}</h3>
+          <h3>Популярные места проведения</h3>
           <div className="admin-table-wrapper">
             <table className="admin-stats-table">
               <thead>
                 <tr>
-                  <th>{t('admin.stats.venueName')}</th>
-                  <th>{t('admin.stats.events.count')}</th>
+                  <th>Название места</th>
+                  <th>Количество мероприятий</th>
                 </tr>
               </thead>
               <tbody>
@@ -174,7 +173,7 @@ const AdminStats = ({ stats }) => {
                 ))}
                 {events.venue_stats.length === 0 && (
                   <tr>
-                    <td colSpan="2" className="no-data">{t('admin.stats.noData')}</td>
+                    <td colSpan="2" className="no-data">Нет данных</td>
                   </tr>
                 )}
               </tbody>
@@ -186,18 +185,43 @@ const AdminStats = ({ stats }) => {
   );
 };
 
+// Функция для получения читаемого названия типа мероприятия
+const getTypeLabel = (type) => {
+  const types = {
+    'SPORT': 'Спорт',
+    'CONCERT': 'Концерт',
+    'THEATER': 'Театр',
+    'EXHIBITION': 'Выставка',
+    'WORKSHOP': 'Мастер-класс',
+    'OTHER': 'Другое'
+  };
+  
+  return types[type] || type;
+};
+
+// Функция для получения читаемого названия статуса бронирования
+const getStatusLabel = (status) => {
+  const statuses = {
+    'confirmed': 'Подтверждено',
+    'cancelled': 'Отменено',
+    'pending': 'В ожидании'
+  };
+  
+  return statuses[status] || status;
+};
+
 // Вспомогательные функции для цветов графиков
 const getTypeColor = (type) => {
   const colors = {
-    'sport': '#4CAF50',
-    'concert': '#2196F3',
-    'theater': '#9C27B0',
-    'exhibition': '#FF9800',
-    'workshop': '#795548',
-    'other': '#607D8B'
+    'SPORT': '#4CAF50',
+    'CONCERT': '#2196F3',
+    'THEATER': '#9C27B0',
+    'EXHIBITION': '#FF9800',
+    'WORKSHOP': '#795548',
+    'OTHER': '#607D8B'
   };
   
-  return colors[type.toLowerCase()] || '#607D8B';
+  return colors[type] || '#607D8B';
 };
 
 const getStatusColor = (status) => {
