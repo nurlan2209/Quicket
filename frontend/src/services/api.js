@@ -136,7 +136,90 @@ getUserNotifications: async () => {
     throw error;
   }
 },
+// Добавьте этот метод в ваш файл services/api.js
 
+// Отправка уведомления пользователю
+sendNotification: async (notificationData) => {
+  try {
+    const token = localStorage.getItem('authToken') || (JSON.parse(localStorage.getItem('user')) || {}).token;
+    
+    const response = await axios.post(`${API_URL}/notifications`, notificationData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    return {
+      success: true,
+      data: response.data
+    };
+  } catch (error) {
+    console.error('Error sending notification:', error);
+    return {
+      success: false,
+      message: error.response?.data?.message || 'Ошибка при отправке уведомления'
+    };
+  }
+},
+
+// Получение уведомлений пользователя
+getUserNotifications: async () => {
+  try {
+    // Получаем текущего пользователя из хранилища
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || !user.id) {
+      throw new Error('Пользователь не авторизован');
+    }
+
+    // Получаем токен
+    const token = localStorage.getItem('authToken') || user.token;
+    
+    // Запрос с указанием ID пользователя
+    const response = await axios.get(`${API_URL}/users/${user.id}/notifications`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    // Проверяем, содержит ли ответ поле notifications
+    if (response.data && response.data.notifications) {
+      return response.data.notifications;
+    } else if (Array.isArray(response.data)) {
+      return response.data;
+    }
+    
+    return [];
+  } catch (error) {
+    console.error('Ошибка при получении уведомлений:', error);
+    throw error;
+  }
+},
+
+
+// Получение всех уведомлений (для админ-панели)
+getAllNotifications: async () => {
+  try {
+    const token = localStorage.getItem('authToken') || (JSON.parse(localStorage.getItem('user')) || {}).token;
+    
+    const response = await axios.get(`${API_URL}/admin/notifications`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    return {
+      success: true,
+      data: response.data
+    };
+  } catch (error) {
+    console.error('Error fetching all notifications:', error);
+    return {
+      success: false,
+      message: error.response?.data?.message || 'Ошибка при получении уведомлений'
+    };
+  }
+},
   // Получение количества непрочитанных уведомлений
   getUnreadNotificationsCount: async (userId) => {
     try {
@@ -211,23 +294,26 @@ getUserNotifications: async () => {
   }   ,
 
   // Удаление уведомления
-  deleteNotification: async (notificationId) => {
+  deleteAdminNotification: async (notificationId) => {
     try {
-      // Получаем токен
-      const user = JSON.parse(localStorage.getItem('user'));
-      const token = localStorage.getItem('authToken') || (user || {}).token;
+      const token = localStorage.getItem('authToken') || (JSON.parse(localStorage.getItem('user')) || {}).token;
       
-      // Отправляем запрос на удаление
-      const response = await axios.delete(`${API_URL}/notifications/${notificationId}`, {
+      const response = await axios.delete(`${API_URL}/admin/notifications/${notificationId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
       
-      return response.data;
+      return {
+        success: true,
+        data: response.data
+      };
     } catch (error) {
-      console.error('Ошибка при удалении уведомления:', error);
-      throw error;
+      console.error('Error deleting notification:', error);
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Ошибка при удалении уведомления'
+      };
     }
   },
 

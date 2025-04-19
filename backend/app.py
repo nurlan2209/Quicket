@@ -864,6 +864,53 @@ def delete_venue(venue_id):
         return jsonify({'success': False, 'message': f'Ошибка при удалении спортивного объекта: {str(e)}'}), 500
 
 # API для управления уведомлениями
+# API для создания уведомления администратором
+@app.route('/api/notifications', methods=['POST'])
+@admin_required
+def create_notification():
+    data = request.json
+    
+    # Проверяем наличие обязательных полей
+    required_fields = ['user_id', 'title', 'message', 'notification_type']
+    for field in required_fields:
+        if field not in data:
+            return jsonify({'success': False, 'message': f'Поле {field} обязательно'}), 400
+    
+    try:
+        # Преобразование строки типа уведомления в Enum
+        notification_type_str = data['notification_type'].upper()
+        try:
+            notification_type = NotificationType[notification_type_str]
+        except KeyError:
+            return jsonify({'success': False, 'message': f'Неверный тип уведомления: {data["notification_type"]}'}), 400
+        
+        # Проверяем, существует ли пользователь
+        user = User.query.get(data['user_id'])
+        if not user:
+            return jsonify({'success': False, 'message': 'Пользователь не найден'}), 404
+        
+        # Создаем новое уведомление
+        notification = Notification(
+            user_id=data['user_id'],
+            title=data['title'],
+            message=data['message'],
+            notification_type=notification_type,
+            action_link=data.get('action_link'),
+            related_id=data.get('related_id')
+        )
+        
+        db.session.add(notification)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Уведомление успешно создано',
+            'notification_id': notification.id
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'message': f'Ошибка при создании уведомления: {str(e)}'}), 500
+
 
 # Получение уведомлений пользователя
 @app.route('/api/users/<int:user_id>/notifications', methods=['GET'])

@@ -27,7 +27,19 @@ const NotificationsPage = () => {
     try {
       const data = await apiService.getUserNotifications();
       console.log('Получены уведомления:', data);
-      setNotifications(Array.isArray(data) ? data : []);
+      
+      // Проверяем структуру данных
+      let notificationsData = [];
+      
+      if (Array.isArray(data)) {
+        notificationsData = data;
+      } else if (data && data.notifications && Array.isArray(data.notifications)) {
+        notificationsData = data.notifications;
+      } else if (data && data.success && Array.isArray(data.data)) {
+        notificationsData = data.data;
+      }
+      
+      setNotifications(notificationsData);
     } catch (err) {
       console.error('Ошибка при загрузке уведомлений:', err);
       setError('Не удалось загрузить уведомления. Попробуйте позже.');
@@ -37,13 +49,20 @@ const NotificationsPage = () => {
   };
 
   const getNotificationIcon = (type) => {
-    switch (type) {
+    // Приводим к нижнему регистру для консистентности и обрабатываем обе версии имен полей
+    const notificationType = (type || '').toLowerCase();
+    
+    switch (notificationType) {
       case 'booking_created':
         return 'notification-icon-booking';
       case 'booking_cancelled':
         return 'notification-icon-cancel';
       case 'booking_reminder':
         return 'notification-icon-reminder';
+      case 'event_updated':
+        return 'notification-icon-update';
+      case 'event_cancelled':
+        return 'notification-icon-cancel';
       case 'system_message':
         return 'notification-icon-system';
       default:
@@ -169,7 +188,7 @@ const NotificationsPage = () => {
               key={notification.id}
               className={`notification-item ${notification.read ? 'read' : 'unread'}`}
             >
-              <div className={`notification-icon ${getNotificationIcon(notification.type)}`}></div>
+              <div className={`notification-icon ${getNotificationIcon(notification.notification_type || notification.type)}`}></div>
               <div className="notification-content">
                 <div className="notification-header">
                   <h3 className="notification-title">{notification.title}</h3>

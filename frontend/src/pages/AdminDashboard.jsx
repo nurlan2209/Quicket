@@ -393,27 +393,6 @@ const AdminDashboard = () => {
     {activeTab === 'users' && "Управление пользователями"}
   </h1>
   
-  <div className="admin-header-actions">
-    {activeTab === 'events' && (
-      <button 
-        className="admin-add-button"
-        onClick={handleCreateEvent}
-      >
-        <span className="admin-add-icon">+</span>
-        Создать мероприятие
-      </button>
-    )}
-    
-    {activeTab === 'venues' && (
-      <button 
-        className="admin-add-button"
-        onClick={handleCreateVenue}
-      >
-        <span className="admin-add-icon">+</span>
-        Добавить спортивный объект
-      </button>
-    )}
-  </div>
 </div>
           
           <div className="admin-content-body">

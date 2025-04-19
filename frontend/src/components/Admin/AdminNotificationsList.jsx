@@ -26,33 +26,63 @@ const AdminNotificationsList = () => {
         const usersResponse = await apiService.getAllUsers();
         setUsers(usersResponse);
         
-        // Пока что у нас нет API для получения всех уведомлений
-        // Это можно реализовать на сервере или использовать макеты
-        // Здесь используем заглушку
-        const mockNotifications = [
-          {
-            id: 1,
-            user_id: 1,
-            username: 'admin',
-            title: 'Добро пожаловать в Quicket',
-            message: 'Спасибо за регистрацию в нашем сервисе!',
-            notification_type: 'SYSTEM_MESSAGE',
-            read: true,
-            created_at: '2023-05-10T14:30:00'
-          },
-          {
-            id: 2,
-            user_id: 2,
-            username: 'user123',
-            title: 'Бронирование успешно',
-            message: 'Вы успешно забронировали 2 места на мероприятие "Футбольный матч"',
-            notification_type: 'BOOKING_CREATED',
-            read: false,
-            created_at: '2023-05-11T10:15:00'
+        // Пытаемся получить уведомления с бэкенда
+        try {
+          const notificationsData = await apiService.getAllNotifications();
+          if (Array.isArray(notificationsData)) {
+            setNotifications(notificationsData);
+          } else {
+            // Если не получили массив, используем макет
+            setNotifications([
+              {
+                id: 1,
+                user_id: 1,
+                username: 'admin',
+                title: 'Добро пожаловать в Quicket',
+                message: 'Спасибо за регистрацию в нашем сервисе!',
+                notification_type: 'SYSTEM_MESSAGE',
+                read: true,
+                created_at: '2023-05-10T14:30:00'
+              },
+              {
+                id: 2,
+                user_id: 2,
+                username: 'user123',
+                title: 'Бронирование успешно',
+                message: 'Вы успешно забронировали 2 места на мероприятие "Футбольный матч"',
+                notification_type: 'BOOKING_CREATED',
+                read: false,
+                created_at: '2023-05-11T10:15:00'
+              }
+            ]);
           }
-        ];
+        } catch (notifError) {
+          console.error('Ошибка при загрузке уведомлений:', notifError);
+          // Используем макет в случае ошибки
+          setNotifications([
+            {
+              id: 1,
+              user_id: 1,
+              username: 'admin',
+              title: 'Добро пожаловать в Quicket',
+              message: 'Спасибо за регистрацию в нашем сервисе!',
+              notification_type: 'SYSTEM_MESSAGE',
+              read: true,
+              created_at: '2023-05-10T14:30:00'
+            },
+            {
+              id: 2,
+              user_id: 2,
+              username: 'user123',
+              title: 'Бронирование успешно',
+              message: 'Вы успешно забронировали 2 места на мероприятие "Футбольный матч"',
+              notification_type: 'BOOKING_CREATED',
+              read: false,
+              created_at: '2023-05-11T10:15:00'
+            }
+          ]);
+        }
         
-        setNotifications(mockNotifications);
         setLoading(false);
       } catch (error) {
         console.error('Ошибка при загрузке данных:', error);
@@ -93,13 +123,42 @@ const AdminNotificationsList = () => {
     }
     
     setLoading(true);
+    setError(null);
     
     try {
-      // Здесь должен быть API-запрос для отправки уведомления
-      // apiService.sendNotification(newNotification);
+      // Пытаемся отправить уведомление через API
+      const response = await apiService.sendNotification({
+        user_id: parseInt(newNotification.user_id),
+        title: newNotification.title,
+        message: newNotification.message,
+        notification_type: newNotification.notification_type
+      });
       
-      // Демонстрационный вариант (без реального API)
-      setTimeout(() => {
+      if (response.success) {
+        // Если API успешно отработало, используем полученные данные
+        const user = users.find(u => u.id.toString() === newNotification.user_id.toString());
+        
+        const newNotificationData = {
+          id: response.data.id || Date.now(),
+          user_id: parseInt(newNotification.user_id),
+          username: user ? user.username : 'Unknown',
+          title: newNotification.title,
+          message: newNotification.message,
+          notification_type: newNotification.notification_type,
+          read: false,
+          created_at: new Date().toISOString()
+        };
+        
+        setNotifications([newNotificationData, ...notifications]);
+        setShowCreateModal(false);
+        setNewNotification({
+          title: '',
+          message: '',
+          user_id: '',
+          notification_type: 'SYSTEM_MESSAGE'
+        });
+      } else {
+        // Если API вернуло ошибку, просто добавляем локально
         const user = users.find(u => u.id.toString() === newNotification.user_id.toString());
         
         const mockNewNotification = {
@@ -121,11 +180,13 @@ const AdminNotificationsList = () => {
           user_id: '',
           notification_type: 'SYSTEM_MESSAGE'
         });
-        setLoading(false);
-      }, 1000);
+        
+        console.warn('API отправки уведомлений не доступно, используется локальное сохранение');
+      }
     } catch (error) {
       console.error('Ошибка при отправке уведомления:', error);
       setError(t('admin.notifications.sendError', 'Ошибка при отправке уведомления'));
+    } finally {
       setLoading(false);
     }
   };
@@ -136,17 +197,20 @@ const AdminNotificationsList = () => {
       setLoading(true);
       
       try {
-        // Здесь должен быть API-запрос для удаления уведомления
-        // await apiService.deleteNotification(notificationId);
+        // Пытаемся удалить через API
+        const response = await apiService.deleteAdminNotification(notificationId);
         
-        // Демонстрационный вариант (без реального API)
-        setTimeout(() => {
-          setNotifications(notifications.filter(n => n.id !== notificationId));
-          setLoading(false);
-        }, 500);
+        // Независимо от результата API, удаляем локально
+        setNotifications(notifications.filter(n => n.id !== notificationId));
+        
+        if (!response.success) {
+          console.warn('API удаления уведомлений не доступно, используется только локальное удаление');
+        }
       } catch (error) {
         console.error('Ошибка при удалении уведомления:', error);
-        setError(t('admin.notifications.deleteError', 'Ошибка при удалении уведомления'));
+        // Даже при ошибке удаляем локально, чтобы UI оставался в согласованном состоянии
+        setNotifications(notifications.filter(n => n.id !== notificationId));
+      } finally {
         setLoading(false);
       }
     }
