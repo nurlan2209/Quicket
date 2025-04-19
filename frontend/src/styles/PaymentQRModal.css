@@ -1,0 +1,315 @@
+.payment-qr-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Высокий z-index */
+    animation: fadeIn 0.3s ease-out;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    will-change: opacity; /* Оптимизация для анимации */
+    backface-visibility: hidden; /* Предотвращает мигание в некоторых браузерах */
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    overflow-y: none;
+  }
+  
+  .payment-qr-content {
+    background-color: #fff;
+    border-radius: 16px;
+    width: 90vw;
+    max-width: 500px;
+    height: auto;
+    max-height: 90vh;
+    padding: 24px;
+    position: relative;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-out;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    will-change: transform, opacity; /* Оптимизация для анимаций */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+  
+  .payment-qr-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+    z-index: 2;
+    padding: 10px; /* Увеличиваем область клика */
+    margin: -10px; /* Компенсируем расширенный padding */
+  }
+  
+  .payment-qr-close:hover {
+    color: #000;
+  }
+  
+  .payment-qr-header {
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 50px;
+  }
+  
+  .payment-qr-header h2 {
+    margin: 0 0 12px;
+    color: #333;
+    font-size: 28px;
+  }
+  
+  .payment-qr-header p {
+    margin: 0;
+    color: #666;
+    font-size: 16px;
+  }
+  
+  .payment-qr-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .payment-qr-timer {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .timer-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  
+  .timer-number {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    z-index: 1;
+  }
+  
+  .timer-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    transform: rotate(-90deg);
+  }
+  
+  .timer-svg circle {
+    fill: transparent;
+    stroke: #4CAF50;
+    stroke-width: 5px;
+    stroke-dasharray: 283; /* Updated for larger circle */
+    transition: stroke-dashoffset 1s linear;
+  }
+  
+  .timer-text {
+    color: #666;
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .payment-qr-image-container {
+    width: 250px;
+    height: 250px;
+    margin: 24px 0;
+    padding: 12px;
+    border: 2px solid #eee;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .payment-qr-image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  .payment-qr-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    color: #666;
+    font-size: 18px;
+  }
+  
+  .payment-amount {
+    margin: 24px 0;
+  }
+  
+  .payment-amount p {
+    margin: 8px 0;
+    font-size: 18px;
+    margin-top: -20px;
+  }
+  
+  .payment-amount .amount {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .payment-instructions {
+    margin-top: -30px;
+    padding: 16px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #555;
+    max-width: 450px;
+  }
+  
+  .payment-instructions p {
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  /* Success state */
+  .payment-success {
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .success-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .success-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: scaleIn 0.5s ease-out;
+  }
+  
+  .success-icon-check {
+    width: 50px;
+    height: 30px;
+    border-bottom: 6px solid white;
+    border-right: 6px solid white;
+    transform: rotate(45deg) translate(-5px, -10px);
+    animation: checkmark 0.5s ease-out 0.3s forwards;
+    opacity: 0;
+  }
+  
+  .payment-success h2 {
+    color: #333;
+    margin: 0 0 16px;
+    font-size: 32px;
+  }
+  
+  .payment-success p {
+    color: #666;
+    font-size: 20px;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes scaleIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+  @keyframes checkmark {
+    from { opacity: 0; transform: rotate(45deg) translate(-15px, -15px); }
+    to { opacity: 1; transform: rotate(45deg) translate(-5px, -10px); }
+  }
+  
+  /* Предотвращение мигания на мобильных устройствах */
+  @media (max-width: 768px) {
+    .payment-qr-overlay {
+      -webkit-transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+    }
+    
+    .payment-qr-content {
+      padding: 16px;
+      width: 95vw;
+      max-height: 95vh;
+    }
+    
+    .payment-qr-header h2 {
+      font-size: 24px;
+    }
+    
+    .timer-circle {
+      width: 80px;
+      height: 80px;
+    }
+    
+    .timer-svg {
+      width: 80px;
+      height: 80px;
+    }
+    
+    .timer-number {
+      font-size: 30px;
+    }
+    
+    .payment-qr-image-container {
+      width: 200px;
+      height: 200px;
+    }
+    
+    .success-icon {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .payment-success h2 {
+      font-size: 26px;
+    }
+    
+    .payment-success p {
+      font-size: 18px;
+    }
+  }

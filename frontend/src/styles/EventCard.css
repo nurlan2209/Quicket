@@ -1,0 +1,313 @@
+.event-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.event-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.event-card-header {
+  height: 150px; /* Уменьшаем высоту, так как убрали изображение сверху */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  background-color: #f0f0f0; /* Серый фон по умолчанию */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.event-card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(13, 27, 42, 0.1), rgba(13, 27, 42, 0.8));
+  z-index: 1;
+}
+
+.event-card-header > * {
+  position: relative;
+  z-index: 2;
+}
+
+.event-card-title {
+  margin: 0;
+  font-size: 1.4rem; /* Уменьшаем размер шрифта */
+  font-weight: 700;
+  line-height: 1.3;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.event-type-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3em 0.7em;
+  border-radius: 50px;
+  background: #2FB99A;
+  color: #ffffff;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.event-card-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-info {
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.event-info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.event-info-icon {
+  margin-right: 0.8rem;
+  color: #CFA570;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+
+.event-price-seats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.event-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0D1B2A;
+}
+
+.event-seats {
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+}
+
+.seats-available {
+  background: linear-gradient(90deg, rgba(47, 185, 154, 0.1), rgba(47, 185, 154, 0.2));
+  color: #2FB99A;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.seats-limited {
+  background: linear-gradient(90deg, rgba(207, 165, 112, 0.15), rgba(207, 165, 112, 0.25));
+  color: #CFA570;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.seats-sold-out {
+  background: linear-gradient(90deg, rgba(239, 71, 111, 0.1), rgba(239, 71, 111, 0.2));
+  color: #ef476f;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.event-card-footer {
+  padding: 1rem 1.5rem;
+  background-color: #f8fafc;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.view-details-btn {
+  width: 100%;
+  text-align: center;
+  background: #0D1B2A;
+  color: #ffffff;
+  padding: 0.6rem;
+  border-radius: 50px;
+  font-weight: 600;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.view-details-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+  background: #2FB99A;
+}
+
+.limited-badge {
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  background: linear-gradient(90deg, #CFA570, #e3b47d);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transform: translateY(-50%);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .event-card-header {
+    height: 120px;
+  }
+  
+  .event-card-title {
+    font-size: 1.2rem;
+  }
+}
+
+@keyframes cardPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.event-card-featured {
+  animation: cardPulse 2s infinite;
+  border: 3px solid #2FB99A;
+}
+
+.event-card {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Стили для изображения */
+.event-card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.event-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Убрали стили для заглушки, так как изображение теперь в event-card-header */
+.event-card-header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-card-title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.event-type-badge {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.event-card-content {
+  padding: 15px;
+}
+
+.event-info {
+  margin-bottom: 15px;
+}
+
+.event-info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.event-info-icon {
+  margin-right: 8px;
+}
+
+.event-price-seats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.event-seats .seats-sold-out {
+  color: #dc3545;
+}
+
+.event-seats .seats-limited {
+  color: #ff9800;
+}
+
+.event-seats .seats-available {
+  color: #28a745;
+}
+
+.limited-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff9800;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.event-card-footer {
+  padding: 15px;
+  text-align: center;
+}
+
+.view-details-btn {
+  width: 100%;
+  padding: 10px;
+}

@@ -1,0 +1,241 @@
+{
+  "notifications": {
+    "title": "Notifications",
+    "noNotifications": "You don't have any notifications yet",
+    "markAllAsRead": "Mark all as read",
+    "markAsRead": "Mark as read",
+    "delete": "Delete",
+    "viewDetails": "View details",
+    "viewAll": "View all",
+    "justNow": "Just now",
+    "minutesAgo": "{{count}} min ago",
+    "minutesAgo_plural": "{{count}} mins ago",
+    "hoursAgo": "{{count}} hour ago",
+    "hoursAgo_plural": "{{count}} hours ago",
+    "daysAgo": "{{count}} day ago",
+    "daysAgo_plural": "{{count}} days ago",
+    "errors": {
+      "loadingFailed": "Failed to load notifications. Please try again later."
+    }
+  },
+  "paymentQR": {
+    "title": "Scan QR to Pay",
+    "subtitle": "Use your banking app or Kaspi to scan",
+    "qrCodeAlt": "Payment QR code",
+    "loading": "Loading QR code...",
+    "timerText": "Payment time remaining",
+    "seats": "Number of seats",
+    "amount": "Total amount",
+    "instructions": "Open your banking app or Kaspi, select 'Scan QR' and point your camera at the code above",
+    "successTitle": "Payment Successful!",
+    "successMessage": "Your ticket has been successfully paid and booked"
+  },
+  "auth": {
+  "login": {
+    "title": "Login",
+    "subtitle": "Log in to your account to make bookings",
+    "username": "Username",
+    "username_placeholder": "Enter your username",
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "button": "Login",
+    "loading": "Logging in...",
+    "no_account": "Don't have an account?",
+    "register_link": "Register",
+    "error": {
+      "fill_all": "Please fill in all fields",
+      "login_error": "An error occurred during login",
+      "wrong_credentials": "Incorrect username or password"
+    }
+  },
+  "register": {
+    "title": "Register",
+    "subtitle": "Register for the PlayTime Pro service",
+    "username": "Username",
+    "username_placeholder": "Enter your username",
+    "email": "Email",
+    "email_placeholder": "Enter your email",
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "confirm_password": "Confirm Password",
+    "confirm_password_placeholder": "Confirm your password",
+    "button": "Register",
+    "loading": "Registering...",
+    "has_account": "Already have an account?",
+    "login_link": "Login",
+    "success": "Registration successful! You will now be redirected to the login page.",
+    "error": {
+      "fill_all": "Please fill in all fields",
+      "email_invalid": "Please enter a valid email",
+      "passwords_not_match": "Passwords do not match",
+      "password_length": "Password must be at least 6 characters long",
+      "register_error": "An error occurred during registration",
+      "username_email_exists": "This username or email already exists"
+    }
+  }
+},
+  "bookings": {
+  "title": "My Bookings",
+  "loading": "Loading...",
+  "error": "Failed to load your bookings. Please try again later.",
+  "no_bookings": "You don't have any bookings yet.",
+  "view_events": "View available events",
+  "active_bookings": "Active Bookings",
+  "no_active_bookings": "You don't have any active bookings",
+  "cancelled_bookings": "Cancelled Bookings",
+  "event_info": {
+    "date": "Date",
+    "time": "Time",
+    "venue": "Venue",
+    "seats": "Number of seats",
+    "total": "Total",
+    "booking_date": "Booking date",
+    "status": "Status",
+    "cancelled": "Cancelled"
+  },
+  "cancel": {
+    "button": "Cancel Booking",
+    "success": "Booking successfully cancelled",
+    "error": "An error occurred while cancelling the booking"
+  }
+},
+
+"eventList": {
+  "loading": "Loading...",
+  "no_events": "No events found"
+},
+
+"eventDetail": {
+  "loading": "Loading...",
+  "error": "An error occurred while loading event information",
+  "not_found": "Event not found",
+  "return": "Return to events list",
+  "seats": {
+    "available": "Available",
+    "sold_out": "Sold Out",
+    "limited": "Left"
+  },
+  "info": {
+    "about": "About the Event",
+    "no_description": "No description has been provided for this event.",
+    "images": "Photos",
+    "image_alt": "photo",
+    "venue": "Venue",
+    "map": "Map at address",
+    "time": "Time",
+    "duration": "Duration",
+    "duration_unit": "minutes",
+    "price": "Price",
+    "seats": "Seats"
+  }
+  },
+    "common": {
+      "loading": "Loading...",
+      "error": "An error occurred",
+      "success": "Success!",
+      "required": "Required field"
+    },
+    "navigation": {
+      "home": "Home",
+      "events": "Events",
+      "bookings": "My Bookings",
+      "login": "Login",
+      "register": "Register",
+      "logout": "Logout",
+      "notifications": "Notifications"
+    },
+    "homepage": {
+      "hero": {
+        "title": "Book Sports and Cultural Events",
+        "subtitle": "Find and book seats for sports and cultural events through our convenient app",
+        "findEvents": "Find Events",
+        "register": "Register"
+      },
+      "recentEvents": {
+        "title": "Upcoming Events",
+        "viewAll": "All Events",
+        "allEvents": "View All Events"
+      },
+      "cta": {
+        "title": "Join Quicket Now",
+        "subtitle": "Create your account and start booking tickets for sports events",
+        "register": "Register Today"
+      },
+      "features": {
+        "title": "Why Choose Us?",
+        "simpleBooking": {
+          "title": "Simple Booking",
+          "description": "Book seats for events with just a few clicks"
+        },
+        "onlinePayment": {
+          "title": "Online Payment",
+          "description": "Secure and simple online payment system"
+        },
+        "multilingual": {
+          "title": "Multilingual",
+          "description": "Our app is available in 3 languages (Kazakh, Russian, English)"
+        },
+        "mobileAccess": {
+          "title": "Mobile Access",
+          "description": "Access and manage bookings from any device"
+        }
+      }
+    },
+    "events": {
+      "title": "Sports and Cultural Events and Sections",
+      "search": {
+        "placeholder": "Enter text to search...",
+        "label": "Search by name or venue"
+      },
+      "filter": {
+        "label": "Filter by type",
+        "allTypes": "All types"
+      },
+      "noEvents": "No events found for your request. Try changing the search parameters.",
+      "viewDetails": "View Details"
+    },
+    "eventCard": {
+      "soldOut": "Sold Out",
+      "limitedSeats": "Left: {{count}}",
+      "availableSeats": "Available: {{count}}",
+      "limitedBadge": "Few seats left!"
+    },
+    "bookingForm": {
+      "title": "Book a Seat",
+      "subtitle": "Select the number of seats",
+      "seatsLabel": "Number of seats",
+      "availableSeats": "Available: {{count}}",
+      "pricePerSeat": "Price per seat",
+      "numberOfSeats": "Number of seats",
+      "totalPayment": "Total payment",
+      "booking": "Book Now",
+      "processing": "Processing...",
+      "loginToBook": "Login to Book",
+      "loginNotice": "You need to log in to book",
+      "soldOutMessage": "Unfortunately, all seats for this event have been booked",
+      "success": {
+        "title": "Booking Successful!",
+        "subtitle": "Thank you for your order",
+        "message": "Booking Confirmed",
+        "details": "Booking details have been sent to your email. You can also view them in the \"My Bookings\" section.",
+        "goToBookings": "Go to My Bookings"
+      },
+      "errors": {
+        "seatsRange": "Please select between 1 and {{max}} seats",
+        "bookingError": "An error occurred during booking",
+        "tryAgain": "An error occurred during booking. Please try again later."
+      }
+    },
+    "footer": {
+      "description": "Online ticket sales system for cultural and sports events. Open the door to great moments and join the world of culture and sports!",
+      "navigation": "Navigation",
+      "contact": "Contact",
+      "copyright": "© {{year}} Quicket. All rights reserved."
+    },
+    "language": {
+      "title": "Language",
+      "kz": "Қазақша",
+      "ru": "Русский",
+      "en": "English"
+    }
+  }

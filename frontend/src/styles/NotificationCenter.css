@@ -1,0 +1,325 @@
+.notification-center-container {
+    position: relative;
+    margin-right: 1rem;
+  }
+  
+  .notification-center-icon {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    transition: background-color 0.2s;
+  }
+  
+  .notification-center-icon:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .notification-icon {
+    font-size: 1.3rem;
+    color: #333;
+  }
+  
+  .notification-badge-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4757;
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .notification-dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 350px;
+    max-height: 500px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .notification-dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .notification-dropdown-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .mark-all-read-btn {
+    background: none;
+    border: none;
+    color: #2FB99A;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .mark-all-read-btn:hover {
+    background-color: rgba(47, 185, 154, 0.1);
+  }
+  
+  .notification-dropdown-content {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 350px;
+  }
+  
+  .notification-dropdown-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+  }
+  
+  .notification-loading-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(47, 185, 154, 0.1);
+    border-top-color: #2FB99A;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .notification-dropdown-empty {
+    padding: 30px 20px;
+    text-align: center;
+    color: #666;
+  }
+  
+  .notification-dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .notification-dropdown-item {
+    display: flex;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+  }
+  
+  .notification-dropdown-item:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .notification-dropdown-item.unread {
+    background-color: rgba(47, 185, 154, 0.05);
+  }
+  
+  .notification-dropdown-item.unread .notification-dropdown-item-header h4 {
+    font-weight: 600;
+  }
+  
+  .notification-dropdown-item-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: white;
+    font-size: 1.1rem;
+    background-color: #ddd;
+  }
+  
+  .notification-dropdown-icon-booking {
+    background-color: #2FB99A;
+  }
+  
+  .notification-dropdown-icon-booking::after {
+    content: '🎟️';
+  }
+  
+  .notification-dropdown-icon-cancel {
+    background-color: #ff4757;
+  }
+  
+  .notification-dropdown-icon-cancel::after {
+    content: '❌';
+  }
+  
+  .notification-dropdown-icon-reminder {
+    background-color: #ffa502;
+  }
+  
+  .notification-dropdown-icon-reminder::after {
+    content: '⏰';
+  }
+  
+  .notification-dropdown-icon-update {
+    background-color: #1e90ff;
+  }
+  
+  .notification-dropdown-icon-update::after {
+    content: '📝';
+  }
+  
+  .notification-dropdown-icon-system {
+    background-color: #8e44ad;
+  }
+  
+  .notification-dropdown-icon-system::after {
+    content: 'ℹ️';
+  }
+  
+  .notification-dropdown-icon-default {
+    background-color: #95a5a6;
+  }
+  
+  .notification-dropdown-icon-default::after {
+    content: '📢';
+  }
+  
+  .notification-dropdown-item-content {
+    flex: 1;
+    min-width: 0; /* Чтобы текст корректно обрезался */
+  }
+  
+  .notification-dropdown-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 5px;
+  }
+  
+  .notification-dropdown-item-header h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .notification-dropdown-item-time {
+    font-size: 0.75rem;
+    color: #999;
+    white-space: nowrap;
+    margin-left: 10px;
+  }
+  
+  .notification-dropdown-item-message {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  
+  .notification-dropdown-mark-read {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s, background-color 0.2s;
+    background-color: rgba(47, 185, 154, 0.1);
+  }
+  
+  .notification-dropdown-item:hover .notification-dropdown-mark-read {
+    opacity: 1;
+  }
+  
+  .notification-dropdown-mark-read:hover {
+    background-color: rgba(47, 185, 154, 0.2);
+  }
+  
+  .check-icon {
+    color: #2FB99A;
+    font-size: 1rem;
+  }
+  
+  .notification-dropdown-footer {
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid #eee;
+  }
+  
+  .view-all-notifications-btn {
+    background: none;
+    border: 1px solid #2FB99A;
+    color: #2FB99A;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .view-all-notifications-btn:hover {
+    background-color: #2FB99A;
+    color: white;
+  }
+  
+  /* Адаптивность для мобильных устройств */
+  @media (max-width: 768px) {
+    .notification-dropdown {
+      width: 290px;
+      right: -120px;
+    }
+    
+    .notification-dropdown::before {
+      right: 130px;
+    }
+    
+    .notification-dropdown-item {
+      padding: 12px 15px;
+    }
+    
+    .notification-dropdown-item-icon {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+  }

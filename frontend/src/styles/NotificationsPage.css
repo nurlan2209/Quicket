@@ -1,0 +1,373 @@
+.notifications-page {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+  }
+  
+  .notifications-header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+  }
+  
+  .mark-all-read-btn {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .mark-all-read-btn:hover {
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  .notifications-loading,
+  .notifications-error,
+  .no-notifications {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    text-align: center;
+  }
+  
+  .loading-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #2196F3;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .notifications-error p {
+    color: #e53935;
+    margin-bottom: 15px;
+  }
+  
+  .retry-btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .retry-btn:hover {
+    background-color: #1976D2;
+  }
+  
+  .no-notifications {
+    color: #757575;
+  }
+  
+  .no-notifications-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #f5f5f5;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .no-notifications-icon:before,
+  .no-notifications-icon:after {
+    content: '';
+    position: absolute;
+    background-color: #bdbdbd;
+  }
+  
+  .no-notifications-icon:before {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: 20px;
+    left: 25px;
+  }
+  
+  .no-notifications-icon:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    top: 28px;
+    left: 33px;
+    border: 2px solid #bdbdbd;
+  }
+  
+  .notifications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .notification-item {
+    display: flex;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: all 0.2s;
+  }
+  
+  .notification-item.unread {
+    background-color: #f0f7ff;
+    border-left: 4px solid #2196F3;
+  }
+  
+  .notification-item.read {
+    border-left: 4px solid transparent;
+    opacity: 0.8;
+  }
+  
+  .notification-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+  
+  .notification-icon::before {
+    content: '';
+    position: absolute;
+    font-family: 'Material Icons', sans-serif;
+    font-size: 20px;
+    color: #fff;
+  }
+  
+  .notification-icon-booking {
+    background-color: #4CAF50;
+  }
+  
+  .notification-icon-booking::before {
+    content: '\e8f7'; /* Ticket icon code */
+  }
+  
+  .notification-icon-cancel {
+    background-color: #F44336;
+  }
+  
+  .notification-icon-cancel::before {
+    content: '\e888'; /* Cancel icon code */
+  }
+  
+  .notification-icon-reminder {
+    background-color: #FF9800;
+  }
+  
+  .notification-icon-reminder::before {
+    content: '\e8b5'; /* Alarm icon code */
+  }
+  
+  .notification-icon-system {
+    background-color: #607D8B;
+  }
+  
+  .notification-icon-system::before {
+    content: '\e8b8'; /* Info icon code */
+  }
+  
+  .notification-icon-default {
+    background-color: #9E9E9E;
+  }
+  
+  .notification-icon-default::before {
+    content: '\e7f4'; /* Notification icon code */
+  }
+  
+  .notification-content {
+    flex: 1;
+    margin-right: 16px;
+  }
+  
+  .notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  
+  .notification-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+  }
+  
+  .notification-date {
+    font-size: 12px;
+    color: #757575;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+  
+  .notification-message {
+    font-size: 14px;
+    color: #555;
+    margin: 0 0 8px;
+    line-height: 1.4;
+  }
+  
+  .notification-action {
+    display: inline-block;
+    font-size: 14px;
+    color: #2196F3;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .notification-action:hover {
+    text-decoration: underline;
+  }
+  
+  .notification-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .read-btn,
+  .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+  
+  .read-btn:hover,
+  .delete-btn:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .read-icon,
+  .delete-icon {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    display: block;
+  }
+  
+  .read-icon::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    border-left: 2px solid #2196F3;
+    border-bottom: 2px solid #2196F3;
+    transform: rotate(-45deg);
+    left: 2px;
+    top: 6px;
+  }
+  
+  .delete-icon::before,
+  .delete-icon::after {
+    content: '';
+    position: absolute;
+    height: 18px;
+    width: 2px;
+    background-color: #F44336;
+    top: 0;
+    left: 8px;
+  }
+  
+  .delete-icon::before {
+    transform: rotate(45deg);
+  }
+  
+  .delete-icon::after {
+    transform: rotate(-45deg);
+  }
+  
+  /* Добавим стиль для иконок на основе Font Awesome или другой библиотеки иконок */
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v139/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+  }
+  
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Адаптивность для мобильных */
+  @media (max-width: 768px) {
+    .notifications-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .notification-item {
+      flex-direction: column;
+    }
+    
+    .notification-icon {
+      margin-bottom: 12px;
+    }
+    
+    .notification-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .notification-date {
+      margin-left: 0;
+      margin-top: 4px;
+    }
+    
+    .notification-actions {
+      flex-direction: row;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+  }
