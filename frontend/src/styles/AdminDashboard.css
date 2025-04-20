@@ -766,3 +766,71 @@
     width: 100%;
   }
 }
+
+/* CSS Additions for Map Widget */
+
+/* Widget generator button styling */
+.widget-generator {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.widget-generator button {
+  height: 40px;
+  margin-top: 8px;
+}
+
+.widget-generator button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Widget help text */
+.widget-help-text {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 5px;
+}
+
+/* Widget preview container */
+.widget-preview {
+  margin-top: 10px;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+.widget-preview iframe {
+  max-width: 100%;
+}
+
+/* Map preview in table */
+.map-preview-row {
+  background-color: #f8f9fa;
+}
+
+.map-preview-container {
+  padding: 20px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.map-preview-container iframe {
+  max-width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .widget-preview {
+    padding: 10px;
+  }
+  
+  .map-preview-container {
+    padding: 10px;
+  }
+}

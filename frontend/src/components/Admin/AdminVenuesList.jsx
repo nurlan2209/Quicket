@@ -11,6 +11,7 @@ const AdminVenuesList = () => {
   const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
+  const [showMapPreview, setShowMapPreview] = useState(null);
   
   useEffect(() => {
     const fetchVenues = async () => {
@@ -84,6 +85,15 @@ const AdminVenuesList = () => {
       }
     }
   };
+
+  // Показать предпросмотр карты
+  const toggleMapPreview = (venue) => {
+    if (showMapPreview === venue.id) {
+      setShowMapPreview(null);
+    } else {
+      setShowMapPreview(venue.id);
+    }
+  };
   
   // Фильтрация мест проведения по поисковому запросу
   const filteredVenues = venues.filter(venue =>
@@ -141,55 +151,81 @@ const AdminVenuesList = () => {
           {filteredVenues.length === 0 ? (
             <p className="admin-no-data">Объекты не найдены</p>
           ) : (
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Название</th>
-                  <th>Адрес</th>
-                  <th>Вместимость</th>
-                  <th>Кол-во мероприятий</th>
-                  <th className="actions-column">Действия</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredVenues.map(venue => (
-                  <tr key={venue.id}>
-                    <td>{venue.id}</td>
-                    <td className="venue-name-cell">{venue.name}</td>
-                    <td className="venue-address-cell">{venue.address}</td>
-                    <td>{venue.capacity}</td>
-                    <td>{venue.events ? venue.events.length : 0}</td>
-                    <td className="actions-cell">
-                      <button 
-                        className="admin-action-button edit"
-                        onClick={() => {
-                          setSelectedVenue(venue);
-                          setShowForm(true);
-                        }}
-                        title="Редактировать"
-                      >
-                        ✏️
-                      </button>
-                      <button 
-                        className="admin-action-button delete"
-                        onClick={() => handleDeleteVenue(venue.id)}
-                        title="Удалить"
-                      >
-                        🗑️
-                      </button>
-                      <button 
-                        className="admin-action-button view"
-                        onClick={() => window.open(`/venues/${venue.id}`, '_blank')}
-                        title="Просмотр"
-                      >
-                        👁️
-                      </button>
-                    </td>
+            <>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Адрес</th>
+                    <th>Вместимость</th>
+                    <th>Кол-во мероприятий</th>
+                    <th>Карта</th>
+                    <th className="actions-column">Действия</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredVenues.map(venue => (
+                    <React.Fragment key={venue.id}>
+                      <tr>
+                        <td>{venue.id}</td>
+                        <td className="venue-name-cell">{venue.name}</td>
+                        <td className="venue-address-cell">{venue.address}</td>
+                        <td>{venue.capacity}</td>
+                        <td>{venue.events ? venue.events.length : 0}</td>
+                        <td>
+                          {venue.map_widget_code ? (
+                            <button 
+                              className="btn-secondary btn-sm"
+                              onClick={() => toggleMapPreview(venue)}
+                            >
+                              {showMapPreview === venue.id ? 'Скрыть карту' : 'Показать карту'}
+                            </button>
+                          ) : (
+                            <span className="text-muted">Карта не настроена</span>
+                          )}
+                        </td>
+                        <td className="actions-cell">
+                          <button 
+                            className="admin-action-button edit"
+                            onClick={() => {
+                              setSelectedVenue(venue);
+                              setShowForm(true);
+                            }}
+                            title="Редактировать"
+                          >
+                            ✏️
+                          </button>
+                          <button 
+                            className="admin-action-button delete"
+                            onClick={() => handleDeleteVenue(venue.id)}
+                            title="Удалить"
+                          >
+                            🗑️
+                          </button>
+                          <button 
+                            className="admin-action-button view"
+                            onClick={() => window.open(`/venues/${venue.id}`, '_blank')}
+                            title="Просмотр"
+                          >
+                            👁️
+                          </button>
+                        </td>
+                      </tr>
+                      {showMapPreview === venue.id && venue.map_widget_code && (
+                        <tr className="map-preview-row">
+                          <td colSpan="7">
+                            <div className="map-preview-container">
+                              <div dangerouslySetInnerHTML={{ __html: venue.map_widget_code }} />
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </>
           )}
         </div>
       )}

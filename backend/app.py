@@ -780,7 +780,8 @@ def create_venue():
             description=data.get('description', ''),
             capacity=data['capacity'],
             latitude=data.get('latitude'),
-            longitude=data.get('longitude')
+            longitude=data.get('longitude'),
+            map_widget_code=data.get('map_widget_code', '')  # New field
         )
         
         db.session.add(venue)
@@ -814,6 +815,9 @@ def update_venue(venue_id):
         
         if 'description' in data:
             venue.description = data['description']
+            
+        if 'map_widget_code' in data:
+            venue.map_widget_code = data['map_widget_code']
         
         if 'capacity' in data:
             venue.capacity = data['capacity']
@@ -830,7 +834,7 @@ def update_venue(venue_id):
             'success': True,
             'message': 'Спортивный объект успешно обновлен'
         })
-    except Exception as e:
+    except Exception as e:  # Здесь должен быть блок except
         db.session.rollback()
         return jsonify({'success': False, 'message': f'Ошибка при обновлении спортивного объекта: {str(e)}'}), 500
 

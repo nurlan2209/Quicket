@@ -1,24 +1,19 @@
-"""${message}
-
-Revision ID: ${up_revision}
-Revises: ${down_revision | comma,n}
-Create Date: ${create_date}
-
-"""
 from alembic import op
 import sqlalchemy as sa
-${imports if imports else ""}
+
 
 # revision identifiers, used by Alembic.
-revision = ${repr(up_revision)}
-down_revision = ${repr(down_revision)}
-branch_labels = ${repr(branch_labels)}
-depends_on = ${repr(depends_on)}
+revision = '45a12bcd54ef'
+down_revision = None  # Update this with your latest migration ID
+branch_labels = None
+depends_on = None
 
 
 def upgrade() -> None:
-    ${upgrades if upgrades else "pass"}
+    # Add the map_widget_code column to the venues table
+    op.add_column('venues', sa.Column('map_widget_code', sa.Text(), nullable=True))
 
 
 def downgrade() -> None:
-    ${downgrades if downgrades else "pass"}
+    # Remove the map_widget_code column from the venues table
+    op.drop_column('venues', 'map_widget_code')

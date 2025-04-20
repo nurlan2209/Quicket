@@ -9,9 +9,11 @@ const AdminVenueForm = ({ venue, onSave, onCancel }) => {
     description: '',
     capacity: 100,
     latitude: '',
-    longitude: ''
+    longitude: '',
+    map_widget_code: ''
   });
   const [errors, setErrors] = useState({});
+  const [showWidgetPreview, setShowWidgetPreview] = useState(false);
 
   // Initialize form when venue data is available (for editing)
   useEffect(() => {
@@ -22,8 +24,13 @@ const AdminVenueForm = ({ venue, onSave, onCancel }) => {
         description: venue.description || '',
         capacity: venue.capacity || 100,
         latitude: venue.latitude || '',
-        longitude: venue.longitude || ''
+        longitude: venue.longitude || '',
+        map_widget_code: venue.map_widget_code || ''
       });
+      
+      if (venue.map_widget_code) {
+        setShowWidgetPreview(true);
+      }
     }
   }, [venue]);
 
@@ -46,6 +53,31 @@ const AdminVenueForm = ({ venue, onSave, onCancel }) => {
         [name]: null
       }));
     }
+  };
+
+  // Generate 2GIS widget code
+  const generateWidgetCode = () => {
+    if (!formData.latitude || !formData.longitude) {
+      setErrors({
+        ...errors,
+        latitude: !formData.latitude ? 'Широта обязательна для генерации виджета' : null,
+        longitude: !formData.longitude ? 'Долгота обязательна для генерации виджета' : null
+      });
+      return;
+    }
+
+    // Format the venue name for use in URLs
+    const encodedName = encodeURIComponent(formData.name);
+    
+    // Generate a widget code using the 2GIS API
+    const widgetCode = `<a class="dg-widget-link" href="http://2gis.kz/nur_sultan/center/${formData.longitude},${formData.latitude}/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте</a><div class="dg-widget-link"><a href="http://2gis.kz/nur_sultan/center/${formData.longitude},${formData.latitude}/zoom/16/routeTab/rsType/bus/to/${formData.longitude},${formData.latitude}╎${encodedName}?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до ${formData.name}</a></div><script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script><script charset="utf-8">new DGWidgetLoader({"width":500,"height":400,"borderColor":"#a3a3a3","pos":{"lat":${formData.latitude},"lon":${formData.longitude},"zoom":16},"opt":{"city":"nur_sultan"}});</script><noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>`;
+
+    setFormData(prevData => ({
+      ...prevData,
+      map_widget_code: widgetCode
+    }));
+    
+    setShowWidgetPreview(true);
   };
 
   // Form validation
@@ -87,6 +119,9 @@ const AdminVenueForm = ({ venue, onSave, onCancel }) => {
         ...formData,
         capacity: parseInt(formData.capacity, 10)
       };
+      
+      // Вывести данные в консоль
+      console.log('Sending data to backend:', dataToSave);
       
       // If coordinates are empty strings, set them to null
       if (dataToSave.latitude === '') dataToSave.latitude = null;
@@ -174,7 +209,45 @@ const AdminVenueForm = ({ venue, onSave, onCancel }) => {
             />
             {errors.longitude && <div className="error-message">{errors.longitude}</div>}
           </div>
+          
+          <div className="form-group widget-generator">
+            <label>Карта 2GIS</label>
+            <button 
+              type="button" 
+              className="btn-secondary" 
+              onClick={generateWidgetCode}
+              disabled={!formData.latitude || !formData.longitude}
+            >
+              Сгенерировать виджет карты
+            </button>
+          </div>
         </div>
+        
+        {/* 2GIS Map Widget Section */}
+        <div className="form-group">
+          <label htmlFor="map_widget_code">{t('admin.venues.mapWidget', 'Код виджета карты 2GIS')}</label>
+          <textarea
+            id="map_widget_code"
+            name="map_widget_code"
+            rows="5"
+            value={formData.map_widget_code}
+            onChange={handleChange}
+            placeholder="<a class='dg-widget-link' href='http://2gis.kz/...'>"
+          ></textarea>
+          <div className="widget-help-text">
+            Для генерации кода виджета введите широту и долготу, затем нажмите "Сгенерировать виджет карты"
+          </div>
+        </div>
+        
+        {/* Widget Preview */}
+        {showWidgetPreview && formData.map_widget_code && (
+          <div className="form-group">
+            <label>Предпросмотр виджета</label>
+            <div className="widget-preview">
+              <div dangerouslySetInnerHTML={{ __html: formData.map_widget_code }} />
+            </div>
+          </div>
+        )}
         
         <div className="form-group">
           <label htmlFor="description">{t('admin.venues.description', 'Описание')}</label>

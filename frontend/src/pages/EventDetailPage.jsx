@@ -140,6 +140,9 @@ const EventDetail = () => {
     return `${t('eventDetail.seats.available')}: ${event.available_seats}`;
   };
   
+  // Проверяем наличие координат для карты
+  const hasMapCoordinates = event.venue_latitude && event.venue_longitude;
+  
   return (
     <div className="event-detail-container">
       <div className="event-detail-card">
@@ -211,6 +214,7 @@ const EventDetail = () => {
                   <p>{event.description || t('eventDetail.info.no_description')}</p>
                 </div>
               </div>
+              
               <div className="event-gallery">
                 <h2 className="gallery-title">{t('eventDetail.info.images')}</h2>
                 <div className="gallery-grid">
@@ -219,6 +223,38 @@ const EventDetail = () => {
                       <img src={image} alt={`${event.title} - ${t('eventDetail.info.image_alt')} ${index + 1}`} />
                     </div>
                   ))}
+                </div>
+              </div>
+              
+              {/* Map Section */}
+              <div className="event-map">
+                <h2 className="map-title">{t('eventDetail.info.venue')}</h2>
+                
+                <div className="venue-info">
+                  <div className="venue-icon">📍</div>
+                  <div className="venue-details">
+                    <h4>{event.venue_name}</h4>
+                    <p className="venue-address">{event.venue_address}</p>
+                  </div>
+                </div>
+                
+                <div className="map-container">
+                  {hasMapCoordinates ? (
+                    <iframe
+                      src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${event.venue_latitude},${event.venue_longitude}&zoom=15`}
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title={`Map - ${event.venue_name}`}
+                    ></iframe>
+                  ) : (
+                    <div className="map-placeholder">
+                      <p>{t('eventDetail.info.map')} {event.venue_address}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

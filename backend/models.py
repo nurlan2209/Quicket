@@ -53,6 +53,9 @@ class Venue(db.Model):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     
+    # New field for 2GIS map widget
+    map_widget_code = Column(Text, nullable=True)
+    
     # Связи с другими таблицами
     events = relationship("Event", back_populates="venue", cascade="all, delete-orphan")
     
