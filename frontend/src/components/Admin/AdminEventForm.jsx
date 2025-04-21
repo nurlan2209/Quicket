@@ -384,32 +384,33 @@ const AdminEventForm = ({ event, venues, onSave, onCancel }) => {
 
 {formData.type === 'CONCERT' && (
   <div className="form-group">
-    <label htmlFor="background_music_url">{t('admin.events.backgroundMusicUrl', 'URL фоновой музыки')}</label>
+  <label htmlFor="background_music_url">{t('admin.events.backgroundMusicUrl', 'URL фоновой музыки')}</label>
+  <input
+    type="text"
+    id="background_music_url"
+    name="background_music_url"
+    value={formData.background_music_url}
+    onChange={handleChange}
+    placeholder="/audio/concerts/название_файла.mp3"
+  />
+  <small className="form-text text-muted">
+    Укажите путь к аудиофайлу из папки public. Например: /audio/concerts/track1.mp3. 
+    Загрузите MP3 файл в папку public/audio/concerts/ вашего проекта.
+  </small>
+  
+  <div className="volume-control">
+    <label htmlFor="music_volume">Громкость: {formData.music_volume || 30}%</label>
     <input
-      type="text"
-      id="background_music_url"
-      name="background_music_url"
-      value={formData.background_music_url}
+      type="range"
+      id="music_volume"
+      name="music_volume"
+      min="10"
+      max="50"
+      value={formData.music_volume || 30}
       onChange={handleChange}
-      placeholder="https://example.com/music.mp3"
     />
-    <small className="form-text text-muted">
-      Эта музыка будет автоматически проигрываться на странице мероприятия с пониженной громкостью.
-    </small>
-    
-    <div className="volume-control">
-      <label htmlFor="music_volume">Громкость: {formData.music_volume || 30}%</label>
-      <input
-        type="range"
-        id="music_volume"
-        name="music_volume"
-        min="10"
-        max="50"
-        value={formData.music_volume || 30}
-        onChange={handleChange}
-      />
-    </div>
   </div>
+</div>
 )}
         
         <div className="form-group">
