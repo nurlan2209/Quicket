@@ -544,6 +544,26 @@ updateVenue: async (venueId, venueData) => {
   }
 },
 
+// Удаление уведомления
+deleteNotification: async (notificationId) => {
+  try {
+    // Получаем текущего пользователя
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('authToken') || (user || {}).token;
+    
+    const response = await axios.delete(`${API_URL}/notifications/${notificationId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error('Ошибка при удалении уведомления:', error);
+    throw error;
+  }
+},
+
 // Удаление места проведения
 deleteVenue: async (venueId) => {
   try {
@@ -568,6 +588,8 @@ deleteVenue: async (venueId) => {
   }
 }
   };
+
+
 
   
 

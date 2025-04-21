@@ -26,61 +26,27 @@ const AdminNotificationsList = () => {
         const usersResponse = await apiService.getAllUsers();
         setUsers(usersResponse);
         
-        // Пытаемся получить уведомления с бэкенда
-        try {
-          const notificationsData = await apiService.getAllNotifications();
-          if (Array.isArray(notificationsData)) {
-            setNotifications(notificationsData);
-          } else {
-            // Если не получили массив, используем макет
-            setNotifications([
-              {
-                id: 1,
-                user_id: 1,
-                username: 'admin',
-                title: 'Добро пожаловать в Quicket',
-                message: 'Спасибо за регистрацию в нашем сервисе!',
-                notification_type: 'SYSTEM_MESSAGE',
-                read: true,
-                created_at: '2023-05-10T14:30:00'
-              },
-              {
-                id: 2,
-                user_id: 2,
-                username: 'user123',
-                title: 'Бронирование успешно',
-                message: 'Вы успешно забронировали 2 места на мероприятие "Футбольный матч"',
-                notification_type: 'BOOKING_CREATED',
-                read: false,
-                created_at: '2023-05-11T10:15:00'
-              }
-            ]);
-          }
-        } catch (notifError) {
-          console.error('Ошибка при загрузке уведомлений:', notifError);
-          // Используем макет в случае ошибки
-          setNotifications([
-            {
-              id: 1,
-              user_id: 1,
-              username: 'admin',
-              title: 'Добро пожаловать в Quicket',
-              message: 'Спасибо за регистрацию в нашем сервисе!',
-              notification_type: 'SYSTEM_MESSAGE',
-              read: true,
-              created_at: '2023-05-10T14:30:00'
-            },
-            {
-              id: 2,
-              user_id: 2,
-              username: 'user123',
-              title: 'Бронирование успешно',
-              message: 'Вы успешно забронировали 2 места на мероприятие "Футбольный матч"',
-              notification_type: 'BOOKING_CREATED',
-              read: false,
-              created_at: '2023-05-11T10:15:00'
+        // Пробуем загрузить сохраненные уведомления из localStorage
+        const savedNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+        
+        if (savedNotifications.length > 0) {
+          setNotifications(savedNotifications);
+        } else {
+          // Если localStorage пуст, пытаемся получить данные с сервера
+          try {
+            const notificationsData = await apiService.getAllNotifications();
+            if (Array.isArray(notificationsData)) {
+              setNotifications(notificationsData);
+              localStorage.setItem('adminNotifications', JSON.stringify(notificationsData));
+            } else {
+              // Используем мок данные
+              setNotifications([/* ваши мок данные */]);
             }
-          ]);
+          } catch (notifError) {
+            console.error('Ошибка при загрузке уведомлений:', notifError);
+            // Используем мок данные
+            setNotifications([/* ваши мок данные */]);
+          }
         }
         
         setLoading(false);
@@ -149,6 +115,10 @@ const AdminNotificationsList = () => {
           created_at: new Date().toISOString()
         };
         
+        // Сохраняем в localStorage
+        const savedNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+        localStorage.setItem('adminNotifications', JSON.stringify([newNotificationData, ...savedNotifications]));
+        
         setNotifications([newNotificationData, ...notifications]);
         setShowCreateModal(false);
         setNewNotification({
@@ -171,6 +141,10 @@ const AdminNotificationsList = () => {
           read: false,
           created_at: new Date().toISOString()
         };
+        
+        // Сохраняем в localStorage
+        const savedNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+        localStorage.setItem('adminNotifications', JSON.stringify([mockNewNotification, ...savedNotifications]));
         
         setNotifications([mockNewNotification, ...notifications]);
         setShowCreateModal(false);
@@ -200,16 +174,24 @@ const AdminNotificationsList = () => {
         // Пытаемся удалить через API
         const response = await apiService.deleteAdminNotification(notificationId);
         
-        // Независимо от результата API, удаляем локально
-        setNotifications(notifications.filter(n => n.id !== notificationId));
+        // Удаляем локально
+        const updatedNotifications = notifications.filter(n => n.id !== notificationId);
+        setNotifications(updatedNotifications);
+        
+        // Обновляем localStorage
+        localStorage.setItem('adminNotifications', JSON.stringify(updatedNotifications));
         
         if (!response.success) {
           console.warn('API удаления уведомлений не доступно, используется только локальное удаление');
         }
       } catch (error) {
         console.error('Ошибка при удалении уведомления:', error);
-        // Даже при ошибке удаляем локально, чтобы UI оставался в согласованном состоянии
-        setNotifications(notifications.filter(n => n.id !== notificationId));
+        // Даже при ошибке удаляем локально
+        const updatedNotifications = notifications.filter(n => n.id !== notificationId);
+        setNotifications(updatedNotifications);
+        
+        // Обновляем localStorage
+        localStorage.setItem('adminNotifications', JSON.stringify(updatedNotifications));
       } finally {
         setLoading(false);
       }

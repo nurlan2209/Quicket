@@ -1294,6 +1294,39 @@ def delete_user(user_id):
         db.session.rollback()
         return jsonify({'success': False, 'message': f'Ошибка при удалении пользователя: {str(e)}'}), 500
     
+@app.route('/api/admin/notifications', methods=['GET'])
+@admin_required
+def get_all_notifications():
+    try:
+        # Получаем уведомления всех пользователей
+        notifications = db.session.query(
+            Notification,
+            User.username
+        ).join(
+            User, Notification.user_id == User.id
+        ).order_by(
+            Notification.created_at.desc()
+        ).all()
+        
+        result = []
+        for notification, username in notifications:
+            result.append({
+                'id': notification.id,
+                'user_id': notification.user_id,
+                'username': username,
+                'title': notification.title,
+                'message': notification.message,
+                'notification_type': notification.notification_type.value,
+                'read': notification.read,
+                'action_link': notification.action_link,
+                'related_id': notification.related_id,
+                'created_at': notification.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            })
+        
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Ошибка при получении уведомлений: {str(e)}'}), 500
+    
     
 with app.app_context():
     db.create_all()
