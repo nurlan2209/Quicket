@@ -16,6 +16,7 @@ const AdminEventForm = ({ event, venues, onSave, onCancel }) => {
     event_subtype: '',
     image_url: '',
     background_music_url: '',
+    music_volume: 30,
     organizer: '',
     featured: false,
     status: 'UPCOMING',
@@ -367,28 +368,49 @@ const AdminEventForm = ({ event, venues, onSave, onCancel }) => {
         </div>
         
         <div className="form-group">
-          <label htmlFor="image_url">{t('admin.events.imageUrl', 'URL изображения')}</label>
-          <input
-            type="text"
-            id="image_url"
-            name="image_url"
-            value={formData.image_url}
-            onChange={handleChange}
-            placeholder="https://example.com/image.jpg"
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="background_music_url">{t('admin.events.backgroundMusicUrl', 'URL фоновой музыки')}</label>
-          <input
-            type="text"
-            id="background_music_url"
-            name="background_music_url"
-            value={formData.background_music_url}
-            onChange={handleChange}
-            placeholder="https://example.com/music.mp3"
-          />
-        </div>
+  <label htmlFor="image_url">{t('admin.events.imageUrl', 'URL изображения')}</label>
+  <input
+    type="text"
+    id="image_url"
+    name="image_url"
+    value={formData.image_url}
+    onChange={handleChange}
+    placeholder="https://example.com/image.jpg"
+  />
+  <small className="form-text text-muted">
+    Это изображение будет использоваться как основное изображение мероприятия и будет отображаться на карточке события и в заголовке страницы детальной информации.
+  </small>
+</div>
+
+{formData.type === 'CONCERT' && (
+  <div className="form-group">
+    <label htmlFor="background_music_url">{t('admin.events.backgroundMusicUrl', 'URL фоновой музыки')}</label>
+    <input
+      type="text"
+      id="background_music_url"
+      name="background_music_url"
+      value={formData.background_music_url}
+      onChange={handleChange}
+      placeholder="https://example.com/music.mp3"
+    />
+    <small className="form-text text-muted">
+      Эта музыка будет автоматически проигрываться на странице мероприятия с пониженной громкостью.
+    </small>
+    
+    <div className="volume-control">
+      <label htmlFor="music_volume">Громкость: {formData.music_volume || 30}%</label>
+      <input
+        type="range"
+        id="music_volume"
+        name="music_volume"
+        min="10"
+        max="50"
+        value={formData.music_volume || 30}
+        onChange={handleChange}
+      />
+    </div>
+  </div>
+)}
         
         <div className="form-group">
           <label htmlFor="description">{t('admin.events.description', 'Описание')}</label>
@@ -404,6 +426,9 @@ const AdminEventForm = ({ event, venues, onSave, onCancel }) => {
         {/* Раздел медиафайлов */}
         <div className="form-section">
           <h3 className="section-title">{t('admin.events.media', 'Медиафайлы')}</h3>
+          <p className="section-info">
+            Изображения, добавленные здесь, будут отображаться в галерее на странице мероприятия. Первое изображение будет использоваться как фоновое, если основное изображение не указано.
+          </p>
           
           {formData.media.length > 0 ? (
             <div className="media-list">

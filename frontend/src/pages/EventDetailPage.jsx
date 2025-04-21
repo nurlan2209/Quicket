@@ -42,6 +42,39 @@ const EventDetail = () => {
     fetchEvent();
   }, [id, t]);
   
+  // Новый useEffect для обработки фоновой музыки
+  useEffect(() => {
+    let audioPlayer;
+    
+    if (event && event.background_music_url) {
+      audioPlayer = new Audio(event.background_music_url);
+      audioPlayer.volume = (event.music_volume || 30) / 100; // преобразуем в диапазон 0-1
+      audioPlayer.loop = true;
+      audioPlayer.play().catch(e => console.log("Автовоспроизведение заблокировано браузером", e));
+      
+      // Добавим кнопку для запуска музыки вручную, если автовоспроизведение запрещено
+      const container = document.querySelector('.event-header');
+      if (container) {
+        const existingButton = container.querySelector('.music-play-btn');
+        if (!existingButton) {
+          const musicButton = document.createElement('button');
+          musicButton.textContent = 'Включить фоновую музыку';
+          musicButton.className = 'music-play-btn';
+          musicButton.onclick = () => audioPlayer.play();
+          container.appendChild(musicButton);
+        }
+      }
+    }
+    
+    // Очистка при размонтировании
+    return () => {
+      if (audioPlayer) {
+        audioPlayer.pause();
+        audioPlayer = null;
+      }
+    };
+  }, [event]);
+  
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const language = i18n.language || 'kz';
@@ -123,9 +156,31 @@ const EventDetail = () => {
   }
   
   // Получаем изображения для мероприятия
-  const images = getEventImages(event.type);
-  const headerImage = images[0];
-  const galleryImages = [images[0], images[1]];
+  const headerImage = event.image_url || getEventImages(event.type)[0];
+  let galleryImages = [];
+  
+  // Если у мероприятия есть медиа-файлы
+  if (event.media && event.media.length > 0) {
+    // Фильтруем только изображения
+    const mediaImages = event.media
+      .filter(media => media.type === 'image')
+      .map(media => media.url);
+    
+    if (mediaImages.length > 0) {
+      galleryImages = mediaImages;
+    } else if (event.image_url) {
+      galleryImages = [event.image_url];
+    } else {
+      // Используем мок данные только если нет реальных изображений
+      galleryImages = getEventImages(event.type);
+    }
+  } else if (event.image_url) {
+    // Если есть хотя бы изображение обложки
+    galleryImages = [event.image_url];
+  } else {
+    // Используем мок данные только если нет реальных изображений
+    galleryImages = getEventImages(event.type);
+  }
   
   // Определяем статус доступных мест
   const getSeatsStatusClass = () => {

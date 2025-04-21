@@ -44,9 +44,11 @@ const EventCard = ({ event }) => {
       <div
         className="event-card-header"
         style={{
-          backgroundImage: event.headerImage
-            ? `url(${event.headerImage})`
-            : 'none',
+          backgroundImage: event.image_url
+            ? `url(${event.image_url})`
+            : event.media && event.media.find(m => m.type === 'image')
+              ? `url(${event.media.find(m => m.type === 'image').url})`
+              : 'none',
         }}
       >
         <h3 className="event-card-title">{event.title}</h3>
