@@ -10,6 +10,7 @@ from functools import wraps
 
 from database import db, init_app
 from models import User, Event, Venue, Booking, Notification, UserRole, EventType, NotificationType, EventStatus
+from models import EventMedia
 
 # Загрузка переменных окружения
 load_dotenv()
