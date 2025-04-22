@@ -217,41 +217,41 @@ const AdminDashboard = () => {
   // Component for dashboard stats overview
   const DashboardOverview = () => (
     <div className="admin-stats-overview">
-      <div className="admin-stat-card">
-        <div className="admin-stat-icon events">🎭</div>
-        <div className="admin-stat-details">
-          <h3>{t('admin.dashboard.events', 'Мероприятия')}</h3>
-          <div className="admin-stat-value">{stats?.events?.total_events || 0}</div>
-          <div className="admin-stat-text">{t('admin.dashboard.totalEvents', 'Всего мероприятий')}</div>
-        </div>
-      </div>
-      
-      <div className="admin-stat-card">
-        <div className="admin-stat-icon bookings">🎟️</div>
-        <div className="admin-stat-details">
-          <h3>{t('admin.dashboard.bookings', 'Бронирования')}</h3>
-          <div className="admin-stat-value">{stats?.bookings?.total_bookings || 0}</div>
-          <div className="admin-stat-text">{t('admin.dashboard.totalBookings', 'Всего бронирований')}</div>
-        </div>
-      </div>
-      
-      <div className="admin-stat-card">
-        <div className="admin-stat-icon users">👥</div>
-        <div className="admin-stat-details">
-          <h3>{t('admin.dashboard.users', 'Пользователи')}</h3>
-          <div className="admin-stat-value">{stats?.users?.total_users || 0}</div>
-          <div className="admin-stat-text">{t('admin.dashboard.totalUsers', 'Всего пользователей')}</div>
-        </div>
-      </div>
-      
-      <div className="admin-stat-card">
-        <div className="admin-stat-icon admins">👑</div>
-        <div className="admin-stat-details">
-          <h3>{t('admin.dashboard.admins', 'Администраторы')}</h3>
-          <div className="admin-stat-value">{stats?.users?.admin_count || 0}</div>
-          <div className="admin-stat-text">{t('admin.dashboard.totalAdmins', 'Администраторов')}</div>
-        </div>
-      </div>
+<div className="admin-stat-card">
+  <div className="admin-stat-icon events">🎭</div>
+  <div className="admin-stat-details">
+    <h3>{t('admin.dashboard.events')}</h3>
+    <div className="admin-stat-value">{stats?.events?.total_events || 0}</div>
+    <div className="admin-stat-text">{t('admin.dashboard.totalEvents')}</div>
+  </div>
+</div>
+
+<div className="admin-stat-card">
+  <div className="admin-stat-icon bookings">🎟️</div>
+  <div className="admin-stat-details">
+    <h3>{t('admin.dashboard.bookings')}</h3>
+    <div className="admin-stat-value">{stats?.bookings?.total_bookings || 0}</div>
+    <div className="admin-stat-text">{t('admin.dashboard.totalBookings')}</div>
+  </div>
+</div>
+
+<div className="admin-stat-card">
+  <div className="admin-stat-icon users">👥</div>
+  <div className="admin-stat-details">
+    <h3>{t('admin.dashboard.users')}</h3>
+    <div className="admin-stat-value">{stats?.users?.total_users || 0}</div>
+    <div className="admin-stat-text">{t('admin.dashboard.totalUsers')}</div>
+  </div>
+</div>
+
+<div className="admin-stat-card">
+  <div className="admin-stat-icon admins">👑</div>
+  <div className="admin-stat-details">
+    <h3>{t('admin.dashboard.admins')}</h3>
+    <div className="admin-stat-value">{stats?.users?.admin_count || 0}</div>
+    <div className="admin-stat-text">{t('admin.dashboard.totalAdmins')}</div>
+  </div>
+</div>
     </div>
   );
 
@@ -261,7 +261,7 @@ const AdminDashboard = () => {
       return (
         <div className="admin-loading">
           <div className="spinner"></div>
-          <p>Загрузка...</p>
+          <p>{t('common.loading')}</p>
         </div>
       );
     }
@@ -275,7 +275,7 @@ const AdminDashboard = () => {
             className="retry-button"
             onClick={() => setActiveTab('dashboard')}
           >
-            Повторить
+            {t('common.retry')}
           </button>
         </div>
       );
@@ -315,49 +315,49 @@ const AdminDashboard = () => {
         <div className="admin-sidebar">
           <div className="admin-sidebar-header">
             <h2>Quicket</h2>
-            <p className="admin-role-badge">Admin Panel</p>
+            <p className="admin-role-badge">{t('admin.dashboard.title')}</p>
           </div>
           
           <nav className="admin-sidebar-nav">
-  <button 
-    className={`admin-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-    onClick={() => setActiveTab('dashboard')}
-  >
-    <span className="admin-nav-icon">📊</span>
-    Статистика
-  </button>
-  
-  <button 
-    className={`admin-nav-item ${activeTab === 'events' ? 'active' : ''}`}
-    onClick={() => setActiveTab('events')}
-  >
-    <span className="admin-nav-icon">🎭</span>
-    Мероприятия
-  </button>
-  
-  <button 
-    className={`admin-nav-item ${activeTab === 'venues' ? 'active' : ''}`}
-    onClick={() => setActiveTab('venues')}
-  >
-    <span className="admin-nav-icon">🏟️</span>
-    Спортивные объекты
-  </button>
+          <button 
+  className={`admin-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+  onClick={() => setActiveTab('dashboard')}
+>
+  <span className="admin-nav-icon">📊</span>
+  {t('admin.dashboard.title')}
+</button>
 
-  <button 
-    className={`admin-nav-item ${activeTab === 'notifications' ? 'active' : ''}`}
-    onClick={() => setActiveTab('notifications')}
-  >
-    <span className="admin-nav-icon">🔔</span>
-    Уведомления
-  </button>
-  
-  <button 
-    className={`admin-nav-item ${activeTab === 'users' ? 'active' : ''}`}
-    onClick={() => setActiveTab('users')}
-  >
-    <span className="admin-nav-icon">👥</span>
-    Пользователи
-  </button>
+<button 
+  className={`admin-nav-item ${activeTab === 'events' ? 'active' : ''}`}
+  onClick={() => setActiveTab('events')}
+>
+  <span className="admin-nav-icon">🎭</span>
+  {t('admin.events.title')}
+</button>
+
+<button 
+  className={`admin-nav-item ${activeTab === 'venues' ? 'active' : ''}`}
+  onClick={() => setActiveTab('venues')}
+>
+  <span className="admin-nav-icon">🏟️</span>
+  {t('admin.venues.title')}
+</button>
+
+<button 
+  className={`admin-nav-item ${activeTab === 'notifications' ? 'active' : ''}`}
+  onClick={() => setActiveTab('notifications')}
+>
+  <span className="admin-nav-icon">🔔</span>
+  {t('admin.notifications.pageTitle')}
+</button>
+
+<button 
+  className={`admin-nav-item ${activeTab === 'users' ? 'active' : ''}`}
+  onClick={() => setActiveTab('users')}
+>
+  <span className="admin-nav-icon">👥</span>
+  {t('admin.users.title')}
+</button>
 </nav>
           
           <div className="admin-sidebar-footer">
@@ -376,8 +376,7 @@ const AdminDashboard = () => {
               className="admin-action-button"
               onClick={() => navigate('/')}
             >
-            <span className="admin-action-icon">🏠</span>
-              Вернуться на сайт
+            <span className="admin-action-icon">🏠{t('admin.dashboard.backToSite')}</span>
             </button>
             </div>
           </div>
@@ -385,13 +384,13 @@ const AdminDashboard = () => {
         
         <div className="admin-content">
         <div className="admin-content-header">
-  <h1 className="admin-page-title">
-    {activeTab === 'dashboard' && "Статистика"}
-    {activeTab === 'events' && "Управление мероприятиями"}
-    {activeTab === 'venues' && "Управление спортивными объектами"}
-    {activeTab === 'notifications' && "Управление уведомлениями"}
-    {activeTab === 'users' && "Управление пользователями"}
-  </h1>
+        <h1 className="admin-page-title">
+        {activeTab === 'dashboard' && t('admin.dashboard.title')}
+        {activeTab === 'events' && t('admin.events.title')}
+        {activeTab === 'venues' && t('admin.venues.title')}
+        {activeTab === 'notifications' && t('admin.notifications.pageTitle')}
+        {activeTab === 'users' && t('admin.users.title')}
+        </h1>
   
 </div>
           

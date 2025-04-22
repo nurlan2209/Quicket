@@ -174,7 +174,7 @@ const ProfilePage = () => {
 
   return (
     <div className="container mt-4">
-      <h1 className="mb-4">Мой профиль</h1>
+      <h1 className="mb-4">{t('profilePage.myProfile')}</h1>
       
       {/* Вкладки */}
       <div className="profile-tabs">
@@ -182,13 +182,13 @@ const ProfilePage = () => {
           className={`profile-tab-btn ${activeTab === 'bookings' ? 'active' : ''}`}
           onClick={() => setActiveTab('bookings')}
         >
-          Мои бронирования
+          {t('profilePage.myBookings')}
         </button>
         <button 
           className={`profile-tab-btn ${activeTab === 'favorites' ? 'active' : ''}`}
           onClick={() => setActiveTab('favorites')}
         >
-          Избранные мероприятия
+          {t('profilePage.favoriteEvents')}
         </button>
       </div>
       

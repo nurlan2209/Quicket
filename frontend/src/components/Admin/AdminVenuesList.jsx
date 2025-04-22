@@ -143,9 +143,9 @@ const AdminVenuesList = () => {
       
       {loading ? (
         <div className="admin-loading">
-          <div className="spinner"></div>
-          <p>Загрузка...</p>
-        </div>
+  <div className="spinner"></div>
+  <p>{t('common.loading')}</p>
+</div>
       ) : (
         <div className="admin-table-responsive">
           {filteredVenues.length === 0 ? (

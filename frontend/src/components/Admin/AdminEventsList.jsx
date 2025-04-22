@@ -120,7 +120,7 @@ const AdminEventsList = () => {
   return (
     <div className="admin-events-container">
       <div className="admin-events-header">
-        <h2>Управление мероприятиями</h2>
+        <h2>{t('admin.events.title')}</h2>
         <button 
           className="admin-add-button"
           onClick={() => {
@@ -175,9 +175,9 @@ const AdminEventsList = () => {
       
       {loading ? (
         <div className="admin-loading">
-          <div className="spinner"></div>
-          <p>Загрузка...</p>
-        </div>
+  <div className="spinner"></div>
+  <p>{t('common.loading')}</p>
+</div>
       ) : (
         <div className="admin-table-responsive">
           {filteredEvents.length === 0 ? (

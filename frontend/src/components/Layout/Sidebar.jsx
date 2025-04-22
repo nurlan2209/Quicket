@@ -90,7 +90,7 @@ const Sidebar = ({ menuOpen, toggleMenu, logoUrl }) => {
               <li>
                 <Link to="/profile" onClick={toggleMenu}>
                   <span role="img" aria-label="profile" className="icon">👤</span>
-                  Мой профиль
+                  {t('sidebar.myProfile')}
                   <span className="arrow">→</span>
                 </Link>
               </li>

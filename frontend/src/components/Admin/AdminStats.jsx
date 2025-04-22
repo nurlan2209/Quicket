@@ -21,43 +21,43 @@ const AdminStats = ({ stats }) => {
   
   return (
     <div className="admin-stats-container">
-      <div className="admin-stats-header">
-        <h2>Статистика</h2>
-        <p>Обзор системных данных и активности пользователей</p>
-      </div>
-      
-      <div className="admin-stats-overview">
-        <div className="admin-stat-card">
-          <div className="admin-stat-icon users">👥</div>
-          <div className="admin-stat-details">
-            <h3>Пользователи</h3>
-            <div className="admin-stat-value">{users.total_users}</div>
-            <div className="admin-stat-label">Всего пользователей</div>
-          </div>
-        </div>
-        
-        <div className="admin-stat-card">
-          <div className="admin-stat-icon events">🎭</div>
-          <div className="admin-stat-details">
-            <h3>Мероприятия</h3>
-            <div className="admin-stat-value">{events.total_events}</div>
-            <div className="admin-stat-label">Всего мероприятий</div>
-          </div>
-        </div>
-        
-        <div className="admin-stat-card">
-          <div className="admin-stat-icon bookings">🎟️</div>
-          <div className="admin-stat-details">
-            <h3>Бронирования</h3>
-            <div className="admin-stat-value">{bookings.total_bookings}</div>
-            <div className="admin-stat-label">Всего бронирований</div>
-          </div>
-        </div>
-      </div>
+<div className="admin-stats-header">
+  <h2>{t('admin.dashboard.title')}</h2>
+  <p>{t('admin.dashboard.overview')}</p>
+</div>
+
+<div className="admin-stats-overview">
+  <div className="admin-stat-card">
+    <div className="admin-stat-icon users">👥</div>
+    <div className="admin-stat-details">
+      <h3>{t('admin.dashboard.users')}</h3>
+      <div className="admin-stat-value">{users.total_users}</div>
+      <div className="admin-stat-label">{t('admin.dashboard.totalUsers')}</div>
+    </div>
+  </div>
+  
+  <div className="admin-stat-card">
+    <div className="admin-stat-icon events">🎭</div>
+    <div className="admin-stat-details">
+      <h3>{t('admin.dashboard.events')}</h3>
+      <div className="admin-stat-value">{events.total_events}</div>
+      <div className="admin-stat-label">{t('admin.dashboard.totalEvents')}</div>
+    </div>
+  </div>
+  
+  <div className="admin-stat-card">
+    <div className="admin-stat-icon bookings">🎟️</div>
+    <div className="admin-stat-details">
+      <h3>{t('admin.dashboard.bookings')}</h3>
+      <div className="admin-stat-value">{bookings.total_bookings}</div>
+      <div className="admin-stat-label">{t('admin.dashboard.totalBookings')}</div>
+    </div>
+  </div>
+</div>
       
       <div className="admin-stats-details">
         <div className="admin-stats-section">
-          <h3>Типы мероприятий</h3>
+          <h3>{t('admin.events.type')}</h3>
           <div className="admin-stats-chart">
             {Object.entries(events.type_stats).map(([type, count]) => (
               <div className="admin-stats-bar-item" key={type}>
@@ -78,7 +78,7 @@ const AdminStats = ({ stats }) => {
         </div>
         
         <div className="admin-stats-section">
-          <h3>Статусы бронирований</h3>
+        <h3>{t('admin.dashboard.bookingStatuses')}</h3>
           <div className="admin-stats-chart">
             {Object.entries(bookings.status_stats).map(([status, count]) => (
               <div className="admin-stats-bar-item" key={status}>
@@ -101,13 +101,13 @@ const AdminStats = ({ stats }) => {
       
       <div className="admin-stats-tables">
         <div className="admin-stats-table-section">
-          <h3>Популярные мероприятия</h3>
+        <h3>{t('admin.dashboard.topEvents')}</h3>
           <div className="admin-table-wrapper">
             <table className="admin-stats-table">
               <thead>
                 <tr>
-                  <th>Название мероприятия</th>
-                  <th>Количество бронирований</th>
+                  <th>{t('admin.dashboard.EventName')}</th>
+                  <th>{t('admin.dashboard.Bookings')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -128,12 +128,12 @@ const AdminStats = ({ stats }) => {
         </div>
         
         <div className="admin-stats-table-section">
-          <h3>Активные пользователи</h3>
+          <h3>{t('admin.dashboard.topUsers')}</h3>
           <div className="admin-table-wrapper">
             <table className="admin-stats-table">
               <thead>
                 <tr>
-                  <th>Имя пользователя</th>
+                  <th>{t('admin.dashboard.UserName')}</th>
                   <th>Количество бронирований</th>
                 </tr>
               </thead>

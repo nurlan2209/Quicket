@@ -36,211 +36,375 @@
     "successMessage": "Your ticket has been successfully paid and booked"
   },
   "auth": {
-  "login": {
-    "title": "Login",
-    "subtitle": "Log in to your account to make bookings",
-    "username": "Username",
-    "username_placeholder": "Enter your username",
-    "password": "Password",
-    "password_placeholder": "Enter your password",
-    "button": "Login",
-    "loading": "Logging in...",
-    "no_account": "Don't have an account?",
-    "register_link": "Register",
-    "error": {
-      "fill_all": "Please fill in all fields",
-      "login_error": "An error occurred during login",
-      "wrong_credentials": "Incorrect username or password"
-    }
-  },
-  "register": {
-    "title": "Register",
-    "subtitle": "Register for the Quicket service",
-    "username": "Username",
-    "username_placeholder": "Enter your username",
-    "email": "Email",
-    "email_placeholder": "Enter your email",
-    "password": "Password",
-    "password_placeholder": "Enter your password",
-    "confirm_password": "Confirm Password",
-    "confirm_password_placeholder": "Confirm your password",
-    "button": "Register",
-    "loading": "Registering...",
-    "has_account": "Already have an account?",
-    "login_link": "Login",
-    "success": "Registration successful! You will now be redirected to the login page.",
-    "error": {
-      "fill_all": "Please fill in all fields",
-      "email_invalid": "Please enter a valid email",
-      "passwords_not_match": "Passwords do not match",
-      "password_length": "Password must be at least 6 characters long",
-      "register_error": "An error occurred during registration",
-      "username_email_exists": "This username or email already exists"
-    }
-  }
-},
-  "bookings": {
-  "title": "My Bookings",
-  "loading": "Loading...",
-  "error": "Failed to load your bookings. Please try again later.",
-  "no_bookings": "You don't have any bookings yet.",
-  "view_events": "View available events",
-  "active_bookings": "Active Bookings",
-  "no_active_bookings": "You don't have any active bookings",
-  "cancelled_bookings": "Cancelled Bookings",
-  "event_info": {
-    "date": "Date",
-    "time": "Time",
-    "venue": "Venue",
-    "seats": "Number of seats",
-    "total": "Total",
-    "booking_date": "Booking date",
-    "status": "Status",
-    "cancelled": "Cancelled"
-  },
-  "cancel": {
-    "button": "Cancel Booking",
-    "success": "Booking successfully cancelled",
-    "error": "An error occurred while cancelling the booking"
-  }
-},
-
-"eventList": {
-  "loading": "Loading...",
-  "no_events": "No events found"
-},
-
-"eventDetail": {
-  "loading": "Loading...",
-  "error": "An error occurred while loading event information",
-  "not_found": "Event not found",
-  "return": "Return to events list",
-  "seats": {
-    "available": "Available",
-    "sold_out": "Sold Out",
-    "limited": "Left"
-  },
-  "info": {
-    "about": "About the Event",
-    "no_description": "No description has been provided for this event.",
-    "images": "Photos",
-    "image_alt": "photo",
-    "venue": "Venue",
-    "map": "Map at address",
-    "time": "Time",
-    "duration": "Duration",
-    "duration_unit": "minutes",
-    "price": "Price",
-    "seats": "Seats"
-  }
-  },
-    "common": {
-      "loading": "Loading...",
-      "error": "An error occurred",
-      "success": "Success!",
-      "required": "Required field"
-    },
-    "navigation": {
-      "home": "Home",
-      "events": "Events",
-      "bookings": "My Bookings",
-      "login": "Login",
-      "register": "Register",
-      "logout": "Logout",
-      "notifications": "Notifications"
-    },
-    "homepage": {
-      "hero": {
-        "title": "Book Sports and Cultural Events",
-        "subtitle": "Find and book seats for sports and cultural events through our convenient app",
-        "findEvents": "Find Events",
-        "register": "Register"
-      },
-      "recentEvents": {
-        "title": "Upcoming Events",
-        "viewAll": "All Events",
-        "allEvents": "View All Events"
-      },
-      "cta": {
-        "title": "Join Quicket Now",
-        "subtitle": "Create your account and start booking tickets for sports events",
-        "register": "Register Today"
-      },
-      "features": {
-        "title": "Why Choose Us?",
-        "simpleBooking": {
-          "title": "Simple Booking",
-          "description": "Book seats for events with just a few clicks"
-        },
-        "onlinePayment": {
-          "title": "Online Payment",
-          "description": "Secure and simple online payment system"
-        },
-        "multilingual": {
-          "title": "Multilingual",
-          "description": "Our app is available in 3 languages (Kazakh, Russian, English)"
-        },
-        "mobileAccess": {
-          "title": "Mobile Access",
-          "description": "Access and manage bookings from any device"
-        }
+    "login": {
+      "title": "Login",
+      "subtitle": "Log in to your account to make bookings",
+      "username": "Username",
+      "username_placeholder": "Enter your username",
+      "password": "Password",
+      "password_placeholder": "Enter your password",
+      "button": "Login",
+      "loading": "Logging in...",
+      "no_account": "Don't have an account?",
+      "register_link": "Register",
+      "error": {
+        "fill_all": "Please fill in all fields",
+        "login_error": "An error occurred during login",
+        "wrong_credentials": "Incorrect username or password"
       }
+    },
+    "register": {
+      "title": "Register",
+      "subtitle": "Register for the Quicket service",
+      "username": "Username",
+      "username_placeholder": "Enter your username",
+      "email": "Email",
+      "email_placeholder": "Enter your email",
+      "password": "Password",
+      "password_placeholder": "Enter your password",
+      "confirm_password": "Confirm Password",
+      "confirm_password_placeholder": "Confirm your password",
+      "button": "Register",
+      "loading": "Registering...",
+      "has_account": "Already have an account?",
+      "login_link": "Login",
+      "success": "Registration successful! You will now be redirected to the login page.",
+      "error": {
+        "fill_all": "Please fill in all fields",
+        "email_invalid": "Please enter a valid email",
+        "passwords_not_match": "Passwords do not match",
+        "password_length": "Password must be at least 6 characters long",
+        "register_error": "An error occurred during registration",
+        "username_email_exists": "This username or email already exists"
+      }
+    }
+  },
+  "bookings": {
+    "title": "My Bookings",
+    "loading": "Loading...",
+    "error": "Failed to load your bookings. Please try again later.",
+    "no_bookings": "You don't have any bookings yet.",
+    "view_events": "View available events",
+    "active_bookings": "Active Bookings",
+    "no_active_bookings": "You don't have any active bookings",
+    "cancelled_bookings": "Cancelled Bookings",
+    "event_info": {
+      "date": "Date",
+      "time": "Time",
+      "venue": "Venue",
+      "seats": "Number of seats",
+      "total": "Total",
+      "booking_date": "Booking date",
+      "status": "Status",
+      "cancelled": "Cancelled"
+    },
+    "cancel": {
+      "button": "Cancel Booking",
+      "success": "Booking successfully cancelled",
+      "error": "An error occurred while cancelling the booking"
+    }
+  },
+  "eventList": {
+    "loading": "Loading...",
+    "no_events": "No events found"
+  },
+  "eventDetail": {
+    "loading": "Loading...",
+    "error": "An error occurred while loading event information",
+    "not_found": "Event not found",
+    "return": "Return to events list",
+    "enableBackgroundMusic": "Enable background music",
+    "disableBackgroundMusic": "Disable background music",
+    "concert": "Concert",
+    "seats": {
+      "available": "Available",
+      "sold_out": "Sold Out",
+      "limited": "Left"
+    },
+    "info": {
+      "about": "About the Event",
+      "no_description": "No description has been provided for this event.",
+      "images": "Photos",
+      "image_alt": "photo",
+      "venue": "Venue",
+      "map": "Map at address",
+      "time": "Time",
+      "duration": "Duration",
+      "duration_unit": "minutes",
+      "price": "Price",
+      "seats": "Seats"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!",
+    "required": "Required field",
+    "cancel": "Cancel"
+  },
+  "navigation": {
+    "home": "Home",
+    "events": "Events",
+    "bookings": "My Bookings",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "notifications": "Notifications"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Book Sports and Cultural Events",
+      "subtitle": "Find and book seats for sports and cultural events through our convenient app",
+      "findEvents": "Find Events",
+      "register": "Register"
+    },
+    "recentEvents": {
+      "title": "Upcoming Events",
+      "viewAll": "All Events",
+      "allEvents": "View All Events"
+    },
+    "cta": {
+      "title": "Join Quicket Now",
+      "subtitle": "Create your account and start booking tickets for sports events",
+      "register": "Register Today"
+    },
+    "features": {
+      "title": "Why Choose Us?",
+      "simpleBooking": {
+        "title": "Simple Booking",
+        "description": "Book seats for events with just a few clicks"
+      },
+      "onlinePayment": {
+        "title": "Online Payment",
+        "description": "Secure and simple online payment system"
+      },
+      "multilingual": {
+        "title": "Multilingual",
+        "description": "Our app is available in 3 languages (Kazakh, Russian, English)"
+      },
+      "mobileAccess": {
+        "title": "Mobile Access",
+        "description": "Access and manage bookings from any device"
+      }
+    }
+  },
+  "events": {
+    "title": "Sports and Cultural Events and Sections",
+    "search": {
+      "placeholder": "Enter text to search...",
+      "label": "Search by name or venue"
+    },
+    "filter": {
+      "label": "Filter by type",
+      "allTypes": "All types"
+    },
+    "noEvents": "No events found for your request. Try changing the search parameters.",
+    "viewDetails": "View Details"
+  },
+  "eventCard": {
+    "soldOut": "Sold Out",
+    "limitedSeats": "Left: {{count}}",
+    "availableSeats": "Available: {{count}}",
+    "limitedBadge": "Few seats left!"
+  },
+  "bookingForm": {
+    "title": "Book a Seat",
+    "subtitle": "Select the number of seats",
+    "seatsLabel": "Number of seats",
+    "availableSeats": "Available: {{count}}",
+    "pricePerSeat": "Price per seat",
+    "numberOfSeats": "Number of seats",
+    "totalPayment": "Total payment",
+    "booking": "Book Now",
+    "processing": "Processing...",
+    "loginToBook": "Login to Book",
+    "loginNotice": "You need to log in to book",
+    "soldOutMessage": "Unfortunately, all seats for this event have been booked",
+    "success": {
+      "title": "Booking Successful!",
+      "subtitle": "Thank you for your order",
+      "message": "Booking Confirmed",
+      "details": "Booking details have been sent to your email. You can also view them in the \"My Bookings\" section.",
+      "goToBookings": "Go to My Bookings"
+    },
+    "errors": {
+      "seatsRange": "Please select between 1 and {{max}} seats",
+      "bookingError": "An error occurred during booking",
+      "tryAgain": "An error occurred during booking. Please try again later."
+    }
+  },
+  "footer": {
+    "description": "Online ticket sales system for cultural and sports events. Open the door to great moments and join the world of culture and sports!",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "copyright": "© {{year}} Quicket. All rights reserved."
+  },
+  "language": {
+    "title": "Language",
+    "kz": "Қазақша",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "sidebar": {
+    "myProfile": "My Profile",
+    "adminPanel": "Admin Panel",
+    "logout": "Logout",
+    "home": "Home",
+    "events": "Events",
+    "notifications": "Notifications"
+  },
+  "profilePage": {
+    "myProfile": "My Profile",
+    "myBookings": "My Bookings",
+    "favoriteEvents": "Favorite Events",
+    "activeBookings": "Active Bookings",
+    "cancelledBookings": "Cancelled Bookings",
+    "noActiveBookings": "You don't have any active bookings",
+    "noFavorites": "You don't have any favorite events.",
+    "findEvents": "Find events",
+    "removeFavorite": "Remove from favorites"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "events": "Events",
+      "bookings": "Bookings",
+      "users": "Users",
+      "admins": "Admins",
+      "totalEvents": "Total events",
+      "totalBookings": "Total bookings",
+      "totalUsers": "Total users",
+      "totalAdmins": "Administrators",
+      "fetchError": "Error loading statistics. Please try again.",
+      "backToSite": "Back to site",
+      "overview": "Overview",
+      "bookingStatuses": "Booking statuses",
+      "topEvents": "Top events",
+      "EventName": "Event name",
+      "Bookings": "Bookings",
+      "topUsers": "Top users",
+      "UserName": "User name"
     },
     "events": {
-      "title": "Sports and Cultural Events and Sections",
-      "search": {
-        "placeholder": "Enter text to search...",
-        "label": "Search by name or venue"
+      "title": "Event Management",
+      "createEvent": "Create New Event",
+      "editEvent": "Edit Event",
+      "saveChanges": "Save Changes",
+      "create": "Create",
+      "delete": "Delete",
+      "edit": "Edit",
+      "name": "Name",
+      "type": "Type",
+      "venue": "Venue",
+      "selectVenue": "Select venue",
+      "date": "Date",
+      "time": "Time",
+      "duration": "Duration (min)",
+      "totalSeats": "Total seats",
+      "price": "Price (tenge)",
+      "status": "Status",
+      "organizer": "Organizer",
+      "featured": "Featured event",
+      "imageUrl": "Image URL",
+      "backgroundMusicUrl": "Background music URL",
+      "description": "Description",
+      "subtype": "Subtype",
+      "subtypePlaceholder": "For example: football, basketball, etc.",
+      "media": "Media",
+      "noMedia": "No media added",
+      "mediaType": "Media type",
+      "mediaUrl": "Media URL",
+      "mediaDescription": "Description",
+      "addMedia": "Add",
+      "addNewMedia": "Add media",
+      "validation": {
+        "titleRequired": "Title is required",
+        "venueRequired": "Please select a venue",
+        "dateRequired": "Date is required",
+        "timeRequired": "Time is required",
+        "seatsPositive": "Number of seats must be positive",
+        "priceNonNegative": "Price cannot be negative"
       },
-      "filter": {
-        "label": "Filter by type",
-        "allTypes": "All types"
+      "fetchError": "Error loading events",
+      "saveError": "Error saving event",
+      "deleteError": "Error deleting event",
+      "confirmDelete": "Are you sure you want to delete this event?"
+    },
+    "venues": {
+      "title": "Sports Venues Management",
+      "createVenue": "Create New Venue",
+      "editVenue": "Edit Venue",
+      "saveChanges": "Save Changes",
+      "create": "Create",
+      "name": "Name",
+      "address": "Address",
+      "capacity": "Capacity",
+      "description": "Description",
+      "descriptionPlaceholder": "Detailed description of the sports venue...",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "mapWidget": "2GIS Map Widget Code",
+      "validation": {
+        "nameRequired": "Name is required",
+        "addressRequired": "Address is required",
+        "capacityPositive": "Capacity must be a positive number",
+        "latitudeInvalid": "Latitude must be between -90 and 90",
+        "longitudeInvalid": "Longitude must be between -180 and 180"
       },
-      "noEvents": "No events found for your request. Try changing the search parameters.",
-      "viewDetails": "View Details"
+      "fetchError": "Error loading venues",
+      "saveError": "Error saving venue",
+      "deleteError": "Error deleting venue"
     },
-    "eventCard": {
-      "soldOut": "Sold Out",
-      "limitedSeats": "Left: {{count}}",
-      "availableSeats": "Available: {{count}}",
-      "limitedBadge": "Few seats left!"
+    "users": {
+      "title": "User Management",
+      "id": "ID",
+      "username": "Username",
+      "email": "Email",
+      "role": "Role",
+      "createdAt": "Registration date",
+      "actions": "Actions",
+      "changeRole": "Change role",
+      "delete": "Delete",
+      "search": "Search",
+      "searchPlaceholder": "Search by name or email...",
+      "noUsers": "No users found",
+      "changeRoleTitle": "Change user role",
+      "changeRoleDescription": "User",
+      "newRole": "New role",
+      "roleUser": "User",
+      "roleAdmin": "Administrator",
+      "saveRole": "Save",
+      "fetchError": "Error loading users",
+      "roleUpdateError": "Error updating role",
+      "deleteError": "Error deleting user",
+      "confirmDelete": "Are you sure you want to delete this user? This action cannot be undone."
     },
-    "bookingForm": {
-      "title": "Book a Seat",
-      "subtitle": "Select the number of seats",
-      "seatsLabel": "Number of seats",
-      "availableSeats": "Available: {{count}}",
-      "pricePerSeat": "Price per seat",
-      "numberOfSeats": "Number of seats",
-      "totalPayment": "Total payment",
-      "booking": "Book Now",
-      "processing": "Processing...",
-      "loginToBook": "Login to Book",
-      "loginNotice": "You need to log in to book",
-      "soldOutMessage": "Unfortunately, all seats for this event have been booked",
-      "success": {
-        "title": "Booking Successful!",
-        "subtitle": "Thank you for your order",
-        "message": "Booking Confirmed",
-        "details": "Booking details have been sent to your email. You can also view them in the \"My Bookings\" section.",
-        "goToBookings": "Go to My Bookings"
-      },
-      "errors": {
-        "seatsRange": "Please select between 1 and {{max}} seats",
-        "bookingError": "An error occurred during booking",
-        "tryAgain": "An error occurred during booking. Please try again later."
-      }
-    },
-    "footer": {
-      "description": "Online ticket sales system for cultural and sports events. Open the door to great moments and join the world of culture and sports!",
-      "navigation": "Navigation",
-      "contact": "Contact",
-      "copyright": "© {{year}} Quicket. All rights reserved."
-    },
-    "language": {
-      "title": "Language",
-      "kz": "Қазақша",
-      "ru": "Русский",
-      "en": "English"
+    "notifications": {
+      "pageTitle": "Notification Management",
+      "createNew": "Create Notification",
+      "createTitle": "Create New Notification",
+      "idField": "ID",
+      "userField": "User",
+      "titleField": "Title",
+      "typeField": "Type",
+      "readStatus": "Read",
+      "createdAt": "Date sent",
+      "actions": "Actions",
+      "delete": "Delete",
+      "recipient": "Recipient",
+      "selectUser": "Select user",
+      "message": "Message",
+      "send": "Send",
+      "filterUser": "User",
+      "allUsers": "All users",
+      "search": "Search",
+      "searchPlaceholder": "Search by title or text...",
+      "noNotifications": "No notifications found",
+      "confirmDelete": "Are you sure you want to delete this notification?",
+      "fetchError": "Error loading data",
+      "sendError": "Error sending notification",
+      "formError": "Please fill in all required fields"
     }
-  }
+  },
+  "locale": "en-US"
+}
