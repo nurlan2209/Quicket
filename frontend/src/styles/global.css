@@ -199,7 +199,6 @@ textarea.form-control {
 
 /* Card */
 .card {
-  background-color: var(--bg-card);
   border-radius: 8px;
   box-shadow: var(--card-shadow);
   padding: 1.5rem;

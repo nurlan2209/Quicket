@@ -134,17 +134,7 @@ const Sidebar = ({ menuOpen, toggleMenu, logoUrl }) => {
               </button>
             </li>
           )}
-          
-          {/* Theme toggle in sidebar */}
-          <li className="theme-toggle-wrapper">
-            <div className="sidebar-link-button">
-              <span role="img" aria-label="theme" className="icon">
-                {theme === 'light' ? '🌙' : '☀️'}
-              </span>
-              {theme === 'light' ? t('theme.darkMode') : t('theme.lightMode')}
-              <ThemeToggle />
-            </div>
-          </li>
+        
         </ul>
         
         {user && (
