@@ -18,6 +18,11 @@
       "loadingFailed": "Failed to load notifications. Please try again later."
     }
   },
+  "theme": {
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "toggleTheme": "Toggle Theme"
+  },
   "paymentQR": {
     "title": "Scan QR to Pay",
     "subtitle": "Use your banking app or Kaspi to scan",

@@ -2,11 +2,14 @@ import { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../../contexts/AuthContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import ThemeToggle from '../theme/ThemeToggle';
 import apiService from '../../services/api';
 import '../../styles/Sidebar.css';
 
 const Sidebar = ({ menuOpen, toggleMenu, logoUrl }) => {
   const { user, logout } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [unreadCount, setUnreadCount] = useState(0);
@@ -131,6 +134,17 @@ const Sidebar = ({ menuOpen, toggleMenu, logoUrl }) => {
               </button>
             </li>
           )}
+          
+          {/* Theme toggle in sidebar */}
+          <li className="theme-toggle-wrapper">
+            <div className="sidebar-link-button">
+              <span role="img" aria-label="theme" className="icon">
+                {theme === 'light' ? '🌙' : '☀️'}
+              </span>
+              {theme === 'light' ? t('theme.darkMode') : t('theme.lightMode')}
+              <ThemeToggle />
+            </div>
+          </li>
         </ul>
         
         {user && (

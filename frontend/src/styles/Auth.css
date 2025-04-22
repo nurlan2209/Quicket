@@ -4,15 +4,16 @@
 }
 
 .auth-card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
+  border: 1px solid var(--border-color);
 }
 
 .auth-header {
-  background: #0D1B2A;
-  color: white;
+  background: var(--bg-sidebar);
+  color: var(--text-light);
   padding: 2.5rem;
   text-align: center;
   position: relative;
@@ -38,6 +39,7 @@
   position: relative;
   text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 2;
+  color: var(--text-light);
 }
 
 .auth-subtitle {
@@ -46,6 +48,7 @@
   opacity: 0.9;
   position: relative;
   z-index: 2;
+  color: var(--text-light);
 }
 
 .auth-logo {
@@ -53,7 +56,7 @@
   margin-bottom: 1.5rem;
   display: inline-block;
   position: relative;
-  color: #CFA570;
+  color: var(--secondary-color);
   z-index: 2;
 }
 
@@ -75,34 +78,36 @@
   display: block;
   margin-bottom: 0.6rem;
   font-weight: 600;
-  color: #0D1B2A;
+  color: var(--text-primary);
 }
 
 .auth-input-icon {
   position: absolute;
   left: 1.2rem;
   top: 42px;
-  color: #9ca3af;
+  color: var(--input-placeholder);
   font-size: 1.2rem;
 }
 
 .auth-input-field {
   width: 100%;
   padding: 0.9rem 1rem 0.9rem 3rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   font-size: 1.1rem;
   transition: all 0.3s ease;
+  background-color: var(--input-bg);
+  color: var(--input-text);
 }
 
 .auth-input-field:focus {
   outline: none;
-  border-color: #2FB99A;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(47, 185, 154, 0.2);
 }
 
 .auth-input-field::placeholder {
-  color: #9ca3af;
+  color: var(--input-placeholder);
 }
 
 .auth-submit-btn {
@@ -110,17 +115,17 @@
   padding: 1rem;
   font-size: 1.1rem;
   font-weight: 600;
-  background: #2FB99A;
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-light);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--btn-shadow);
 }
 
 .auth-submit-btn:hover {
-  background: #25a085;
+  background: var(--primary-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
@@ -134,17 +139,18 @@
   text-align: center;
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border-color);
   font-size: 1.1rem;
+  color: var(--text-secondary);
 }
 
 .auth-redirect a {
-  color: #2FB99A;
+  color: var(--primary-color);
   font-weight: 600;
 }
 
 .auth-redirect a:hover {
-  color: #CFA570;
+  color: var(--primary-hover);
 }
 
 .auth-or-divider {
@@ -158,12 +164,12 @@
   content: '';
   flex-grow: 1;
   height: 1px;
-  background: #e5e7eb;
+  background: var(--border-color);
 }
 
 .auth-or-text {
   padding: 0 1.2rem;
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 1rem;
 }
 
@@ -176,8 +182,8 @@
 .social-btn {
   flex: 1;
   padding: 1rem;
-  background: white;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -185,10 +191,11 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
 }
 
 .social-btn:hover {
-  background: #f9fafb;
+  background: var(--bg-secondary);
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -212,11 +219,11 @@
   margin-top: -1.2rem;
   margin-bottom: 2rem;
   font-size: 1rem;
-  color: #2FB99A;
+  color: var(--primary-color);
 }
 
 .auth-additional {
-  background: #f9fafb;
+  background: var(--bg-secondary);
   padding: 2rem;
   border-radius: 0 0 12px 12px;
   font-size: 1rem;
@@ -225,7 +232,7 @@
 .auth-additional-title {
   font-weight: 700;
   margin-bottom: 0.6rem;
-  color: #0D1B2A;
+  color: var(--text-primary);
 }
 
 .auth-test-credentials {
@@ -241,7 +248,7 @@
 }
 
 .auth-test-credentials p strong {
-  color: #2FB99A;
+  color: var(--primary-color);
 }
 
 /* Success animation */
@@ -258,7 +265,7 @@
   position: relative;
   border-radius: 50%;
   box-sizing: content-box;
-  border: 5px solid #2FB99A;
+  border: 5px solid var(--primary-color);
 }
 
 .success-checkmark .check-icon::before {
@@ -282,13 +289,13 @@
   content: '';
   height: 120px;
   position: absolute;
-  background: white;
+  background: var(--bg-card);
   transform: rotate(-45deg);
 }
 
 .success-checkmark .check-icon .icon-line {
   height: 6px;
-  background: #2FB99A;
+  background: var(--primary-color);
   display: block;
   border-radius: 3px;
   position: absolute;
@@ -331,7 +338,7 @@
   height: 100px;
   position: absolute;
   transform: rotate(-45deg);
-  background: white;
+  background: var(--bg-card);
 }
 
 @keyframes rotate-circle {

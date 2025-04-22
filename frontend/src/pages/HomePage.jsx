@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ThemeContext } from '../contexts/ThemeContext';
 import apiService from '../services/api';
 import EventCard from '../components/Booking/EventCard';
 import '../styles/HomePage.css';
 
 const HomePage = () => {
   const { t } = useTranslation();
+  const { theme } = useContext(ThemeContext);
   const [recentEvents, setRecentEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,6 +50,18 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Theme Switch Demo Section */}
+      {/* <section className="theme-switch-section container">
+        <div className="section-header">
+          <h2>
+            {theme === 'light' 
+              ? 'Переключение на темную тему' 
+              : 'Переключение на светлую тему'}
+          </h2>
+        </div>
+        <ThemeSwitchDemo />
+      </section> */}
 
       <section className="recent-events-section container">
         <div className="section-header">

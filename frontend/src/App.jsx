@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { AuthContext } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 import Sidebar from './components/Layout/Sidebar';
 import Footer from './components/Layout/Footer';
@@ -19,6 +20,7 @@ import AdminDashboard from './pages/AdminDashboard';
 
 import './i18n';
 import './styles/global.css';
+import './styles/themes.css';
 
 const createLogoPlaceholder = () => {
   const canvas = document.createElement('canvas');
@@ -110,49 +112,51 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      <div className="app">
-        <GlobalLanguageSwitcher />
-        <Sidebar menuOpen={menuOpen} toggleMenu={toggleMenu} logoUrl={logoUrl} />
+    <ThemeProvider>
+      <AuthContext.Provider value={{ user, login, logout }}>
+        <div className="app">
+          <GlobalLanguageSwitcher />
+          <Sidebar menuOpen={menuOpen} toggleMenu={toggleMenu} logoUrl={logoUrl} />
 
-        <div className={`main-content ${menuOpen ? 'shifted' : ''}`}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/events" element={<EventsPage />} />
-            <Route path="/events/:id" element={<EventDetailPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route 
-              path="/bookings" 
-              element={
-                <ProtectedRoute>
-                  <BookingsPage />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/notifications" 
-              element={
-                <ProtectedRoute>
-                  <NotificationsPage />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/admin" 
-              element={
-                <AdminRoute>
-                  <AdminDashboard />
-                </AdminRoute>
-              } 
-            />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
+          <div className={`main-content ${menuOpen ? 'shifted' : ''}`}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/events/:id" element={<EventDetailPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route 
+                path="/bookings" 
+                element={
+                  <ProtectedRoute>
+                    <BookingsPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/notifications" 
+                element={
+                  <ProtectedRoute>
+                    <NotificationsPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/admin" 
+                element={
+                  <AdminRoute>
+                    <AdminDashboard />
+                  </AdminRoute>
+                } 
+              />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
 
-          <Footer />
+            <Footer />
+          </div>
         </div>
-      </div>
-    </AuthContext.Provider>
+      </AuthContext.Provider>
+    </ThemeProvider>
   );
 }
 

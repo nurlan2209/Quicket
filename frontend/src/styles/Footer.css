@@ -1,6 +1,6 @@
 .footer {
-  background: #0D1B2A;
-  color: #e5e7eb;
+  background: var(--bg-sidebar);
+  color: var(--text-light);
   padding: 4rem 0 2rem;
   margin-top: 4rem;
   font-family: 'Poppins', sans-serif;
@@ -37,7 +37,7 @@
 }
 
 .footer-brand h3 {
-  color: #ffffff;
+  color: var(--text-light);
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -53,11 +53,11 @@
   bottom: -8px;
   width: 50px;
   height: 4px;
-  background: #CFA570;
+  background: var(--secondary-color);
 }
 
 .footer-brand p {
-  color: #b0b5c0;
+  color: var(--text-muted);
   font-size: 1rem;
   line-height: 1.8;
   margin-bottom: 2rem;
@@ -69,7 +69,7 @@
 }
 
 .footer-section h4 {
-  color: #ffffff;
+  color: var(--text-light);
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1.8rem;
@@ -83,7 +83,7 @@
   bottom: -8px;
   width: 40px;
   height: 3px;
-  background: #2FB99A;
+  background: var(--primary-color);
 }
 
 .footer-links {
@@ -97,7 +97,7 @@
 }
 
 .footer-links a {
-  color: #b0b5c0;
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -105,7 +105,7 @@
 }
 
 .footer-links a:hover {
-  color: #CFA570;
+  color: var(--secondary-color);
   transform: translateX(8px);
 }
 
@@ -114,22 +114,22 @@
   align-items: flex-start;
   margin-bottom: 1.5rem;
   font-size: 1rem;
-  color: #b0b5c0;
+  color: var(--text-muted);
 }
 
 .contact-icon {
   margin-right: 1rem;
-  color: #2FB99A;
+  color: var(--primary-color);
   font-size: 1.4rem;
 }
 
 .footer-bottom {
   margin-top: 3rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--divider-color);
   text-align: center;
   font-size: 0.9rem;
-  color: #b0b5c0;
+  color: var(--text-muted);
   position: relative;
   z-index: 1;
 }
@@ -139,13 +139,13 @@
 }
 
 .footer-bottom a {
-  color: #2FB99A;
+  color: var(--primary-color);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer-bottom a:hover {
-  color: #CFA570;
+  color: var(--secondary-color);
 }
 
 @media (max-width: 768px) {
