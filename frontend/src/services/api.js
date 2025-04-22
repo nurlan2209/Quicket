@@ -77,30 +77,168 @@ createEvent: async (eventData) => {
 },
   
   // Бронирование места на мероприятии
-  createBooking: async (bookingData) => {
+// Обновленная функция createBooking для api.js
+// Добавляем токен авторизации в заголовки запроса
+
+// Бронирование места на мероприятии
+createBooking: async (bookingData) => {
+  try {
+    // Получаем токен из localStorage или из объекта пользователя
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const token = localStorage.getItem('authToken') || (user && user.token);
+    
+    // Проверяем наличие токена
+    if (!token) {
+      console.error('Ошибка авторизации: токен не найден');
+      return { 
+        success: false, 
+        message: 'Необходима авторизация. Пожалуйста, войдите в систему снова.' 
+      };
+    }
+    
+    // Отправляем запрос с токеном в заголовке
     const response = await fetch(`${API_URL}/bookings`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify(bookingData)
     });
-    return handleResponse(response);
-  },
+    
+    // Обработка ответа
+    const data = await response.json();
+    
+    if (!response.ok) {
+      // Если ошибка связана с авторизацией, предлагаем пользователю переавторизоваться
+      if (response.status === 401) {
+        console.error('Ошибка авторизации при бронировании');
+        return { 
+          success: false, 
+          message: 'Ваша сессия истекла. Пожалуйста, войдите в систему снова.'
+        };
+      }
+      
+      return {
+        success: false,
+        message: data.message || 'Ошибка при создании бронирования'
+      };
+    }
+    
+    return {
+      success: true,
+      data: data
+    };
+  } catch (error) {
+    console.error('Ошибка при создании бронирования:', error);
+    return {
+      success: false,
+      message: 'Произошла ошибка при бронировании. Попробуйте позже.'
+    };
+  }
+},
   
   // Получение всех бронирований пользователя
-  getUserBookings: async (userId) => {
-    const response = await fetch(`${API_URL}/users/${userId}/bookings`);
-    return handleResponse(response);
-  },
+// Обновленная функция getUserBookings для api.js
+// Добавляем токен авторизации в заголовки запроса
+
+// Получение всех бронирований пользователя
+getUserBookings: async (userId) => {
+  try {
+    // Получаем токен из localStorage или из объекта пользователя
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const token = localStorage.getItem('authToken') || (user && user.token);
+    
+    // Проверяем наличие токена
+    if (!token) {
+      console.error('Ошибка авторизации: токен не найден');
+      return Promise.reject('Необходима авторизация. Пожалуйста, войдите в систему снова.');
+    }
+    
+    // Отправляем запрос с токеном в заголовке
+    const response = await fetch(`${API_URL}/users/${userId}/bookings`, {
+      method: 'GET',
+      headers: { 
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    // Обработка ответа
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error('Ошибка авторизации при получении бронирований');
+        return Promise.reject('Ваша сессия истекла. Пожалуйста, войдите в систему снова.');
+      }
+      return Promise.reject('Ошибка при получении бронирований');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Ошибка при получении бронирований:', error);
+    return Promise.reject(error.message || 'Произошла ошибка при получении бронирований');
+  }
+},
   
   // Отмена бронирования
-  cancelBooking: async (bookingId, userId) => {
+// Обновленная функция cancelBooking для api.js
+// Добавляем токен авторизации в заголовки запроса
+
+// Отмена бронирования
+cancelBooking: async (bookingId, userId) => {
+  try {
+    // Получаем токен из localStorage или из объекта пользователя
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const token = localStorage.getItem('authToken') || (user && user.token);
+    
+    // Проверяем наличие токена
+    if (!token) {
+      console.error('Ошибка авторизации: токен не найден');
+      return {
+        success: false,
+        message: 'Необходима авторизация. Пожалуйста, войдите в систему снова.'
+      };
+    }
+    
+    // Отправляем запрос с токеном в заголовке
     const response = await fetch(`${API_URL}/bookings/${bookingId}/cancel`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify({ user_id: userId })
     });
-    return handleResponse(response);
-  },
+    
+    // Обработка ответа
+    const data = await response.json();
+    
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error('Ошибка авторизации при отмене бронирования');
+        return {
+          success: false,
+          message: 'Ваша сессия истекла. Пожалуйста, войдите в систему снова.'
+        };
+      }
+      
+      return {
+        success: false,
+        message: data.message || 'Ошибка при отмене бронирования'
+      };
+    }
+    
+    return {
+      success: true,
+      data: data
+    };
+  } catch (error) {
+    console.error('Ошибка при отмене бронирования:', error);
+    return {
+      success: false,
+      message: 'Произошла ошибка при отмене бронирования. Попробуйте позже.'
+    };
+  }
+},
   
   // Получение всех спортивных объектов
   getVenues: async () => {

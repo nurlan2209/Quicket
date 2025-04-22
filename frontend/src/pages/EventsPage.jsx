@@ -1,17 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../contexts/AuthContext';
 import apiService from '../services/api';
 import EventCard from '../components/Booking/EventCard';
 import '../styles/EventCard.css';
+import '../styles/FavoriteButton.css'; // Создадим такой файл отдельно
 
 const EventsPage = () => {
   const { t } = useTranslation();
+  const { user } = useContext(AuthContext);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState('all');
   const [search, setSearch] = useState('');
+  const [favorites, setFavorites] = useState([]); // Список ID избранных мероприятий
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -25,7 +29,14 @@ const EventsPage = () => {
       }
     };
 
+    // Загружаем избранные из localStorage
+    const loadFavorites = () => {
+      const savedFavorites = JSON.parse(localStorage.getItem('favoriteEvents') || '[]');
+      setFavorites(savedFavorites);
+    };
+
     fetchEvents();
+    loadFavorites();
   }, [t]);
 
   // Фильтрация событий
@@ -38,6 +49,30 @@ const EventsPage = () => {
 
   // Получаем уникальные типы событий
   const eventTypes = [...new Set(events.map(event => event.type))];
+
+  // Добавление/удаление из избранных
+  const toggleFavorite = (eventId) => {
+    let updatedFavorites;
+    
+    if (favorites.includes(eventId)) {
+      // Если уже в избранном, то удаляем
+      updatedFavorites = favorites.filter(id => id !== eventId);
+    } else {
+      // Если не в избранном, то добавляем
+      updatedFavorites = [...favorites, eventId];
+    }
+    
+    // Сохраняем обновленный список в localStorage
+    localStorage.setItem('favoriteEvents', JSON.stringify(updatedFavorites));
+    
+    // Обновляем состояние
+    setFavorites(updatedFavorites);
+  };
+
+  // Проверка, находится ли мероприятие в избранном
+  const isFavorite = (eventId) => {
+    return favorites.includes(eventId);
+  };
 
   return (
     <div className="container mt-4">
@@ -87,7 +122,18 @@ const EventsPage = () => {
           ) : (
             <div className="grid grid-3">
               {filteredEvents.map(event => (
-                <EventCard key={event.id} event={event} />
+                <div key={event.id} className="event-card-container">
+                  <EventCard event={event} />
+                  {user && (
+                    <button 
+                      className={`favorite-button ${isFavorite(event.id) ? 'is-favorite' : ''}`}
+                      onClick={() => toggleFavorite(event.id)}
+                      title={isFavorite(event.id) ? "Удалить из избранного" : "Добавить в избранное"}
+                    >
+                      {isFavorite(event.id) ? '★' : '☆'}
+                    </button>
+                  )}
+                </div>
               ))}
             </div>
           )}

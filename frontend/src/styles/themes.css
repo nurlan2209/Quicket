@@ -1,124 +1,134 @@
 :root {
-    /* Base theme colors - Light theme by default */
-    --primary-color: #2FB99A;
-    --primary-hover: #25a085;
-    --secondary-color: #CFA570;
-    --secondary-hover: #c39157;
-    --accent-color: #0D1B2A;
-    
-    /* Background colors */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f5f7fa;
-    --bg-card: #ffffff;
-    --bg-sidebar: #0D1B2A;
-    
-    /* Text colors */
-    --text-primary: #0D1B2A;
-    --text-secondary: #4b5563;
-    --text-muted: #6b7280;
-    --text-light: #ffffff;
-    
-    /* Border colors */
-    --border-color: #e5e7eb;
-    --divider-color: rgba(0, 0, 0, 0.1);
-    
-    /* Component specific colors */
-    --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    --btn-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    --input-bg: #ffffff;
-    --input-border: #e5e7eb;
-    --input-text: #0D1B2A;
-    --input-placeholder: #9ca3af;
-    
-    /* Toggle theme button */
-    --toggle-bg: rgba(0, 0, 0, 0.05);
-    --toggle-hover-bg: rgba(0, 0, 0, 0.1);
-    
-    /* Notification colors */
-    --notification-bg-unread: #f0f7ff;
-    --notification-border-unread: #2196F3;
-    --notification-bg-read: #ffffff;
-    
-    /* Alert colors */
-    --alert-success-bg: rgba(47, 185, 154, 0.1);
-    --alert-success-border: #2FB99A;
-    --alert-success-text: #25a085;
-    --alert-danger-bg: rgba(239, 71, 111, 0.1);
-    --alert-danger-border: #ef476f;
-    --alert-danger-text: #d93e60;
-    --alert-warning-bg: rgba(207, 165, 112, 0.1);
-    --alert-warning-border: #CFA570;
-    --alert-warning-text: #c39157;
-    
-    /* Transitions */
-    --transition-speed: 0.3s;
-  }
+  /* Базовые цвета - Светлая тема по умолчанию */
+  --primary-color: #3498DB; /* Основной голубой */
+  --primary-hover: #2980B9; /* Темнее голубой при наведении */
+  --secondary-color: #1ABC9C; /* Бирюзовый/зеленый акцент */
+  --secondary-hover: #16A085; /* Темнее бирюзовый при наведении */
+  --accent-color: #0D1B2A; /* Темно-синий/черный */
   
-  /* Dark Theme */
-  [data-theme='dark'] {
-    /* Base theme colors */
-    --primary-color: #2FB99A;
-    --primary-hover: #3ad0ae;
-    --secondary-color: #e0b77e;
-    --secondary-hover: #f0cfa5;
-    --accent-color: #80cbc4;
-    
-    /* Background colors */
-    --bg-primary: #121212;
-    --bg-secondary: #1e1e1e;
-    --bg-card: #252525;
-    --bg-sidebar: #151c28;
-    
-    /* Text colors */
-    --text-primary: #e0e0e0;
-    --text-secondary: #b0b0b0;
-    --text-muted: #909090;
-    --text-light: #e0e0e0;
-    
-    /* Border colors */
-    --border-color: #333333;
-    --divider-color: rgba(255, 255, 255, 0.1);
-    
-    /* Component specific colors */
-    --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    --btn-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    --input-bg: #2a2a2a;
-    --input-border: #3a3a3a;
-    --input-text: #e0e0e0;
-    --input-placeholder: #808080;
-    
-    /* Toggle theme button */
-    --toggle-bg: rgba(255, 255, 255, 0.1);
-    --toggle-hover-bg: rgba(255, 255, 255, 0.2);
-    
-    /* Notification colors */
-    --notification-bg-unread: #1a2e44;
-    --notification-border-unread: #2196F3;
-    --notification-bg-read: #252525;
-    
-    /* Alert colors */
-    --alert-success-bg: rgba(47, 185, 154, 0.15);
-    --alert-success-border: #2FB99A;
-    --alert-success-text: #3ad0ae;
-    --alert-danger-bg: rgba(239, 71, 111, 0.15);
-    --alert-danger-border: #ef476f;
-    --alert-danger-text: #ff6384;
-    --alert-warning-bg: rgba(207, 165, 112, 0.15);
-    --alert-warning-border: #CFA570;
-    --alert-warning-text: #e0b77e;
-  }
+  /* Фоновые цвета */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7fa;
+  --bg-card: #ffffff;
+  --bg-sidebar: #0D1B2A;
   
-  /* Apply default body styles based on theme */
-  body {
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-    transition: background-color var(--transition-speed), color var(--transition-speed);
-  }
+  /* Цвета текста */
+  --text-primary: #0D1B2A;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-light: #ffffff;
   
-  /* Apply transition to all elements to make theme switch smoother */
-  * {
-    transition: background-color var(--transition-speed), 
-                color var(--transition-speed), 
-                border-color var(--transition-speed),
-                box-shadow var(--transition-speed);
-  }
+  /* Цвета границ */
+  --border-color: #e5e7eb;
+  --divider-color: rgba(0, 0, 0, 0.1);
+  
+  /* Специфичные цвета компонентов */
+  --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --btn-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  --input-bg: #ffffff;
+  --input-border: #e5e7eb;
+  --input-text: #0D1B2A;
+  --input-placeholder: #9ca3af;
+  
+  /* Кнопка переключения темы */
+  --toggle-bg: rgba(0, 0, 0, 0.05);
+  --toggle-hover-bg: rgba(0, 0, 0, 0.1);
+  
+  /* Цвета уведомлений */
+  --notification-bg-unread: #f0f7ff;
+  --notification-border-unread: #3498DB;
+  --notification-bg-read: #ffffff;
+  
+  /* Цвета оповещений */
+  --alert-success-bg: rgba(26, 188, 156, 0.1);
+  --alert-success-border: #1ABC9C;
+  --alert-success-text: #16A085;
+  --alert-danger-bg: rgba(231, 76, 60, 0.1);
+  --alert-danger-border: #E74C3C;
+  --alert-danger-text: #C0392B;
+  --alert-warning-bg: rgba(241, 196, 15, 0.1);
+  --alert-warning-border: #F1C40F;
+  --alert-warning-text: #D3A516;
+  
+  /* Цвета для событий */
+  --event-concert: #3498DB; /* Голубой для концертов */
+  --event-sport: #1ABC9C; /* Зеленый для спортивных событий */
+  --event-theater: #9B59B6; /* Фиолетовый для театра */
+  
+  /* Переходы */
+  --transition-speed: 0.3s;
+}
+
+/* Темная тема */
+[data-theme='dark'] {
+  /* Базовые цвета темы */
+  --primary-color: #3498DB; /* Основной голубой остается тем же */
+  --primary-hover: #5DADE2; /* Светлее при наведении в темной теме */
+  --secondary-color: #1ABC9C; /* Бирюзовый также сохраняется */
+  --secondary-hover: #48C9B0; /* Светлее при наведении */
+  --accent-color: #3498DB; /* Акцентный цвет голубой в темной теме */
+  
+  /* Фоновые цвета */
+  --bg-primary: #0D1B2A; /* Очень темный синий */
+  --bg-secondary: #1E293B; /* Темно-синий */
+  --bg-card: #1F2937; /* Темно-серый */
+  --bg-sidebar: #0F172A; /* Очень темный темно-синий */
+  
+  /* Цвета текста */
+  --text-primary: #F3F4F6; /* Почти белый */
+  --text-secondary: #D1D5DB; /* Светло-серый */
+  --text-muted: #9CA3AF; /* Серый */
+  --text-light: #F9FAFB; /* Белый */
+  
+  /* Цвета границ */
+  --border-color: #374151; /* Темно-серый */
+  --divider-color: rgba(255, 255, 255, 0.1); /* Белый с прозрачностью */
+  
+  /* Специфичные цвета компонентов */
+  --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  --btn-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --input-bg: #374151;
+  --input-border: #4B5563;
+  --input-text: #E5E7EB;
+  --input-placeholder: #9CA3AF;
+  
+  /* Кнопка переключения темы */
+  --toggle-bg: rgba(255, 255, 255, 0.1);
+  --toggle-hover-bg: rgba(255, 255, 255, 0.2);
+  
+  /* Цвета уведомлений */
+  --notification-bg-unread: #172554;
+  --notification-border-unread: #3498DB;
+  --notification-bg-read: #1F2937;
+  
+  /* Цвета оповещений */
+  --alert-success-bg: rgba(26, 188, 156, 0.15);
+  --alert-success-border: #1ABC9C;
+  --alert-success-text: #1ABC9C;
+  --alert-danger-bg: rgba(231, 76, 60, 0.15);
+  --alert-danger-border: #E74C3C;
+  --alert-danger-text: #E74C3C;
+  --alert-warning-bg: rgba(241, 196, 15, 0.15);
+  --alert-warning-border: #F1C40F;
+  --alert-warning-text: #F1C40F;
+  
+  /* Цвета для событий в темной теме */
+  --event-concert: #3498DB; /* Голубой для концертов */
+  --event-sport: #1ABC9C; /* Зеленый для спортивных событий */
+  --event-theater: #9B59B6; /* Фиолетовый для театра */
+}
+
+/* Применяем стили по умолчанию для тела на основе темы */
+body {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Применяем переход ко всем элементам для более плавной смены темы */
+* {
+  transition: background-color var(--transition-speed), 
+              color var(--transition-speed), 
+              border-color var(--transition-speed),
+              box-shadow var(--transition-speed);
+}

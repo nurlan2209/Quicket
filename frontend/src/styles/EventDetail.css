@@ -1,27 +1,19 @@
 .event-detail-container {
-  margin: 3rem 0;
+  margin: 0;
 }
 
 .event-detail-card {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  background: var(--bg-primary);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-top: -60px;
-}
-
-.event-detail-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
 .event-header {
-  color: white;
-  padding: 3rem 2.5rem;
+  color: var(--text-light);
+  padding: 6rem 2.5rem 2rem;
   position: relative;
   overflow: hidden;
-  height: 450px;
+  height: 400px;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -36,94 +28,112 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(13, 27, 42, 0.3), rgba(13, 27, 42, 0.8));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
   z-index: 1;
 }
 
 .event-header-content {
   position: relative;
   z-index: 2;
-  top: 30px;
 }
 
 .event-title {
-  margin: 0 0 1.2rem 0;
-  font-size: 2.8rem;
+  margin: 0 0 1.5rem;
+  font-size: 3.5rem;
   font-weight: 800;
-  line-height: 1.3;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .event-type {
-  margin-left: 50px;
   display: inline-block;
-  padding: 0.5em 1em;
-  font-size: 0.9rem;
+  padding: 0.5em 1.2em;
+  font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border-radius: 50px;
-  background: #2FB99A;
-  color: white;
-  margin-bottom: 1.2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: var(--primary-color);
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .event-location {
   display: flex;
   align-items: center;
-  margin-bottom: 0.7rem;
-  opacity: 0.9;
-  font-size: 1.1rem;
-  color: #ffffff;
+  margin-bottom: 1rem;
+  opacity: 0.95;
+  font-size: 1.3rem;
+  color: var(--text-light);
 }
 
 .event-location-icon {
   margin-right: 1rem;
-  color: #CFA570;
-  font-size: 1.3rem;
+  color: var(--primary-color);
+  font-size: 1.5rem;
 }
 
 .event-datetime {
   display: flex;
   align-items: center;
-  opacity: 0.9;
-  font-size: 1.1rem;
-  color: #ffffff;
+  opacity: 0.95;
+  font-size: 1.3rem;
+  color: var(--text-light);
 }
 
 .event-datetime-icon {
   margin-right: 1rem;
-  color: #CFA570;
-  font-size: 1.3rem;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.event-music-controls {
+  margin-top: 1.5rem;
+}
+
+.music-play-btn {
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.music-play-btn:hover {
+  background: rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
 }
 
 .event-content {
-  padding: 2.5rem;
+  padding: 0;
 }
 
 .event-detail-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 2.5rem;
+  gap: 0;
 }
 
 .event-main {
-  padding-right: 2.5rem;
-  padding-bottom: 50px;
+  padding: 2.5rem;
+  padding-bottom: 4rem;
 }
 
 .event-info-section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .event-info-title {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
   padding-bottom: 0.6rem;
-  color: #0D1B2A;
+  color: var(--text-primary);
   font-weight: 700;
 }
 
@@ -134,12 +144,12 @@
   left: 0;
   width: 50px;
   height: 4px;
-  background: #2FB99A;
+  background: var(--primary-color);
 }
 
 .event-description {
   line-height: 1.8;
-  color: #4b5563;
+  color: var(--text-secondary);
   font-size: 1.1rem;
 }
 
@@ -147,11 +157,12 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.8rem;
-  background: #f9fafb;
+  background: var(--bg-card);
   padding: 2rem;
   border-radius: 12px;
-  margin-bottom: 2.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 3rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .event-meta-item {
@@ -161,13 +172,13 @@
 
 .meta-label {
   font-size: 0.95rem;
-  color: #6b7280;
+  color: var(--text-muted);
   margin-bottom: 0.6rem;
 }
 
 .meta-value {
   font-weight: 600;
-  color: #0D1B2A;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   font-size: 1.1rem;
@@ -175,7 +186,7 @@
 
 .meta-value-icon {
   margin-right: 1rem;
-  color: #CFA570;
+  color: var(--primary-color);
   font-size: 1.3rem;
 }
 
@@ -193,33 +204,33 @@
 }
 
 .seats-available {
-  background: linear-gradient(90deg, rgba(47, 185, 154, 0.1), rgba(47, 185, 154, 0.2));
-  color: #2FB99A;
+  background: var(--alert-success-bg);
+  color: var(--alert-success-text);
 }
 
 .seats-limited {
-  background: linear-gradient(90deg, rgba(207, 165, 112, 0.15), rgba(207, 165, 112, 0.25));
-  color: #CFA570;
+  background: var(--alert-warning-bg);
+  color: var(--alert-warning-text);
 }
 
 .seats-sold-out {
-  background: linear-gradient(90deg, rgba(239, 71, 111, 0.1), rgba(239, 71, 111, 0.2));
-  color: #ef476f;
+  background: var(--alert-danger-bg);
+  color: var(--alert-danger-text);
 }
 
 .event-gallery {
-  margin-top: 2.5rem;
+  margin-top: 3rem;
   overflow: hidden;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .gallery-title {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
   padding-bottom: 0.6rem;
-  color: #0D1B2A;
+  color: var(--text-primary);
   font-weight: 700;
 }
 
@@ -230,13 +241,13 @@
   left: 0;
   width: 50px;
   height: 4px;
-  background: #2FB99A;
+  background: var(--primary-color);
 }
 
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 1.2rem;
   margin-bottom: 1.5rem;
 }
 
@@ -260,17 +271,17 @@
 
 /* Map section styles */
 .event-map {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .map-title {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
   padding-bottom: 0.6rem;
-  color: #0D1B2A;
+  color: var(--text-primary);
   font-weight: 700;
 }
 
@@ -281,35 +292,36 @@
   left: 0;
   width: 50px;
   height: 4px;
-  background: #2FB99A;
+  background: var(--primary-color);
 }
 
 .venue-info {
   margin-bottom: 1.5rem;
   display: flex;
   align-items: flex-start;
-  background: #f9fafb;
+  background: var(--bg-card);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .venue-icon {
   font-size: 1.8rem;
-  color: #CFA570;
-  margin-right: 1rem;
+  color: var(--primary-color);
+  margin-right: 1.2rem;
   margin-top: 0.2rem;
 }
 
 .venue-details h4 {
   margin: 0 0 0.5rem 0;
   font-size: 1.3rem;
-  color: #0D1B2A;
+  color: var(--text-primary);
 }
 
 .venue-address {
   margin: 0;
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 1.1rem;
   line-height: 1.5;
 }
@@ -318,9 +330,9 @@
   height: 350px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   position: relative;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .map-placeholder {
@@ -329,24 +341,62 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f9fafb;
-  color: #6b7280;
+  background: var(--bg-card);
+  color: var(--text-muted);
   font-size: 1.1rem;
   text-align: center;
   padding: 2rem;
 }
 
+/* Правая колонка с формой бронирования */
+.booking-form-container {
+  background-color: var(--bg-card);
+  padding: 2.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  height: 100%;
+}
+
+.price-summary {
+  padding: 2rem;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.price-summary-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.price-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.price-detail.total {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+  margin-top: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
 /* Event loading skeleton */
 .event-detail-skeleton {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
 }
 
 .event-header-skeleton {
   height: 350px;
-  background: linear-gradient(90deg, #e5e7eb, #d1d5db);
+  background: linear-gradient(90deg, var(--bg-card), var(--bg-secondary));
   animation: pulse 1.5s infinite;
 }
 
@@ -363,7 +413,7 @@
 .skeleton-title {
   height: 40px;
   width: 70%;
-  background: linear-gradient(90deg, #e5e7eb, #d1d5db);
+  background: linear-gradient(90deg, var(--bg-card), var(--bg-secondary));
   margin-bottom: 1.5rem;
   border-radius: 6px;
   animation: pulse 1.5s infinite;
@@ -371,7 +421,7 @@
 
 .skeleton-text {
   height: 18px;
-  background: linear-gradient(90deg, #e5e7eb, #d1d5db);
+  background: linear-gradient(90deg, var(--bg-card), var(--bg-secondary));
   margin-bottom: 1rem;
   border-radius: 6px;
   animation: pulse 1.5s infinite;
@@ -391,7 +441,7 @@
 
 .skeleton-box {
   height: 350px;
-  background: linear-gradient(90deg, #e5e7eb, #d1d5db);
+  background: linear-gradient(90deg, var(--bg-card), var(--bg-secondary));
   border-radius: 12px;
   animation: pulse 1.5s infinite;
 }
@@ -403,22 +453,43 @@
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .event-detail-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .event-main {
-    padding-right: 0;
   }
   
   .event-title {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
   }
-
+  
   .event-header {
-    height: 280px;
+    height: 350px;
+    padding: 4rem 2rem 2rem;
+  }
+  
+  .booking-form-container {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .event-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .event-title {
+    font-size: 2rem;
+  }
+  
+  .event-header {
+    height: 300px;
+    padding: 3rem 1.5rem 1.5rem;
+  }
+  
+  .event-main {
+    padding: 1.5rem;
   }
   
   .gallery-grid {
@@ -428,90 +499,35 @@
   .map-container {
     height: 250px;
   }
+  
+  .event-meta {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
 }
 
-/* Стили для контейнера кнопок управления музыкой */
-.event-music-controls {
-  margin-top: 15px;
-}
-
-/* Стилизация кнопки воспроизведения музыки */
-.music-play-btn {
+/* Стили для кнопки включения фоновой музыки */
+.background-music-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
-  background: rgba(47, 185, 154, 0.85);
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Добавление иконки перед текстом */
-.music-play-btn::before {
-  content: '🎵';
-  margin-right: 8px;
-  font-size: 16px;
-}
-
-/* Стили при наведении */
-.music-play-btn:hover {
-  background: rgba(47, 185, 154, 1);
+.background-music-btn:hover {
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Стили при нажатии */
-.music-play-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Стили для кнопки, когда музыка играет */
-.music-play-btn.playing {
-  background: rgba(207, 165, 112, 0.85);
-}
-
-.music-play-btn.playing:hover {
-  background: rgba(207, 165, 112, 1);
-}
-
-/* Стили для кнопки управления в метаданных */
-.music-toggle-btn {
-  padding: 5px 10px;
-  background: #f5f5f5;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.music-toggle-btn:hover {
-  background: #eaeaea;
-}
-
-/* Пульсирующая анимация для кнопки, когда музыка играет */
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(47, 185, 154, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(47, 185, 154, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(47, 185, 154, 0);
-  }
-}
-
-.music-play-btn.playing::before {
-  content: '🔊';
-  animation: pulse 2s infinite;
+.background-music-btn .music-icon {
+  margin-right: 8px;
+  font-size: 1.2rem;
 }

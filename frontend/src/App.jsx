@@ -14,41 +14,15 @@ import EventsPage from './pages/EventsPage';
 import EventDetailPage from './pages/EventDetailPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import BookingsPage from './pages/BookingsPage';
+import ProfilePage from './pages/ProfilePage';
 import NotificationsPage from './pages/NotificationsPage';
 import AdminDashboard from './pages/AdminDashboard';
 
 import './i18n';
 import './styles/global.css';
 import './styles/themes.css';
-
-const createLogoPlaceholder = () => {
-  const canvas = document.createElement('canvas');
-  canvas.width = 200;
-  canvas.height = 200;
-  const ctx = canvas.getContext('2d');
-
-  ctx.fillStyle = '#0D1B2A';
-  ctx.fillRect(0, 0, 200, 200);
-
-  ctx.fillStyle = '#2FB99A';
-  ctx.beginPath();
-  ctx.arc(100, 100, 70, 0, 2 * Math.PI);
-  ctx.fill();
-
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 120px Arial';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('P', 100, 100);
-
-  ctx.fillStyle = '#CFA570';
-  ctx.beginPath();
-  ctx.arc(140, 60, 25, 0, 2 * Math.PI);
-  ctx.fill();
-
-  return canvas.toDataURL();
-};
+import './styles/FavoriteButton.css';
+import './styles/StickyFooter.css'; // Добавляем стили для футера
 
 function App() {
   const { t } = useTranslation();
@@ -98,10 +72,6 @@ function App() {
     return children;
   };
 
-  if (logoUrl && typeof window !== 'undefined') {
-    window.appLogo = logoUrl;
-  }
-
   if (loading) {
     return (
       <div className="loading-screen">
@@ -121,15 +91,17 @@ function App() {
           <div className={`main-content ${menuOpen ? 'shifted' : ''}`}>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/events" element={<EventsPage />} />
-              <Route path="/events/:id" element={<EventDetailPage />} />
+              <Route path="/events" element={<div className="events-page-container"><EventsPage /></div>} />
+              <Route path="/events/:id" element={<div className="event-detail-container"><EventDetailPage /></div>} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route 
-                path="/bookings" 
+                path="/profile" 
                 element={
                   <ProtectedRoute>
-                    <BookingsPage />
+                    <div className="profile-page-container">
+                      <ProfilePage />
+                    </div>
                   </ProtectedRoute>
                 } 
               />
@@ -137,7 +109,9 @@ function App() {
                 path="/notifications" 
                 element={
                   <ProtectedRoute>
-                    <NotificationsPage />
+                    <div className="notifications-page">
+                      <NotificationsPage />
+                    </div>
                   </ProtectedRoute>
                 } 
               />

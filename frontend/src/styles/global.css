@@ -457,3 +457,45 @@ table tr:hover {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* Убедимся, что html и body занимают всю высоту */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Основной контейнер приложения */
+.app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row; /* Sidebar слева, контент справа */
+}
+
+/* Контейнер для основного контента */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Занимает всю высоту */
+}
+
+/* Основной контент растягивается */
+.main-content main {
+  flex: 1 0 auto; /* Растягивается, чтобы заполнить пространство */
+}
+
+/* Футер прижимается к низу */
+.footer {
+  flex-shrink: 0; /* Не сжимается */
+}
+
+/* Если есть сайдбар, он не должен ломать структуру */
+.sidebar {
+  flex-shrink: 0;
+}
+
+/* Учет сдвига контента при открытом меню */
+.main-content.shifted {
+  margin-left: 250px; /* Настройте под ширину вашего сайдбара */
+}

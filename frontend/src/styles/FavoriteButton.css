@@ -1,0 +1,110 @@
+/* Стили для контейнера с карточкой мероприятия и кнопкой избранного */
+.event-card-container {
+    position: relative;
+  }
+  
+  /* Стили для кнопки избранного */
+  .favorite-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #aaaaaa;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+  }
+  
+  .favorite-button:hover {
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+  }
+  
+  /* Стиль для активного состояния (в избранном) */
+  .favorite-button.is-favorite {
+    color: #ffcc00;
+    opacity: 1;
+  }
+  
+  /* Стили для контейнера в избранном */
+  .favorite-event-container {
+    position: relative;
+  }
+  
+  /* Кнопка удаления из избранного */
+  .btn-remove-favorite {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #ff4d4d;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-remove-favorite:hover {
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Стили для вкладок на странице профиля */
+  .profile-tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .profile-tab-btn {
+    padding: 12px 20px;
+    border: none;
+    background: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .profile-tab-btn:hover {
+    color: #2FB99A;
+  }
+  
+  .profile-tab-btn.active {
+    color: #2FB99A;
+    font-weight: 600;
+  }
+  
+  .profile-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #2FB99A;
+    border-radius: 2px 2px 0 0;
+  }

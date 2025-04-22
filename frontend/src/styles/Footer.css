@@ -164,3 +164,51 @@
     justify-content: center;
   }
 }
+
+/* Стили для футера, привязанного к низу страницы */
+
+/* Основная обертка приложения должна иметь минимальную высоту 100vh */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Основной контент должен занимать всё доступное пространство */
+.main-content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Контейнер для содержимого страницы должен тоже растягиваться */
+.container {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Футер должен быть всегда внизу */
+.footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  /* Остальные стили футера */
+  background: var(--bg-sidebar);
+  color: var(--text-light);
+  padding: 4rem 0 2rem;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Для страниц с малым количеством контента, чтобы контент занимал минимальную высоту */
+.profile-page-container,
+.events-page-container,
+.event-detail-container,
+.auth-container,
+.notifications-page {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh; /* минимальная высота для контента */
+}

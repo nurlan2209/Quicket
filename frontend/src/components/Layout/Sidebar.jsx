@@ -88,9 +88,9 @@ const Sidebar = ({ menuOpen, toggleMenu, logoUrl }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/bookings" onClick={toggleMenu}>
-                  <span role="img" aria-label="bookings" className="icon">🎟️</span>
-                  {t('navigation.bookings')}
+                <Link to="/profile" onClick={toggleMenu}>
+                  <span role="img" aria-label="profile" className="icon">👤</span>
+                  Мой профиль
                   <span className="arrow">→</span>
                 </Link>
               </li>

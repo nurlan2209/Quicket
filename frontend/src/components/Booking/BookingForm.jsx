@@ -44,67 +44,81 @@ const BookingForm = ({ event, onBookingSuccess }) => {
     setShowPaymentQRModal(true);
   };
   
-  // Обработчик успешной оплаты
-  const handlePaymentSuccess = async () => {
-    // Проверяем, не была ли уже обработана оплата
-    if (bookingProcessedRef.current) {
-      return;
-    }
+// Обработчик успешной оплаты
+const handlePaymentSuccess = async () => {
+  // Проверяем, не была ли уже обработана оплата
+  if (bookingProcessedRef.current) {
+    return;
+  }
+  
+  // Устанавливаем флаг, что оплата обработана
+  bookingProcessedRef.current = true;
+  
+  setLoading(true);
+  
+  try {
+    const response = await apiService.createBooking({
+      user_id: user.id,
+      event_id: event.id,
+      seats: seats // Передаем ТОЛЬКО количество выбранных мест
+    });
     
-    // Устанавливаем флаг, что оплата обработана
-    bookingProcessedRef.current = true;
-    
-    setLoading(true);
-    
-    try {
-      const response = await apiService.createBooking({
-        user_id: user.id,
-        event_id: event.id,
-        seats: seats // Передаем ТОЛЬКО количество выбранных мест
+    if (response.success) {
+      // Закрываем модальное окно оплаты
+      setShowPaymentQRModal(false);
+      
+      setStatus({
+        type: 'success',
+        message: t('common.success')
       });
       
-      if (response.success) {
-        // Закрываем модальное окно оплаты
-        setShowPaymentQRModal(false);
-        
+      // Показываем анимацию успеха
+      setShowSuccess(true);
+      
+      // Сбрасываем количество мест
+      setSeats(1);
+      
+      // Вызываем колбэк успешного бронирования
+      if (onBookingSuccess) {
+        onBookingSuccess();
+      }
+    } else {
+      // Закрываем модальное окно оплаты
+      setShowPaymentQRModal(false);
+      
+      // Если ошибка связана с авторизацией, перенаправляем на страницу входа
+      if (response.message && response.message.includes('авторизац')) {
+        // Выводим сообщение об истечении сессии
         setStatus({
-          type: 'success',
-          message: t('common.success')
+          type: 'error',
+          message: response.message
         });
         
-        // Показываем анимацию успеха
-        setShowSuccess(true);
-        
-        // Сбрасываем количество мест
-        setSeats(1);
-        
-        // Вызываем колбэк успешного бронирования
-        if (onBookingSuccess) {
-          onBookingSuccess();
-        }
+        // Даем пользователю время прочитать сообщение и перенаправляем
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
       } else {
-        // Закрываем модальное окно оплаты
-        setShowPaymentQRModal(false);
-        
         setStatus({
           type: 'error',
           message: response.message || t('bookingForm.errors.bookingError')
         });
       }
-    } catch (err) {
-      console.error("Booking error:", err);
-      
-      // Закрываем модальное окно оплаты
-      setShowPaymentQRModal(false);
-      
-      setStatus({
-        type: 'error',
-        message: t('bookingForm.errors.tryAgain')
-      });
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (err) {
+    console.error("Booking error:", err);
+    
+    // Закрываем модальное окно оплаты
+    setShowPaymentQRModal(false);
+    
+    setStatus({
+      type: 'error',
+      message: t('bookingForm.errors.tryAgain')
+    });
+  } finally {
+    setLoading(false);
+  }
+};
   
   // Закрытие модального окна оплаты
   const closePaymentQRModal = () => {
