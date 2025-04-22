@@ -283,7 +283,11 @@
       "EventName": "Event name",
       "Bookings": "Bookings",
       "topUsers": "Top users",
-      "UserName": "User name"
+      "UserName": "User name",
+      "BookingCount": "Booking count",
+      "topVenues": "Top venues",
+      "VenueName": "Venue name",
+      "EventCount": "Event count"
     },
     "events": {
       "title": "Event Management",

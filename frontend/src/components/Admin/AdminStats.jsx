@@ -134,7 +134,7 @@ const AdminStats = ({ stats }) => {
               <thead>
                 <tr>
                   <th>{t('admin.dashboard.UserName')}</th>
-                  <th>Количество бронирований</th>
+                  <th>{t('admin.dashboard.BookingCount')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -155,13 +155,13 @@ const AdminStats = ({ stats }) => {
         </div>
         
         <div className="admin-stats-table-section">
-          <h3>Популярные места проведения</h3>
+          <h3>{t('admin.dashboard.topVenues')}</h3>
           <div className="admin-table-wrapper">
             <table className="admin-stats-table">
               <thead>
                 <tr>
-                  <th>Название места</th>
-                  <th>Количество мероприятий</th>
+                  <th>{t('admin.dashboard.VenueName')}</th>
+                  <th>{t('admin.dashboard.EventCount')}</th>
                 </tr>
               </thead>
               <tbody>
