@@ -45,88 +45,104 @@ const EventDetail = () => {
     fetchEvent();
   }, [id, t]);
   
-  // Улучшенный useEffect для обработки фоновой музыки
-// Улучшенный useEffect для обработки фоновой музыки
-useEffect(() => {
-  if (!event || !event.background_music_url || event.type !== 'CONCERT') {
-    return;
-  }
-  
-  // Если музыка уже создана - не пересоздаем
-  if (audioRef.current) {
-    return;
-  }
-  
-  // Проверяем, существует ли файл перед созданием аудио-объекта
-  const checkFileExists = (url) => {
-    return new Promise((resolve) => {
-      const http = new XMLHttpRequest();
-      http.open('HEAD', url, true);
-      http.onreadystatechange = function() {
-        if (this.readyState === this.DONE) {
-          resolve(this.status !== 404);
-        }
-      };
-      http.send();
-    });
-  };
-  
-  // Асинхронная проверка и воспроизведение
-  const setupAudio = async () => {
-    const fileExists = await checkFileExists(event.background_music_url);
-    if (!fileExists) {
-      console.error('Аудиофайл не найден:', event.background_music_url);
-      setMusicButtonVisible(false);
-      return;
-    }
-    
-    // Создаем новый элемент Audio для музыки
-    audioRef.current = new Audio(event.background_music_url);
-    audioRef.current.volume = (event.music_volume || 30) / 100; // преобразуем в диапазон 0-1
-    audioRef.current.loop = true;
-    
-    // Пробуем воспроизвести музыку автоматически
-    try {
-      await audioRef.current.play();
-      // Автоматическое воспроизведение началось успешно
-      setMusicPlaying(true);
-      setMusicButtonVisible(true); // Всегда показываем кнопку для управления
-    } catch (error) {
-      // Автоматическое воспроизведение заблокировано браузером
-      console.log("Автовоспроизведение заблокировано:", error);
-      setMusicPlaying(false);
-      setMusicButtonVisible(true); // Показываем кнопку для ручного включения
-    }
-  };
-  
-  setupAudio();
-  
-  // Очистка при размонтировании
-  return () => {
+  useEffect(() => {
+    // Очищаем предыдущее аудио при смене события
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current = null;
-    }
-  };
-}, [event]);
-  
-  // Функция для переключения воспроизведения музыки
-  const toggleMusic = () => {
-    if (!audioRef.current) return;
-    
-    if (musicPlaying) {
-      audioRef.current.pause();
       setMusicPlaying(false);
+    }
+    
+    // Проверяем, есть ли фоновая музыка у текущего события
+    if (event && event.type === 'CONCERT' && event.background_music_url) {
+      // Показываем кнопку только если указан URL музыки
+      setMusicButtonVisible(true);
     } else {
+      // Скрываем кнопку, если музыки нет
+      setMusicButtonVisible(false);
+    }
+    
+    // Очистка при размонтировании
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [event]); // Зависимость от event 
+  
+  // Функция для инициализации и включения музыки
+const initializeAndPlayMusic = () => {
+    try {
+      // Проверяем наличие URL в данных события
+      if (!event || !event.background_music_url) {
+        console.error('URL фоновой музыки не указан');
+        return;
+      }
+      
+      // Логируем для отладки
+      console.log('Инициализация аудио с URL:', event.background_music_url);
+      
+      // Если аудио уже создано, используем его
+      if (!audioRef.current) {
+        // Создаем аудио объект с URL из данных события
+        audioRef.current = new Audio(event.background_music_url);
+        audioRef.current.volume = (event.music_volume || 30) / 100; // Используем указанную громкость или 30%
+        audioRef.current.loop = true;
+        
+        // Добавляем обработчики событий
+        audioRef.current.addEventListener('canplaythrough', () => {
+          console.log('Аудио готово к воспроизведению');
+        });
+        
+        audioRef.current.addEventListener('error', (e) => {
+          console.error('Ошибка аудио:', e);
+          console.error('Код ошибки:', audioRef.current.error ? audioRef.current.error.code : 'неизвестно');
+          setMusicButtonVisible(false);
+        });
+      }
+      
+      // Показываем кнопку управления
+      setMusicButtonVisible(true);
+      
+      // Пробуем включить аудио
       audioRef.current.play()
         .then(() => {
+          console.log('Воспроизведение началось!');
           setMusicPlaying(true);
         })
         .catch(error => {
-          console.error("Ошибка воспроизведения:", error);
+          console.error('Ошибка воспроизведения:', error);
+          setMusicPlaying(false);
         });
+    } catch (error) {
+      console.error('Ошибка инициализации аудио:', error);
     }
-  };
+};
+  
+// Функция для переключения воспроизведения музыки
+const toggleMusic = () => {
+  if (!audioRef.current) {
+    // Если аудио еще не инициализировано, делаем это сейчас
+    initializeAndPlayMusic();
+    return;
+  }
+  
+  if (musicPlaying) {
+    // Останавливаем воспроизведение
+    audioRef.current.pause();
+    setMusicPlaying(false);
+  } else {
+    // Возобновляем воспроизведение
+    audioRef.current.play()
+      .then(() => {
+        setMusicPlaying(true);
+      })
+      .catch(error => {
+        console.error("Ошибка воспроизведения:", error);
+      });
+  }
+};
   
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -273,16 +289,15 @@ useEffect(() => {
             </div>
             
             {/* Добавляем кнопку управления музыкой для концертов */}
-            {event.type === 'CONCERT' && event.background_music_url && (
+            {/* Кнопка управления музыкой только для концертов с указанным URL аудио */}
+            {(event.type === 'concert' || event.type === 'CONCERT') && event.background_music_url && (
               <div className="event-music-controls">
-                {musicButtonVisible && (
-                  <button 
-                    className="music-play-btn" 
-                    onClick={toggleMusic}
-                  >
-                    {musicPlaying ? 'Приостановить музыку' : 'Включить фоновую музыку'}
-                  </button>
-                )}
+                <button 
+                  className={`music-play-btn ${musicPlaying ? 'playing' : ''}`}
+                  onClick={toggleMusic}
+                >
+                  {musicPlaying ? 'Приостановить музыку' : 'Включить фоновую музыку'}
+                </button>
               </div>
             )}
           </div>

@@ -391,11 +391,11 @@ const AdminEventForm = ({ event, venues, onSave, onCancel }) => {
     name="background_music_url"
     value={formData.background_music_url}
     onChange={handleChange}
-    placeholder="/audio/concerts/название_файла.mp3"
+    placeholder="/audio/название_файла.mp3"
   />
   <small className="form-text text-muted">
-    Укажите путь к аудиофайлу из папки public. Например: /audio/concerts/track1.mp3. 
-    Загрузите MP3 файл в папку public/audio/concerts/ вашего проекта.
+    Укажите путь к аудиофайлу из папки public. Например: /audio/track1.mp3. 
+    Загрузите MP3 файл в папку public/audio/ вашего проекта.
   </small>
   
   <div className="volume-control">
