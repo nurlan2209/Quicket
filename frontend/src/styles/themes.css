@@ -13,10 +13,8 @@
   --bg-sidebar: #0D1B2A;
   
   /* Цвета текста */
-  --text-primary: #0D1B2A;
-  --text-secondary: #4b5563;
-  --text-muted: #6b7280;
   --text-light: #ffffff;
+  --text-notification: #0D1B2A;
   
   /* Цвета границ */
   --border-color: #e5e7eb;

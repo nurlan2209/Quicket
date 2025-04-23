@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import '../../styles/PaymentQRModal.css';
 
-const PaymentQRModal = ({ isOpen, onClose, onPaymentSuccess, qrImagePath, price, seats }) => {
+const PaymentQRModal = ({ isOpen, onClose, onPaymentSuccess, qrImagePath, price, seats, selectedSeats = [], isStadium = false }) => {
   const { t } = useTranslation();
   const [timeLeft, setTimeLeft] = useState(20);
   const [paymentStatus, setPaymentStatus] = useState('waiting'); // waiting, success, failed
@@ -28,6 +28,23 @@ const PaymentQRModal = ({ isOpen, onClose, onPaymentSuccess, qrImagePath, price,
   const calculateCircleOffset = () => {
     const circumference = 2 * Math.PI * 45;
     return (1 - timeLeft / 20) * circumference;
+  };
+  
+  // Форматирование ID места для отображения
+  const formatSeatId = (seatId) => {
+    if (isStadium) {
+      // Формат ID для стадиона: "A1-3-15" -> "Сектор A1, Ряд 3, Место 15"
+      const parts = seatId.split('-');
+      if (parts.length === 3) {
+        const [subsector, row, seat] = parts;
+        return `${t('stadium.sector')} ${subsector}, ${t('stadium.row')} ${row}, ${t('stadium.seat')} ${seat}`;
+      }
+      return seatId;
+    } else {
+      // Стандартный формат для обычного зала: "3-15" -> "Ряд 3, Место 15"
+      const [row, seat] = seatId.split('-');
+      return `${t('bookingForm.row')} ${row}, ${t('bookingForm.seat')} ${seat}`;
+    }
   };
   
   // Timer logic
@@ -177,6 +194,20 @@ const PaymentQRModal = ({ isOpen, onClose, onPaymentSuccess, qrImagePath, price,
                 <p className="amount">{t('paymentQR.amount')}: <strong>{price * seats} тг</strong></p>
               </div>
               
+              {/* Отображение выбранных мест */}
+              {selectedSeats && selectedSeats.length > 0 && (
+                <div className="payment-selected-seats">
+                  <h4>{t('paymentQR.selectedSeats', 'Выбранные места')}:</h4>
+                  <div className="payment-seats-list">
+                    {selectedSeats.map(seatId => (
+                      <div key={seatId} className="payment-seat-item">
+                        {formatSeatId(seatId)}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
               <div className="payment-instructions">
                 <p>{t('paymentQR.instructions')}</p>
               </div>
@@ -191,6 +222,20 @@ const PaymentQRModal = ({ isOpen, onClose, onPaymentSuccess, qrImagePath, price,
             </div>
             <h2>{t('paymentQR.successTitle')}</h2>
             <p>{t('paymentQR.successMessage')}</p>
+            
+            {/* Отображение забронированных мест в сообщении об успехе */}
+            {selectedSeats && selectedSeats.length > 0 && (
+              <div className="success-seats-info">
+                <p>{t('paymentQR.bookedSeats', 'Забронированы места')}:</p>
+                <div className="success-seats-list">
+                  {selectedSeats.map(seatId => (
+                    <span key={seatId} className="success-seat-item">
+                      {formatSeatId(seatId)}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         ) : null}
       </div>

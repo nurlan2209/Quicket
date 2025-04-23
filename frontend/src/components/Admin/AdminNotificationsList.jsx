@@ -284,12 +284,12 @@ const AdminNotificationsList = () => {
               <thead>
                 <tr>
                   <th>{t('admin.notifications.id', 'ID')}</th>
-                  <th>{t('admin.notifications.user', 'Пользователь')}</th>
-                  <th>{t('admin.notifications.title', 'Заголовок')}</th>
-                  <th>{t('admin.notifications.type', 'Тип')}</th>
-                  <th>{t('admin.notifications.read', 'Прочитано')}</th>
-                  <th>{t('admin.notifications.createdAt', 'Дата отправки')}</th>
-                  <th className="actions-column">{t('admin.notifications.actions', 'Действия')}</th>
+                  <th>{t('admin.notifications.userField')}</th>
+                  <th>{t('admin.notifications.titleField')}</th>
+                  <th>{t('admin.notifications.typeField')}</th>
+                  <th>{t('admin.notifications.readStatus')}</th>
+                  <th>{t('admin.notifications.createdAt')}</th>
+                  <th className="actions-column">{t('admin.notifications.actions')}</th>
                 </tr>
               </thead>
               <tbody>

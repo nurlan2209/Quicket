@@ -313,3 +313,57 @@
       font-size: 18px;
     }
   }
+
+  /* Добавьте эти стили к существующему PaymentQRModal.css */
+
+/* Стили для отображения выбранных мест в модальном окне оплаты */
+.payment-selected-seats {
+  margin-top: 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  text-align: center;
+}
+
+.payment-selected-seats h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.payment-seats-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.payment-seat-item {
+  background-color: #f1f1f1;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Стили для отображения забронированных мест в сообщении об успехе */
+.success-seats-info {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.success-seats-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.success-seat-item {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 14px;
+}

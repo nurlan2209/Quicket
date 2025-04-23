@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f5f7fa;
 }
 
 .admin-dashboard-container {
@@ -165,7 +164,6 @@
   font-size: 24px;
   font-weight: 700;
   margin: 0;
-  color: #2c3e50;
 }
 
 .admin-header-actions {
@@ -205,7 +203,6 @@
 }
 
 .admin-stat-card {
-  background-color: white;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -257,7 +254,6 @@
 .admin-stat-value {
   font-size: 24px;
   font-weight: 700;
-  color: #2c3e50;
   margin: 0;
 }
 
@@ -270,7 +266,6 @@
 /* Таблицы */
 .admin-table-responsive {
   overflow-x: auto;
-  background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
@@ -282,12 +277,10 @@
 }
 
 .admin-table th {
-  background-color: #f8f9fa;
   padding: 12px 15px;
   text-align: left;
   font-size: 14px;
   font-weight: 600;
-  color: #2c3e50;
   border-bottom: 1px solid #e1e5e8;
 }
 
@@ -295,7 +288,6 @@
   padding: 12px 15px;
   border-bottom: 1px solid #e1e5e8;
   font-size: 14px;
-  color: #2c3e50;
 }
 
 .admin-table tr:hover {
@@ -359,7 +351,6 @@
   margin-bottom: 5px;
   font-size: 14px;
   font-weight: 600;
-  color: #2c3e50;
 }
 
 .admin-filter-group select,

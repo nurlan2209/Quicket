@@ -302,6 +302,13 @@
       "venue": "Өткізілетін орны",
       "selectVenue": "Орынды таңдаңыз",
       "date": "Күні",
+      "nameField": "Атауы",
+      "seats": "Орындар",
+      "actions": "Әрекеттер",
+      "search": "Табу",
+      "searchPlaceholder": "Іс-шара атауын табу",
+      "filterByType": "Түрі табу",
+      "addressField": "Мекен-жайы",
       "time": "Уақыты",
       "duration": "Ұзақтығы (мин.)",
       "totalSeats": "Барлық орындар",
@@ -335,9 +342,13 @@
       "confirmDelete": "Бұл іс-шараны шынымен жойғыңыз келе ме?"
     },
     "venues": {
-      "title": "Спорт нысандарын басқару",
-      "createVenue": "Жаңа спорт нысанын құру",
+      "title": "Іс-шара өткізу орындарын басқару",
+      "createVenue": "Жаңа өткізу орнын құру",
       "editVenue": "Спорт нысанын өңдеу",
+      "searchPlaceholder": "Аты бойынша немесе адресі бойынша табу",
+      "eventsCount": "Іс-шаралардың саны:",
+      "map": "Карта",
+      "noMap": "Карта қосылмаған",
       "saveChanges": "Өзгерістерді сақтау",
       "create": "Құру",
       "name": "Атауы",
@@ -426,5 +437,40 @@
     "status": "Күйі",
     "cancelled": "Жойылды",
     "astanaArena": "Astana Arena"
+  },
+  "stadium": {
+    "astanaArenaTitle": "\"Astana Arena\" стадионында орын таңдау",
+    "sector": "Сектор",
+    "subsector": "Қосалқы сектор",
+    "row": "Қатар",
+    "seat": "Орын",
+    "selectSector": "Секторды таңдаңыз",
+    "generationError": "Стадион сызбасын жасауда қате пайда болды"
+  },
+  "bookingForm1": {
+    "selectSeats": "Орындарды таңдаңыз",
+    "seatAvailable": "Қолжетімді",
+    "seatSelected": "Таңдалған",
+    "seatOccupied": "Бос емес",
+    "stage": "САХНА",
+    "row": "Қатар",
+    "seat": "Орын",
+    "rowSeat": "Қатар {{row}}, Орын {{seat}}",
+    "selectedSeats": "Таңдалған орындар",
+    "noSeatsSelected": "Таңдалған орындар жоқ",
+    "showSeatMap": "Зал схемасында орындарды таңдау",
+    "hideSeatMap": "Зал схемасын жасыру",
+    "seatsSelected": "орын таңдалды",
+    "yourSelectedSeats": "Таңдалған орындар",
+    "removeSeat": "Орынды алып тастау",
+    "errors": {
+      "noSeatsSelected": "Кем дегенде бір орынды таңдаңыз",
+      "tooManySeats": "Тым көп орын таңдалды. Қолжетімді: {{count}}"
+    }
+  },
+  "paymentQR_stadium": {
+    "selectedSeats": "Таңдалған орындар",
+    "rowSeat": "Қатар {{row}}, Орын {{seat}}",
+    "bookedSeats": "Брондалған орындар"
   }
 }

@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../../contexts/AuthContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import ThemeToggle from '../theme/ThemeToggle';
 import apiService from '../../services/api';
 import '../../styles/Sidebar.css';
 
@@ -100,7 +99,7 @@ const Sidebar = ({ menuOpen, toggleMenu, logoUrl }) => {
                 <li>
                   <Link to="/admin" onClick={toggleMenu}>
                     <span role="img" aria-label="admin" className="icon">⚙️</span>
-                    Admin Panel
+                    {t('sidebar.adminPanel')}
                     <span className="arrow">→</span>
                   </Link>
                 </li>

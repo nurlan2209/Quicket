@@ -298,6 +298,13 @@
       "delete": "Delete",
       "edit": "Edit",
       "name": "Name",
+      "seats": "Seats",
+      "nameField": "Name",
+      "actions": "Actions",
+      "search": "Search",
+      "searchPlaceholder": "Search by name or venue...",
+      "filterByType": "Filter by type",
+      "addressField": "Address",
       "type": "Type",
       "venue": "Venue",
       "selectVenue": "Select venue",
@@ -335,8 +342,11 @@
       "confirmDelete": "Are you sure you want to delete this event?"
     },
     "venues": {
-      "title": "Sports Venues Management",
+      "title": "Venue Management",
       "createVenue": "Create New Venue",
+      "eventsCount": "Events count",
+      "map" : "Map",
+      "noMap": "No map",
       "editVenue": "Edit Venue",
       "saveChanges": "Save Changes",
       "create": "Create",
@@ -410,5 +420,40 @@
       "formError": "Please fill in all required fields"
     }
   },
-  "locale": "en-US"
+  "locale": "en-US",
+  "stadium": {
+    "astanaArenaTitle": "Select seats at Astana Arena stadium",
+    "sector": "Sector",
+    "subsector": "Subsector",
+    "row": "Row",
+    "seat": "Seat",
+    "selectSector": "Select sector",
+    "generationError": "Error generating stadium scheme"
+  },
+  "bookingForm1": {
+    "selectSeats": "Select seats",
+    "seatAvailable": "Available",
+    "seatSelected": "Selected",
+    "seatOccupied": "Occupied",
+    "stage": "STAGE",
+    "row": "Row",
+    "seat": "Seat",
+    "rowSeat": "Row {{row}}, Seat {{seat}}",
+    "selectedSeats": "Selected seats",
+    "noSeatsSelected": "No seats selected",
+    "showSeatMap": "Select seats on the seating map",
+    "hideSeatMap": "Hide seating map",
+    "seatsSelected": "seats selected",
+    "yourSelectedSeats": "Your selected seats",
+    "removeSeat": "Remove seat",
+    "errors": {
+      "noSeatsSelected": "Please select at least one seat",
+      "tooManySeats": "Too many seats selected. Available: {{count}}"
+    }
+  },
+  "paymentQR_stadium": {
+    "selectedSeats": "Selected seats",
+    "rowSeat": "Row {{row}}, Seat {{seat}}",
+    "bookedSeats": "Booked seats"
+  }
 }

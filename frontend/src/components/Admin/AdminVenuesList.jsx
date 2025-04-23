@@ -104,7 +104,7 @@ const AdminVenuesList = () => {
   return (
     <div className="admin-venues-container">
       <div className="admin-venues-header">
-        <h2>Спортивные объекты</h2>
+        <h2>{t('admin.venues.title')}</h2>
         <button 
           className="admin-add-button"
           onClick={() => {
@@ -112,7 +112,7 @@ const AdminVenuesList = () => {
             setShowForm(true);
           }}
         >
-          Добавить объект
+          {t('admin.venues.createVenue')}
         </button>
       </div>
       
@@ -130,11 +130,11 @@ const AdminVenuesList = () => {
       
       <div className="admin-filters">
         <div className="admin-filter-group full-width">
-          <label htmlFor="search">Поиск</label>
+          <label htmlFor="search">{t('admin.events.search')}</label>
           <input
             type="text"
             id="search"
-            placeholder="Поиск по названию или адресу..."
+            placeholder={t("admin.venues.searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -156,12 +156,12 @@ const AdminVenuesList = () => {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Название</th>
-                    <th>Адрес</th>
-                    <th>Вместимость</th>
-                    <th>Кол-во мероприятий</th>
-                    <th>Карта</th>
-                    <th className="actions-column">Действия</th>
+                    <th>{t('admin.events.nameField')}</th>
+                    <th>{t('admin.events.addressField')}</th>
+                    <th>{t('admin.venues.capacity')}</th>
+                    <th>{t('admin.venues.eventsCount')}</th>
+                    <th>{t('admin.venues.map')}</th>
+                    <th className="actions-column">{t('admin.events.actions')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -182,7 +182,7 @@ const AdminVenuesList = () => {
                               {showMapPreview === venue.id ? 'Скрыть карту' : 'Показать карту'}
                             </button>
                           ) : (
-                            <span className="text-muted">Карта не настроена</span>
+                            <span className="text-muted">{t('admin.venues.noMap')}</span>
                           )}
                         </td>
                         <td className="actions-cell">

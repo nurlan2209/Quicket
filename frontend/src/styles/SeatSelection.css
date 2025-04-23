@@ -1,0 +1,168 @@
+.seat-selection-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .seat-selection-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .seats-legend {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+  }
+  
+  .seat-example {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  
+  .seat-example.available {
+    background-color: #3498db;
+    border: 1px solid #2980b9;
+  }
+  
+  .seat-example.selected {
+    background-color: #2ecc71;
+    border: 1px solid #27ae60;
+  }
+  
+  .seat-example.occupied {
+    background-color: #e74c3c;
+    border: 1px solid #c0392b;
+  }
+  
+  .stage {
+    width: 80%;
+    height: 40px;
+    background-color: #f39c12;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+  }
+  
+  .stage-label {
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .seating-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .seat-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .row-number {
+    width: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .seats {
+    display: flex;
+    gap: 6px;
+    flex-grow: 1;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .seat {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #3498db;
+    border: 1px solid #2980b9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .seat:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .seat.occupied {
+    background-color: #e74c3c;
+    border: 1px solid #c0392b;
+    cursor: not-allowed;
+  }
+  
+  .seat.selected {
+    background-color: #2ecc71;
+    border: 1px solid #27ae60;
+  }
+  
+  .seat-number {
+    font-size: 12px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .selected-seats-summary {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+  }
+  
+  .selected-seats-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .selected-seats-list li {
+    background-color: #f1f1f1;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+  
+  .no-seats-selected {
+    font-style: italic;
+    color: #666;
+  }
+  
+  /* Адаптивность для мобильных устройств */
+  @media (max-width: 768px) {
+    .seat {
+      width: 25px;
+      height: 25px;
+    }
+    
+    .seat-number {
+      font-size: 10px;
+    }
+    
+    .seats {
+      gap: 4px;
+    }
+  }

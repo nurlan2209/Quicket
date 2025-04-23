@@ -128,7 +128,7 @@ const AdminEventsList = () => {
             setShowForm(true);
           }}
         >
-          Создать мероприятие
+          {t('admin.events.createEvent')}
         </button>
       </div>
       
@@ -146,13 +146,13 @@ const AdminEventsList = () => {
       
       <div className="admin-filters">
         <div className="admin-filter-group">
-          <label htmlFor="type-filter">Тип мероприятия</label>
+          <label htmlFor="type-filter">{t('admin.events.filterByType')}</label>
           <select
             id="type-filter"
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
           >
-            <option value="all">Все типы</option>
+            <option value="all">{t('events.filter.allTypes')}</option>
             {eventTypes.map(type => (
               <option key={type} value={type}>
                 {type}
@@ -162,11 +162,11 @@ const AdminEventsList = () => {
         </div>
         
         <div className="admin-filter-group">
-          <label htmlFor="search">Поиск</label>
+          <label htmlFor="search">{t('admin.events.search')}</label>
           <input
             type="text"
             id="search"
-            placeholder="Поиск по названию или месту проведения..."
+            placeholder={t('admin.events.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -175,27 +175,27 @@ const AdminEventsList = () => {
       
       {loading ? (
         <div className="admin-loading">
-  <div className="spinner"></div>
-  <p>{t('common.loading')}</p>
-</div>
+          <div className="spinner"></div>
+          <p>{t('common.loading')}</p>
+        </div>
       ) : (
         <div className="admin-table-responsive">
           {filteredEvents.length === 0 ? (
-            <p className="admin-no-data">Мероприятия не найдены</p>
+            <p className="admin-no-data">{t('admin.events.noEvents', 'Мероприятия не найдены')}</p>
           ) : (
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Название</th>
-                  <th>Тип</th>
-                  <th>Место проведения</th>
-                  <th>Дата</th>
-                  <th>Время</th>
-                  <th>Места</th>
-                  <th>Цена</th>
-                  <th>Статус</th>
-                  <th className="actions-column">Действия</th>
+                  <th>{t('admin.events.id', 'ID')}</th>
+                  <th>{t('admin.events.nameField', 'Название')}</th>
+                  <th>{t('admin.events.type', 'Тип')}</th>
+                  <th>{t('admin.events.venue', 'Место проведения')}</th>
+                  <th>{t('admin.events.date', 'Дата')}</th>
+                  <th>{t('admin.events.time', 'Время')}</th>
+                  <th>{t('admin.events.seats', 'Места')}</th>
+                  <th>{t('admin.events.price', 'Цена')}</th>
+                  <th>{t('admin.events.status', 'Статус')}</th>
+                  <th className="actions-column">{t('admin.events.actions', 'Действия')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -210,7 +210,7 @@ const AdminEventsList = () => {
                     <td>
                       {event.available_seats} / {event.total_seats}
                     </td>
-                    <td>{event.price} тг</td>
+                    <td>{event.price} {t('currency', 'тг')}</td>
                     <td>
                       <span className={`event-status ${event.status}`}>
                         {event.status}

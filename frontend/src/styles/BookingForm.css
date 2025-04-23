@@ -339,3 +339,84 @@
   justify-content: space-between;
   color: var(--primary-color);
 }
+
+/* Добавляем новые стили к существующему BookingForm.css */
+
+/* Стили для переключателя режима выбора мест */
+.booking-seats-toggle {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.toggle-seat-selection-btn {
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #333;
+}
+
+.toggle-seat-selection-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Стили для отображения выбранных мест */
+.seats-display {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.selected-seats-count {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #2ecc71;
+}
+
+.seats-text {
+  color: #555;
+}
+
+.selected-seats-display {
+  margin: 15px 0;
+}
+
+.seat-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.seat-tag {
+  background-color: #e8f4fd;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: #2980b9;
+}
+
+.remove-seat-btn {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}

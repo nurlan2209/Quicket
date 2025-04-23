@@ -81,6 +81,7 @@ createEvent: async (eventData) => {
 // Добавляем токен авторизации в заголовки запроса
 
 // Бронирование места на мероприятии
+// Бронирование места на мероприятии
 createBooking: async (bookingData) => {
   try {
     // Получаем токен из localStorage или из объекта пользователя
@@ -96,6 +97,18 @@ createBooking: async (bookingData) => {
       };
     }
     
+    // Формируем данные для отправки
+    const dataToSend = {
+      user_id: bookingData.user_id,
+      event_id: bookingData.event_id,
+      seats: bookingData.seats
+    };
+    
+    // Если есть данные о выбранных местах, добавляем их
+    if (bookingData.seat_numbers && Array.isArray(bookingData.seat_numbers)) {
+      dataToSend.seat_numbers = bookingData.seat_numbers;
+    }
+    
     // Отправляем запрос с токеном в заголовке
     const response = await fetch(`${API_URL}/bookings`, {
       method: 'POST',
@@ -103,7 +116,7 @@ createBooking: async (bookingData) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(bookingData)
+      body: JSON.stringify(dataToSend)
     });
     
     // Обработка ответа
@@ -125,6 +138,34 @@ createBooking: async (bookingData) => {
       };
     }
     
+    // Сохраняем информацию о забронированных местах в localStorage
+    if (bookingData.seat_numbers && bookingData.seat_numbers.length > 0) {
+      // Ключ вида 'venue_123' (где 123 - ID места проведения)
+      const eventData = await fetch(`${API_URL}/events/${bookingData.event_id}`).then(res => res.json());
+      if (eventData && eventData.venue_id) {
+        const venueKey = `venue_${eventData.venue_id}`;
+        const storedVenueData = localStorage.getItem(venueKey);
+        let venueData = { occupiedSeats: [] };
+        
+        if (storedVenueData) {
+          try {
+            venueData = JSON.parse(storedVenueData);
+          } catch (e) {
+            console.error('Ошибка при чтении данных о занятых местах:', e);
+          }
+        }
+        
+        // Добавляем новые занятые места
+        venueData.occupiedSeats = [
+          ...(venueData.occupiedSeats || []),
+          ...bookingData.seat_numbers
+        ];
+        
+        // Сохраняем обновленные данные
+        localStorage.setItem(venueKey, JSON.stringify(venueData));
+      }
+    }
+    
     return {
       success: true,
       data: data
@@ -137,10 +178,6 @@ createBooking: async (bookingData) => {
     };
   }
 },
-  
-  // Получение всех бронирований пользователя
-// Обновленная функция getUserBookings для api.js
-// Добавляем токен авторизации в заголовки запроса
 
 // Получение всех бронирований пользователя
 getUserBookings: async (userId) => {

@@ -16,7 +16,6 @@
   .notifications-header h1 {
     font-size: 24px;
     font-weight: 600;
-    color: #333;
     margin: 0;
   }
   
@@ -129,14 +128,12 @@
     display: flex;
     padding: 16px;
     border-radius: 8px;
-    background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     position: relative;
     transition: all 0.2s;
   }
   
   .notification-item.unread {
-    background-color: #f0f7ff;
     border-left: 4px solid #2196F3;
   }
   
@@ -219,9 +216,9 @@
   }
   
   .notification-title {
+    color: var();
     font-size: 16px;
     font-weight: 600;
-    color: #333;
     margin: 0;
   }
   

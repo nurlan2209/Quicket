@@ -300,6 +300,13 @@
       "name": "Название",
       "type": "Тип",
       "venue": "Место проведения",
+      "nameField": "Название",
+      "seats": "Места",
+      "actions": "Действия",
+      "search": "Поиск",
+      "searchPlaceholder": "Поиск по названию или месту проведения...",
+      "filterByType": "Фильтр по типу",
+      "addressField": "Адрес",
       "selectVenue": "Выберите место",
       "date": "Дата",
       "time": "Время",
@@ -335,8 +342,8 @@
       "confirmDelete": "Вы уверены, что хотите удалить это мероприятие?"
     },
     "venues": {
-      "title": "Управление спортивными объектами",
-      "createVenue": "Создание нового спортивного объекта",
+      "title": "Управление местами проведения",
+      "createVenue": "Создание места проведения",
       "editVenue": "Редактирование спортивного объекта",
       "saveChanges": "Сохранить изменения",
       "create": "Создать",
@@ -347,6 +354,9 @@
       "descriptionPlaceholder": "Подробное описание спортивного объекта...",
       "latitude": "Широта",
       "longitude": "Долгота",
+      "eventsCount": "Мероприятий:",
+      "map": "Карта",
+      "noMap": "Нет карты",
       "mapWidget": "Код виджета карты 2GIS",
       "validation": {
         "nameRequired": "Название обязательно",
@@ -423,5 +433,40 @@
   "number": {
     "of": "из",
     "seats": "мест"
+  },
+  "stadium": {
+    "astanaArenaTitle": "Выбор мест на стадионе \"Astana Arena\"",
+    "sector": "Сектор",
+    "subsector": "Подсектор",
+    "row": "Ряд",
+    "seat": "Место",
+    "selectSector": "Выберите сектор",
+    "generationError": "Ошибка при создании схемы стадиона"
+  },
+  "bookingForm1": {
+    "selectSeats": "Выберите места",
+    "seatAvailable": "Доступно",
+    "seatSelected": "Выбрано",
+    "seatOccupied": "Занято",
+    "stage": "СЦЕНА",
+    "row": "Ряд",
+    "seat": "Место",
+    "rowSeat": "Ряд {{row}}, Место {{seat}}",
+    "selectedSeats": "Выбранные места",
+    "noSeatsSelected": "Нет выбранных мест",
+    "showSeatMap": "Выбрать места на схеме",
+    "hideSeatMap": "Скрыть схему зала",
+    "seatsSelected": "мест выбрано",
+    "yourSelectedSeats": "Выбранные места",
+    "removeSeat": "Убрать место",
+    "errors": {
+      "noSeatsSelected": "Пожалуйста, выберите хотя бы одно место",
+      "tooManySeats": "Выбрано слишком много мест. Доступно: {{count}}"
+    }
+  },
+  "paymentQR_stadium": {
+    "selectedSeats": "Выбранные места",
+    "rowSeat": "Ряд {{row}}, Место {{seat}}",
+    "bookedSeats": "Забронированы места"
   }
 }
