@@ -23,7 +23,7 @@ const BookingForm = ({ event, onBookingSuccess }) => {
   // Состояние для модального окна оплаты
   const [showPaymentQRModal, setShowPaymentQRModal] = useState(false);
   const bookingProcessedRef = useRef(false);
-  const [qrImagePath, setQrImagePath] = useState('/payment-qr.png');
+  const [qrImagePath, setQrImagePath] = useState('../../../public/kaspi_qr.jpeg');
 
   // Проверяем, является ли место проведения "Astana Arena"
   const isAstanaArena = event?.venue_name?.includes('Astana Arena');
