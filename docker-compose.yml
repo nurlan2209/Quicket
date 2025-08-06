@@ -1,0 +1,81 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    container_name: quicket_postgres
+    environment:
+      POSTGRES_DB: quicket
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - quicket_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d quicket"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend Flask Application
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: quicket_backend
+    environment:
+      - DATABASE_URL=postgresql://postgres:1234@postgres:5432/quicket
+      - SECRET_KEY=your_secret_key_here
+      - JWT_SECRET_KEY=your_jwt_secret_key_here
+      - FLASK_ENV=production
+    ports:
+      - "5001:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - quicket_network
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+      - /app/__pycache__
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/events"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend React Application
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: quicket_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - quicket_network
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_API_URL=http://localhost:5000
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  quicket_network:
+    driver: bridge
